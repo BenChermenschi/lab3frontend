@@ -72,3 +72,4 @@ mongodb.conf
 # Courtesy of https://github.com/meanjs/mean/blob/master/.gitignore
 
 mainconfig.js
+config/mainconfig.js
