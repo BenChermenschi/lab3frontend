@@ -1,6 +1,12 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
+var port = process.env.PORT || 3000;
+var bodyParser = require ('body-parser');
+var cors = require('cors');
+var config = require('./config/mainconfig');
+
+
 
 mongoose.connect('');
 var db= mongoose.connection;
