@@ -7,10 +7,6 @@ var cors = require('cors');
 var config = require('./config/mainconfig');
 
 
-
-mongoose.connect('');
-var db= mongoose.connection;
-
 /*
 Testing the server.js
 
@@ -29,10 +25,25 @@ app.get('/ping/:id',function(req, res){
 app.listen(3000);
 console.log('Listen on port 3000...');
 
-db.on('error', function callback () {
-    console.log("Connection error");
-  });
-  
-  db.once('open', function callback () {
-    console.log("Mongo working!");
-  });
+//setup
+var app = express();
+
+
+//mongoose promises
+mongoose.Promise = global.Promise;
+//mongo connect
+mongoose.connect(config.db,{useMongoClient:true});
+
+//output of connections
+//successfull connection
+mongoose.connection.on("connected",function () {
+    console.log("Now connected to " + config.db_nickname);
+});
+//failed connection
+mongoose.connection.on("error",function (err) {
+   console.log(
+       "Encountered an error \n" +
+       " db: " + config.db_nickname +'\n'+
+       " connectionstring : " + config.db+ '\n'+
+       " error : " + err);
+});
