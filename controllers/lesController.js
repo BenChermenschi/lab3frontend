@@ -23,7 +23,7 @@ exports.getAllLessen= function(req,res,next){
 }
 
 //GET : les by id
-exports.getLesAtId= function(req,res){
+/*exports.getLesAtId= function(req,res){
     console.log('searching lessen for _id : ');
     console.log(req.params.id);
     les.find({_id:req.params.id}).exec(function(err,responseLes){
@@ -40,10 +40,10 @@ exports.getLesAtId= function(req,res){
             object:responseLes
         });
     });
-}
+}*/
 
 //GET : Les by date
-exports.getLesAtDate= function(req,res){
+/*exports.getLesAtDate= function(req,res){
     console.log('searching lessen for datum : ');
     console.log(req.params.datum);
     les.find({datum:req.params.datum}).exec(function(err,responseLes){
@@ -62,4 +62,4 @@ exports.getLesAtDate= function(req,res){
         });
     });
     
-}
+}*/

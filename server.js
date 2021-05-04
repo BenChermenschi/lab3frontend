@@ -21,10 +21,6 @@ app.get('/ping/:id',function(req, res){
 */
 
 
-
-app.listen(3000);
-console.log('Listen on port 3000...');
-
 //setup
 var app = express();
 
@@ -46,4 +42,19 @@ mongoose.connection.on("error",function (err) {
        " db: " + config.db_nickname +'\n'+
        " connectionstring : " + config.db+ '\n'+
        " error : " + err);
+});
+
+//further setup
+
+//app usages
+app.use(cors());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+
+//routes
+var appRoutes = require('./appRoutes');
+appRoutes(app);
+
+app.listen(port,function(){
+    console.log(config.application_name+' started on port ' + port);
 });
