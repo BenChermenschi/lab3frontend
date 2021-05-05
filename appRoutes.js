@@ -84,7 +84,25 @@ module.exports = function (app){
                 }
                 res.json(les);
             });
-        });
+        })
+
+        //update les at id
+        .put(function(req,res){
+            Les.findById(req.params.les_id,function(err,les){
+                if(err){
+                    res.send(err);
+                }
+                console.log('adding new name');
+                les.naam= req.body.naam;
+                console.log(les.naam);
+                les.save(function(err){
+                    if(err){
+                        res.send(err);
+                    }
+                    res.json({message:'Les updated!'});
+                });
+            });
+        })
 
 
 
