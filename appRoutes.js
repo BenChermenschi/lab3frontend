@@ -73,6 +73,19 @@ module.exports = function (app){
             });
         });
 
+    //routes that end in /lessen/:les_id
+    router.route('/lessen/:les_id')
+    
+        //grab les at id
+        .get(function(req,res){
+            Les.findById(req.params.les_id,function(err,les){
+                if (err){
+                    res.send(err);
+                }
+                res.json(les);
+            });
+        });
+
 
 
 
