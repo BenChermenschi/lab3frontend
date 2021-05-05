@@ -47,7 +47,7 @@ module.exports = function (app){
     //more routes
 
     //routes that end in /les
-    router.route('/les')
+    router.route('/lessen')
 
         //create a les
         .post(function(req,res){
@@ -61,8 +61,17 @@ module.exports = function (app){
                 }
                 res.json({message:'les created'});
             });
-        });
+        }) //Do not put a ';' here, since technically this is all one line
 
+        //get all lessen
+        .get(function(req,res){
+            Les.find(function(err,lessen){
+                if(err){
+                    res.send(err);
+                }
+                res.json(lessen);
+            });
+        });
 
 
 
