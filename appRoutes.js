@@ -6,6 +6,7 @@ const Les = require('./models/lesModel');
 const { model } = require('mongoose');
 const express = require('express');
 const bodyParser = require ('body-parser');
+const { Router } = require('express');
 
 
 module.exports = function (app){
@@ -114,7 +115,24 @@ module.exports = function (app){
             });
         });
 
+    //Routes that end in /usertypes
+     router.route('/usertypes')
         
+        //create a les
+        .post(function(req,res){
+            var usertype = new Usertype(); //create new instance of Les model
+            usertype.naam = req.body.naam; //set lesname
+
+            //save and check for errors
+            usertype.save(function(err){
+                if(err){
+                    res.send(err);
+                }
+                res.json({message:'usertype created'});
+            });
+        }) //Do not put a ';' here, since technically this is all one line
+
+
 
     
 
