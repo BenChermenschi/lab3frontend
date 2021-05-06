@@ -142,6 +142,19 @@ module.exports = function (app){
             });
         });
 
+        
+     //routes that end in /lessen/:les_id
+     router.route('/usertypes/:usertype_id')
+    
+     //grab les at id
+     .get(function(req,res){
+         Usertype.findById(req.params.usertype_id,function(err,usertype){
+             if (err){
+                 res.send(err);
+             }
+             res.json(usertype);
+         });
+     })
     
 
     //route registration
