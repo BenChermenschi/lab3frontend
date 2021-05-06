@@ -132,7 +132,15 @@ module.exports = function (app){
             });
         }) //Do not put a ';' here, since technically this is all one line
 
-
+        //get all usertypes
+        .get(function(req,res){
+            Usertype.find(function(err,usertypes){
+                if(err){
+                    res.send(err);
+                }
+                res.json(usertypes);
+            });
+        });
 
     
 
