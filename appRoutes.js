@@ -103,9 +103,20 @@ module.exports = function (app){
                 });
             });
         })
+    
+        //delete les at id
+        .delete(function(req,res){
+            Les.remove({_id:req.params.les_id},function(err,les){
+                if (err){
+                    res.send(err);
+                }
+                res.json({message: 'Les successfully deleted'});
+            });
+        });
 
+        
 
-
+    
 
     //route registration
     app.use(routerprefix,router);
