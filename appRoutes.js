@@ -156,6 +156,23 @@ module.exports = function (app){
          });
      })
 
+     //update usertype at id
+     .put(function(req,res){
+        Usertype.findById(req.params.usertype_id,function(err,usertype){
+            if(err){
+                res.send(err);
+            }
+            console.log('adding new name');
+            usertype.naam= req.body.naam;
+            console.log(usertype.naam);
+            usertype.save(function(err){
+                if(err){
+                    res.send(err);
+                }
+                res.json({message:'Usertype updated!'});
+            });
+        });
+    })
 
     
 
