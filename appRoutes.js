@@ -7,6 +7,7 @@ const { model } = require('mongoose');
 const express = require('express');
 const bodyParser = require ('body-parser');
 const { Router } = require('express');
+const bcrypt = require('bcryptjs');
 
 
 module.exports = function (app){
@@ -185,13 +186,43 @@ module.exports = function (app){
     });
 
 
+    //Routes that end in /users
+    router.route('/users')
+        
+    //create a user
+    .post(async function(req,res){
+        var saltrounds = 10; //defines the level of encryption, the higher the number the more encrypted but also the slower the application.
+        var user = new User(); //create new instance of user model
+       
+        //setting the fields
+        user.naam = req.body.naam; //set username
+        user.email = req.body.email;
+        user.usertype = req.body.usertype;
+
+        //encrypting the password
+        bcrypt.hash(req.body.wachtwoord,saltrounds,function(err,hash){
+            //storing hash in db
+            if(err){
+                console.log('something went wrong during hashing');
+                res.send(err);
+            }
+            user.wachtwoord=hash;
+
+             //save and check for errors
+            user.save(function(err){
+                if(err){
+                    res.send(err);
+                }
+                res.json({message:'user created'});
+            });
+        });
+
+       
+    }) //Do not put a ';' here, since technically this is all one line
     
 
     //route registration
     app.use(routerprefix,router);
-
-
-
     
     
 
