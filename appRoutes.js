@@ -174,6 +174,17 @@ module.exports = function (app){
         });
     })
 
+    //delete usertype at id
+    .delete(function(req,res){
+        Usertype.remove({_id:req.params.usertype_id},function(err,usertype){
+            if (err){
+                res.send(err);
+            }
+            res.json({message: 'Usertype successfully deleted'});
+        });
+    });
+
+
     
 
     //route registration
