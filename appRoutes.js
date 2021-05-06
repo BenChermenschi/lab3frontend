@@ -143,10 +143,10 @@ module.exports = function (app){
         });
 
         
-     //routes that end in /lessen/:les_id
+     //routes that end in /usertype/:usertype_id
      router.route('/usertypes/:usertype_id')
     
-     //grab les at id
+     //grab usertype at id
      .get(function(req,res){
          Usertype.findById(req.params.usertype_id,function(err,usertype){
              if (err){
@@ -155,6 +155,8 @@ module.exports = function (app){
              res.json(usertype);
          });
      })
+
+
     
 
     //route registration
