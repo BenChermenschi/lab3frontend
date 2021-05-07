@@ -1,35 +1,34 @@
-//importing models
-const Survey = require('./models/surveyModel');
-const User = require('./models/userModel');
-const Usertype = require('./models/usertypeModel');
-const Les = require('./models/lesModel');
+//importing core
 const { model } = require('mongoose');
 const express = require('express');
 const bodyParser = require ('body-parser');
 const { Router } = require('express');
 const bcrypt = require('bcryptjs');
+const { json } = require('body-parser');
+
+//defining models
+const Survey = require('./models/surveyModel');
+const User = require('./models/userModel');
+const Usertype = require('./models/usertypeModel');
+const Les = require('./models/lesModel');
+
+//defining main routers
+const router = express.Router(); //main router 
+
+//defning subrouters
+const lesRoutes= require('./routes/lesRoutes');
+
+//defining pathprefix
+const routerprefix = '/api';
 
 
 module.exports = function (app){
-    //setting path prefix
-    const routerprefix = '/api';
+    
 
-    //defining routers
    // const surveyRouter = require('./routes/surveyRoutes');
    // const userRouter = require('./routes/userRoutes');
    // const usertypeRouter = require('./routes/usertypeRoutes');
     //const lesRouter = require('./routes/lesRoutes');
-
-    //teaching the application the routes
-   // app.use(routerprefix+ '/survey',surveyRouter);
-    // app.use(routerprefix+ '/user',userRouter);
-    // app.use(routerprefix+ '/usertype',usertypeRouter);
-    //app.use(routerprefix+ '/les',lesRouter);
-
-
-    //API ROUTES
-        //test route
-    var router = express.Router();
 
 
     app.use(bodyParser.json());
@@ -38,84 +37,20 @@ module.exports = function (app){
     //middleware to use for all requests
     router.use(function(req,res,next){
         //logging when middleware is handing a request.
-        console.log('middleware doing stuff');
+        console.log('middleware: incomming request detected');
         next();
     });
 
+    //testroute
     router.get('/',function(req,res){
         res.json({message:'api is on'});
     });
 
     //more routes
+    lesRoutes(router);
 
-    //routes that end in /les
-    router.route('/lessen')
 
-        //create a les
-        .post(function(req,res){
-            var les = new Les(); //create new instance of Les model
-            les.naam = req.body.naam; //set lesname
-
-            //save and check for errors
-            les.save(function(err){
-                if(err){
-                    res.send(err);
-                }
-                res.json({message:'les created'});
-            });
-        }) //Do not put a ';' here, since technically this is all one line
-
-        //get all lessen
-        .get(function(req,res){
-            Les.find(function(err,lessen){
-                if(err){
-                    res.send(err);
-                }
-                res.json(lessen);
-            });
-        });
-
-    //routes that end in /lessen/:les_id
-    router.route('/lessen/:les_id')
     
-        //grab les at id
-        .get(function(req,res){
-            Les.findById(req.params.les_id,function(err,les){
-                if (err){
-                    res.send(err);
-                }
-                res.json(les);
-            });
-        })
-
-        //update les at id
-        .put(function(req,res){
-            Les.findById(req.params.les_id,function(err,les){
-                if(err){
-                    res.send(err);
-                }
-                console.log('adding new name');
-                les.naam= req.body.naam;
-                console.log(les.naam);
-                les.save(function(err){
-                    if(err){
-                        res.send(err);
-                    }
-                    res.json({message:'Les updated!'});
-                });
-            });
-        })
-    
-        //delete les at id
-        .delete(function(req,res){
-            Les.remove({_id:req.params.les_id},function(err,les){
-                if (err){
-                    res.send(err);
-                }
-                res.json({message: 'Les successfully deleted'});
-            });
-        });
-
     //Routes that end in /usertypes
      router.route('/usertypes')
         
@@ -196,15 +131,11 @@ module.exports = function (app){
          bcrypt.hash(req.body.wachtwoord,saltrounds).then(hash=>{
             var user = new User(); //create new instance of user model
            
-    
-            console.log(req.body.naam);
-            console.log(req.body.email);
-           
-            console.log(req.body.wachtwoord);
             //setting the fields
             user.naam = req.body.naam; //set username
             user.email = req.body.email;
-                
+            console.log('usertype : ');
+            console.log(req.body.usertype);
             user.wachtwoord=hash;
 
             //save and check for errors

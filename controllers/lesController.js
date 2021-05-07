@@ -1,65 +1,94 @@
 var mongoose = require('mongoose');
-var les = mongoose.model('Les');
+var Les = mongoose.model('Les');
+//=========================
+//CRUD
+//=========================
 
-//GET : all lessen
-exports.getAllLessen= function(req,res,next){
+////C : Create
+//////POST : http://localhost:3000/api/lessen
+////// create new les
+exports.createLes= function(req,res,next){
+    var les = new Les(); //create new instance of Les model
     
-    //grab all lessen
-    console.log('searching for all Lessen');
-    les.find().exec(function(err,lessen){
-        //on fail
-        if (err){
-            return res.status(500).json({
-                title:'Error occured',
-                error:err
-            });
+    //setting values
+    les.naam = req.body.naam; //set lesname
+
+    //save and check for errors
+    les.save(function(err){
+        //on error
+        if(err){
+            res.send(err);
         }
         //on success
-        res.status(200).json({
-            message:'success',
-            obj: les
+        res.json({message:'les created'});
+    });
+}
+
+////R : Read
+//////GET : http://localhost:3000/api/lessen
+////// get list of all lessen
+exports.getAllLessen= function(req,res,next){
+    //search all lessen
+    Les.find(function(err,lessen){
+        //on error
+        if(err){
+            res.send(err);
+        }
+        //on success
+        res.json(lessen);
+    });
+}
+//////GET : http://localhost:3000/api/lessen/_id
+////// get specific les by its _id
+exports.getLesAtId=function(req,res,next){
+    //search by id
+    Les.findById(req.params.les_id,function(err,les){
+        //on error
+        if (err){
+            res.send(err);
+        }
+        //on success
+        res.json(les);
+    });
+}
+
+////U : Update
+//////PUT : http://localhost:3000/api/lessen/_id
+////// update the les at _id
+exports.updateLes=function(req,res,next){
+    //searching the database for a les with the _id
+    Les.findById(req.params.les_id,function(err,les){
+        //if not found
+        if(err){
+            res.send(err);
+        }
+        //if a existing les is found at that _id
+        //overwriting the old data
+        les.naam= req.body.naam;
+
+        //saving the overwrite
+        les.save(function(err){
+            //on error
+            if(err){
+                res.send(err);
+            }
+            //on success
+            res.json({message:'Les updated!'});
         });
     });
 }
 
-//GET : les by id
-/*exports.getLesAtId= function(req,res){
-    console.log('searching lessen for _id : ');
-    console.log(req.params.id);
-    les.find({_id:req.params.id}).exec(function(err,responseLes){
-        //on fail
+////D : Delete
+//////DELETE : http://localhost:3000/api/lessen/_id
+////// remove the les at _id
+exports.deleteLes=function(req,res,next){
+    //removing it at the given les_id
+    Les.remove({_id:req.params.les_id},function(err,les){
+        //on error
         if (err){
-            return res.status(500).json({
-                title:'error occured',
-                error:err
-            });
+            res.send(err);
         }
         //on success
-        res.status(200).json({
-            message:'Success',
-            object:responseLes
-        });
+        res.json({message: 'Les successfully deleted'});
     });
-}*/
-
-//GET : Les by date
-/*exports.getLesAtDate= function(req,res){
-    console.log('searching lessen for datum : ');
-    console.log(req.params.datum);
-    les.find({datum:req.params.datum}).exec(function(err,responseLes){
-        //onfail
-        if(err){
-            return res.status(500).json({
-                title:'Error occurred',
-                error:err
-            });
-        }
-
-        //on success
-        res.status(200).json({
-            message:'Success',
-            object:responseLes
-        });
-    });
-    
-}*/
+}
