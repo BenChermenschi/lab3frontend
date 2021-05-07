@@ -1,10 +1,10 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 const Usertype = require('../models/usertypeModel');
 
 
 //Create
 exports.createUsertype=function(req,res,next){
-    var usertype = new Usertype(); 
+    let usertype = new Usertype(); 
     usertype.naam = req.body.naam; 
 
     usertype.save(function(err){

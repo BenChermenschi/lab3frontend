@@ -1,10 +1,10 @@
-var express = require('express');
-var app = express();
-var mongoose = require('mongoose');
-var port = process.env.PORT || 3000;
-var bodyParser = require ('body-parser');
-var cors = require('cors');
-var config = require('./config/mainconfig');
+let express = require('express');
+let app = express();
+let mongoose = require('mongoose');
+let port = process.env.PORT || 3000;
+let bodyParser = require ('body-parser');
+let cors = require('cors');
+let config = require('./config/mainconfig');
 
 
 /*
@@ -20,9 +20,6 @@ app.get('/ping/:id',function(req, res){
 
 */
 
-
-//setup
-var app = express();
 
 
 //mongoose promises
@@ -52,7 +49,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 //routes
-var appRoutes = require('./appRoutes');
+let appRoutes = require('./appRoutes');
 appRoutes(app);
 
 app.listen(port,function(){

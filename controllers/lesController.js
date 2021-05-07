@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var Les = mongoose.model('Les');
+let mongoose = require('mongoose');
+let Les = mongoose.model('Les');
 //=========================
 //CRUD
 //=========================
@@ -8,7 +8,7 @@ var Les = mongoose.model('Les');
 //////POST : http://localhost:3000/api/lessen
 ////// create new les
 exports.createLes= function(req,res,next){
-    var les = new Les(); //create new instance of Les model
+    let les = new Les(); //create new instance of Les model
     
     //setting values
     les.naam = req.body.naam; //set lesname
