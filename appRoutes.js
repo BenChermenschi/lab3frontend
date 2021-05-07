@@ -33,7 +33,7 @@ module.exports = function (app){
         res.json({message:'api is on'});
     });
 
-    //more routes
+    //Main routes
     lesRoutes(router);
     usertypeRoutes(router);
     userRoutes(router);
