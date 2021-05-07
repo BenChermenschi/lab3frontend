@@ -11,7 +11,6 @@ exports.createUser= async function(req,res,next){
         
         user.naam = req.body.naam; 
         user.email = req.body.email;
-        console.log(req.body.usertype._id);
         user.usertype = req.body.usertype._id;
         user.wachtwoord=hash;
 
@@ -45,3 +44,28 @@ exports.getUserAtId=function(req,res,next){
     });
 }
 
+exports.updateUser=function(req,res,next){          // need to check if what to do with the password an encryption
+                                                    // also very unsafe
+    User.findById(req.params.user_id,function(err,user){
+        if(err){ 
+            res.send(err);
+        }
+       
+       
+  
+        
+            user.naam = req.body.naam; 
+            user.email = req.body.email;
+            user.usertype = req.body.usertype._id;
+
+            user.save().then(result=>{
+                if(!result){
+                    return res.status(500).json({
+                        message:"error creating user"
+                    })
+                }
+                res.json({message:'user updated'});
+            });
+        });
+    
+}

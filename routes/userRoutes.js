@@ -16,6 +16,7 @@ module.exports=function(router){
         .get(userController.getAllUsers);//Extremely unsafe
     
     router.route(userroutepathprefix+'/:user_id')
-        .get(userController.getUserAtId);
+        .get(userController.getUserAtId)
+        .put(userController.updateUser);
         
 }
