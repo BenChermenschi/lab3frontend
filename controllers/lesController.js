@@ -88,7 +88,6 @@ exports.deleteLes=function(req,res,next){
         if (err){
             res.send(err);
         }
-        //on success
         res.json({message: 'Les successfully deleted'});
     });
 }
