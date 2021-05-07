@@ -1,8 +1,6 @@
 const express= require('express');
 const usertypeController = require('../controllers/usertypeController');
 const Usertype = require('../models/usertypeModel');
-
-//defining pathprefix
 const usertyperouteprefix="/usertypes";
 
 module.exports=function(router){

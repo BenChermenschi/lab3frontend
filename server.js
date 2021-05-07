@@ -1,33 +1,16 @@
-let express = require('express');
-let app = express();
-let mongoose = require('mongoose');
-let port = process.env.PORT || 3000;
-let bodyParser = require ('body-parser');
-let cors = require('cors');
-let config = require('./config/mainconfig');
-
-
-/*
-Testing the server.js
-
-app.get('/ping',function(req,res){
-    res.send({ping:'Server is alive yahoo!'});
-});
-
-app.get('/ping/:id',function(req, res){
-    res.send({ping:'hello this is the server and i got ' + req.params.id});
-});
-
-*/
-
-
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose');
+const port = process.env.PORT || 3000;
+const bodyParser = require ('body-parser');
+const cors = require('cors');
+const config = require('./config/mainconfig');
 
 //mongoose promises
 mongoose.Promise = global.Promise;
 //mongo connect
 mongoose.connect(config.db,{useMongoClient:true});
 
-//output of connections
 //successfull connection
 mongoose.connection.on("connected",function () {
     console.log("Now connected to " + config.db_nickname);
@@ -40,8 +23,6 @@ mongoose.connection.on("error",function (err) {
        " connectionstring : " + config.db+ '\n'+
        " error : " + err);
 });
-
-//further setup
 
 //app usages
 app.use(cors());

@@ -3,12 +3,7 @@ const { model } = require('mongoose');
 const express = require('express');
 const bodyParser = require ('body-parser');
 const { Router } = require('express');
-
 const { json } = require('body-parser');
-
-//defining models
-const User = require('./models/userModel');
-
 
 //defining main routers
 const router = express.Router(); //main router 
@@ -20,7 +15,6 @@ const userRoutes = require('./routes/userRoutes');
 
 //defining pathprefix
 const routerprefix = '/api';
-
 
 module.exports = function (app){
     
@@ -45,7 +39,4 @@ module.exports = function (app){
     userRoutes(router);
 
     app.use(routerprefix,router);
-    
-    
-
 }

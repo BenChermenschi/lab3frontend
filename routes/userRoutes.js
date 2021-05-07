@@ -12,8 +12,6 @@ module.exports=function(router){
     });
 
    router.route(userroutepathprefix)
-   .post(userController.createUser)
+        .post(userController.createUser)
         
-
-
 }
