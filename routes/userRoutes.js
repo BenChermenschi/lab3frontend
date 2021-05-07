@@ -1,6 +1,19 @@
-var express = require('express');
-var userrouter = express.Router();
-var bcrypt = require('bcryptjs');
-var jwt = require('jsonwebtoken');
+const express=require('express');
+const User=require('../models/userModel');
+const userController = require('../controllers/userController');
+const userroutepathprefix="/users";
 
-var User = require('../models/user');
+module.exports=function(router){
+
+    //middleware
+    router.use(function(req,res,next){
+        //do type and other validations here
+        next();
+    });
+
+   router.route(userroutepathprefix)
+   .post(userController.createUser)
+        
+
+
+}
