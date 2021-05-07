@@ -36,3 +36,12 @@ exports.getAllUsers=function(req,res,next){ //Extremely unsafe!
     });
 }
 
+exports.getUserAtId=function(req,res,next){
+    User.findById(req.params.user_id,function(err,user){
+        if(err){
+            res.send(err);
+        }
+        res.json(user);
+    });
+}
+

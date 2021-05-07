@@ -14,5 +14,8 @@ module.exports=function(router){
    router.route(userroutepathprefix)
         .post(userController.createUser)
         .get(userController.getAllUsers);//Extremely unsafe
+    
+    router.route(userroutepathprefix+'/:user_id')
+        .get(userController.getUserAtId);
         
 }
