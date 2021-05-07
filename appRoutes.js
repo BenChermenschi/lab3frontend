@@ -17,6 +17,7 @@ const router = express.Router(); //main router
 
 //defning subrouters
 const lesRoutes= require('./routes/lesRoutes');
+const usertypeRoutes= require('./routes/usertypeRoutes');
 
 //defining pathprefix
 const routerprefix = '/api';
@@ -48,79 +49,11 @@ module.exports = function (app){
 
     //more routes
     lesRoutes(router);
+    usertypeRoutes(router);
+    
 
 
     
-    //Routes that end in /usertypes
-     router.route('/usertypes')
-        
-        //create a les
-        .post(function(req,res){
-            var usertype = new Usertype(); //create new instance of Les model
-            usertype.naam = req.body.naam; //set lesname
-
-            //save and check for errors
-            usertype.save(function(err){
-                if(err){
-                    res.send(err);
-                }
-                res.json({message:'usertype created'});
-            });
-        }) //Do not put a ';' here, since technically this is all one line
-
-        //get all usertypes
-        .get(function(req,res){
-            Usertype.find(function(err,usertypes){
-                if(err){
-                    res.send(err);
-                }
-                res.json(usertypes);
-            });
-        });
-
-        
-     //routes that end in /usertype/:usertype_id
-     router.route('/usertypes/:usertype_id')
-    
-     //grab usertype at id
-     .get(function(req,res){
-         Usertype.findById(req.params.usertype_id,function(err,usertype){
-             if (err){
-                 res.send(err);
-             }
-             res.json(usertype);
-         });
-     })
-
-     //update usertype at id
-     .put(function(req,res){
-        Usertype.findById(req.params.usertype_id,function(err,usertype){
-            if(err){
-                res.send(err);
-            }
-            console.log('adding new name');
-            usertype.naam= req.body.naam;
-            console.log(usertype.naam);
-            usertype.save(function(err){
-                if(err){
-                    res.send(err);
-                }
-                res.json({message:'Usertype updated!'});
-            });
-        });
-    })
-
-    //delete usertype at id
-    .delete(function(req,res){
-        Usertype.remove({_id:req.params.usertype_id},function(err,usertype){
-            if (err){
-                res.send(err);
-            }
-            res.json({message: 'Usertype successfully deleted'});
-        });
-    });
-
-
     //Routes that end in /users
     router.route('/users')
         
