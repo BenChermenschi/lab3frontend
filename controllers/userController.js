@@ -1,17 +1,23 @@
 let mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const { json } = require('body-parser');
 let User = mongoose.model('User');
+let Usertype = mongoose.model('UserType');
 
 exports.createUser= async function(req,res,next){
-    var saltrounds = 10; //defines the level of encryption, the higher the number the more encrypted but also the slower the application.
+    let saltrounds = 10; //defines the level of encryption, the higher the number the more encrypted but also the slower the application.
      //encrypting the password
      bcrypt.hash(req.body.wachtwoord,saltrounds).then(hash=>{
-        var user = new User(); 
-       
+        let user = new User(); 
+        
         //setting the fields
         user.naam = req.body.naam; 
         user.email = req.body.email;
-        
+        console.log(req.body.usertype._id);
+        user.usertype = req.body.usertype._id;
+
+
+
         user.wachtwoord=hash;
 
         //save and check for errors
@@ -26,3 +32,5 @@ exports.createUser= async function(req,res,next){
         
     });
 }
+
+
