@@ -69,3 +69,12 @@ exports.updateUser=function(req,res,next){          // need to check if what to 
         });
     
 }
+
+exports.deleteUser=function(req,res,next){ //unsafe
+    User.remove({_id:req.params.user_id},function(err,user){
+        if(err){
+            res.send(err);
+        }
+        res.json({message:'user sucessfully deleted'});
+    });
+}

@@ -17,6 +17,7 @@ module.exports=function(router){
     
     router.route(userroutepathprefix+'/:user_id')
         .get(userController.getUserAtId)
-        .put(userController.updateUser);
+        .put(userController.updateUser)
+        .delete(userController.deleteUser);
         
 }
