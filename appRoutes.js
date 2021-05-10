@@ -5,6 +5,9 @@ const bodyParser = require ('body-parser');
 const { Router } = require('express');
 const { json } = require('body-parser');
 
+
+const tokenController = require('./controllers/tokenController');
+
 //defining main routers
 const router = express.Router(); //main router 
 
@@ -32,6 +35,12 @@ module.exports = function (app){
     router.get('/',function(req,res){
         res.json({message:'api is on'});
     });
+
+    //login route
+    router.post('/login',tokenController.login)
+ /  router.post('/refresh',tokenController.refresh);
+    //refresh route
+
 
     //Main routes
     lesRoutes(router);

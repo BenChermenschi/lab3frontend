@@ -5,6 +5,11 @@ const port = process.env.PORT || 3000;
 const bodyParser = require ('body-parser');
 const cors = require('cors');
 const config = require('./config/mainconfig');
+require('dotenv').config();
+const cookieParser = require('cookie-parser');
+
+const{login,refresh}=require('./authentication');
+
 
 //mongoose promises
 mongoose.Promise = global.Promise;
@@ -28,6 +33,7 @@ mongoose.connection.on("error",function (err) {
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 //routes
 let appRoutes = require('./appRoutes');
