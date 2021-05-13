@@ -14,7 +14,7 @@ const router = express.Router(); //main router
 //defning subrouters
 const lesRoutes= require('./routes/lesRoutes');
 const gebruikerstypeRoutes= require('./routes/gebruikerstypeRoutes');
-const userRoutes = require('./routes/userRoutes');
+const gebruikerRoutes = require('./routes/gebruikerRoutes');
 
 //defining pathprefix
 const routerprefix = '/api';
@@ -45,7 +45,7 @@ module.exports = function (app){
     //Main routes
     lesRoutes(router);
     gebruikerstypeRoutes(router);
-    userRoutes(router);
+    gebruikerRoutes(router);
 
     app.use(routerprefix,router);
 }

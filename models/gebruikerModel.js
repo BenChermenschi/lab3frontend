@@ -9,4 +9,4 @@ const schema = new Schema({
     gebruikerstype:{type:Schema.Types.ObjectId, ref:'GebruikersType'}
 })
 
-module.exports = mongoose.model('User',schema);
+module.exports = mongoose.model('Gebruiker',schema);
