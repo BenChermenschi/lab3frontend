@@ -15,6 +15,7 @@ const router = express.Router(); //main router
 const vakRoutes= require('./routes/vakRoutes');
 const gebruikerstypeRoutes= require('./routes/gebruikerstypeRoutes');
 const gebruikerRoutes = require('./routes/gebruikerRoutes');
+const klasgroepRoutes = require('./routes/klasgroepRoutes');
 
 //defining pathprefix
 const routerprefix = '/api';
@@ -46,6 +47,7 @@ module.exports = function (app){
     vakRoutes(router);
     gebruikerstypeRoutes(router);
     gebruikerRoutes(router);
+    klasgroepRoutes(router);
 
     app.use(routerprefix,router);
 }
