@@ -6,4 +6,4 @@ const schema = new Schema({
     naam:{type:String,required:true}
 })
 
-module.exports = mongoose.model('UserType',schema);
+module.exports = mongoose.model('GebruikersType',schema);

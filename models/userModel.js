@@ -6,7 +6,7 @@ const schema = new Schema({
     email:{type:String,required:true},
     naam:{type:String,required:true},
     wachtwoord:{type:String,required:true},
-    usertype:{type:Schema.Types.ObjectId, ref:'UserType'}
+    gebruikerstype:{type:Schema.Types.ObjectId, ref:'GebruikersType'}
 })
 
 module.exports = mongoose.model('User',schema);

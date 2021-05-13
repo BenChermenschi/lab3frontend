@@ -8,7 +8,7 @@ const config = require('./config/mainconfig');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
 
-const{login,refresh}=require('./authentication');
+const{login,refresh}=require('./authenticationMiddleware');
 
 
 //mongoose promises
