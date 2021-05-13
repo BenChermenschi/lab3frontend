@@ -12,7 +12,7 @@ const tokenController = require('./controllers/tokenController');
 const router = express.Router(); //main router 
 
 //defning subrouters
-const lesRoutes= require('./routes/lesRoutes');
+const vakRoutes= require('./routes/vakRoutes');
 const gebruikerstypeRoutes= require('./routes/gebruikerstypeRoutes');
 const gebruikerRoutes = require('./routes/gebruikerRoutes');
 
@@ -43,7 +43,7 @@ module.exports = function (app){
 
 
     //Main routes
-    lesRoutes(router);
+    vakRoutes(router);
     gebruikerstypeRoutes(router);
     gebruikerRoutes(router);
 

@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 const mongooseUniqueValidator = require('mongoose-unique-validator');
 
 const schema = new Schema({
-    teacher:{type:Schema.Types.ObjectId, ref:'Gebruiker'},
-    les:{type:Schema.Types.ObjectId, ref:'Les'},
+    gebruiker:{type:Schema.Types.ObjectId, ref:'Gebruiker'},
+    vak:{type:Schema.Types.ObjectId, ref:'Vak'},
     datum:{type:Date,required:true}
 })
 
