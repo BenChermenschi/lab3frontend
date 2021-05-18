@@ -6,7 +6,7 @@ exports.createVak= function(req,res,next){
     
     vak.naam = req.body.naam;
 
-    vak.save(function(err){r
+    vak.save(function(err){
         if(err){
             res.send(err);
         }

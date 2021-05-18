@@ -16,6 +16,7 @@ const vakRoutes= require('./routes/vakRoutes');
 const gebruikerstypeRoutes= require('./routes/gebruikerstypeRoutes');
 const gebruikerRoutes = require('./routes/gebruikerRoutes');
 const klasgroepRoutes = require('./routes/klasgroepRoutes');
+const vragenlijstRoutes = require('./routes/vragenlijstRoutes');
 
 //defining pathprefix
 const routerprefix = '/api';
@@ -48,6 +49,7 @@ module.exports = function (app){
     gebruikerstypeRoutes(router);
     gebruikerRoutes(router);
     klasgroepRoutes(router);
+    vragenlijstRoutes(router);
 
     app.use(routerprefix,router);
 }
