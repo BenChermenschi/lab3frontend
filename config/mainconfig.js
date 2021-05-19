@@ -1,5 +1,4 @@
 module.exports = {
-    db: '',
     db_nickname: 'mlab-db',
-    application_name: 'motivatiemeter'
+    application_name: 'lab3_backend'
 }

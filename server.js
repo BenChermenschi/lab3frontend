@@ -14,7 +14,7 @@ const{login,refresh}=require('./authenticationMiddleware');
 //mongoose promises
 mongoose.Promise = global.Promise;
 //mongo connect
-mongoose.connect(config.db,{useMongoClient:true});
+mongoose.connect(process.env.CONNECTION_STRING,{useMongoClient:true});
 
 //successfull connection
 mongoose.connection.on("connected",function () {
@@ -25,7 +25,7 @@ mongoose.connection.on("error",function (err) {
    console.log(
        "Encountered an error \n" +
        " db: " + config.db_nickname +'\n'+
-       " connectionstring : " + config.db+ '\n'+
+       " connectionstring : " + process.env.CONNECTION_STRING+ '\n'+
        " error : " + err);
 });
 
