@@ -40,8 +40,11 @@ exports.updateKlasgroep=function(req,res,next){
             res.send(err);
         }
 
+
         klasgroep.naam= req.body.naam;
         klasgroep.aantalStudenten = req.body.aantalStudenten;
+
+
 
         klasgroep.save(function(err){
             if(err){

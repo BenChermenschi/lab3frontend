@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const { json } = require('body-parser');
 const Gebruiker = mongoose.model('Gebruiker');
 const Gebruikerstype = mongoose.model('GebruikersType');
+const gebruikerstypeController = require('../controllers/gebruikerstypeController');
 
 exports.createGebruiker= async function(req,res,next){
     const saltrounds = 10; //defines the level of encryption, the higher the number the more encrypted but also the slower the application.
@@ -27,10 +28,15 @@ exports.createGebruiker= async function(req,res,next){
 }
 
 exports.getAllGebruikers=function(req,res,next){ //Extremely unsafe!
-    Gebruiker.find(function(err,gebruikers){
+    Gebruiker.find().populate('gebruikerstype').exec(function(err,gebruikers){
         if(err){
             res.send(err);
         }
+       
+
+
+
+
         res.json(gebruikers);
     });
 }
