@@ -4,15 +4,12 @@ const Vragenlijst = mongoose.model('Vragenlijst');
 exports.createVragenlijst= function(req,res,next){
     let vragenlijst = new Vragenlijst();
 
-    vragenlijst.gebruiker = req.body.gebruiker._id;
-    vragenlijst.vak = req.body.vak._id;
+    vragenlijst.gebruiker = req.body.gebruiker;
+    vragenlijst.vak = req.body.vak;
     vragenlijst.datum = new Date();
 
-    let klasgroepen_idList = [];
-    req.body.klasgroepen.forEach((element,i) => {
-        klasgroepen_idList[i] =element._id;
-    });
-    vragenlijst.klasgroepen = klasgroepen_idList;
+    
+    vragenlijst.klasgroepen = req.body.klasgroepen;
     vragenlijst.responses = req.body.responses;
 
     vragenlijst.save(function(err){
@@ -35,7 +32,14 @@ exports.getAllVragenlijsten= function(req,res,next){
             }
         })
         .populate('vak')
-        .populate('klasgroepen').populate('responses').exec(function(err,vragenlijsten){ //HIER BEZIG (in populate)
+        .populate({
+            path:'klasgroepen',
+            populate:{
+                path:'klasgroepen',
+                model:'Klasgroep'}
+        })
+        .populate('responses')
+        .exec(function(err,vragenlijsten){ //HIER BEZIG (in populate)
         if(err){
             res.send(err);
         }

@@ -6,7 +6,7 @@ const schema = new Schema({
     gebruiker:{type:Schema.Types.ObjectId, ref:'Gebruiker'},
     vak:{type:Schema.Types.ObjectId, ref:'Vak'},
     datum:{type:Date},
-    klasgroepen:{type:Array},
+    klasgroepen:[{type:Schema.Types.ObjectId,ref:'Klasgroep'}],
     responses:{type:Array}
 })
 
