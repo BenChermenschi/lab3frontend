@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Reactie = require('../models/reactieModel');
 
-
 exports.createReactie= function(req,res,next){
     let reactie = new Reactie();
     
