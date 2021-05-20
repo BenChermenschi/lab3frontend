@@ -7,7 +7,7 @@ const schema = new Schema({
     vak:{type:Schema.Types.ObjectId, ref:'Vak'},
     datum:{type:Date},
     klasgroepen:[{type:Schema.Types.ObjectId,ref:'Klasgroep'}],
-    responses:{type:Array}
+    responses:[{type:Schema.Types.ObjectId,ref:'Respons'}]
 })
 
 module.exports = mongoose.model('Vragenlijst',schema);

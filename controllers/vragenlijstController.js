@@ -38,11 +38,13 @@ exports.getAllVragenlijsten= function(req,res,next){
                 path:'klasgroepen',
                 model:'Klasgroep'}
         })
-        .populate('responses')
+        
         .exec(function(err,vragenlijsten){ //HIER BEZIG (in populate)
         if(err){
             res.send(err);
         }
+
+        console.log(vragenlijsten);
         res.json(vragenlijsten);
     });
 }
