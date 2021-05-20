@@ -10,7 +10,7 @@ exports.createVragenlijst= function(req,res,next){
 
     
     vragenlijst.klasgroepen = req.body.klasgroepen;
-    vragenlijst.responses = req.body.responses;
+    vragenlijst.reacties = null;
 
     vragenlijst.save(function(err){
         if(err){
@@ -38,12 +38,12 @@ exports.getAllVragenlijsten= function(req,res,next){
                 path:'klasgroepen',
                 model:'Klasgroep'}
         })
-        
-        .exec(function(err,vragenlijsten){ //HIER BEZIG (in populate)
+        // Somehow doesnt wanna populate if reacties is empty?
+        .exec(function(err,vragenlijsten){ 
         if(err){
             res.send(err);
         }
-
+        
         console.log(vragenlijsten);
         res.json(vragenlijsten);
     });
@@ -68,7 +68,7 @@ exports.updateVragenlijst=function(req,res,next){
         vragenlijst.vak = req.body.vak;
         //vragenlijst.datum = new Date();
         vragenlijst.klasgroepen = req.body.klasgroepen;
-        vragenlijst.responses = req.body.responses;
+        vragenlijst.reacties = req.body.reacties;
 
         vragenlijst.save(function(err){
             if(err){

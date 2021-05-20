@@ -9,4 +9,4 @@ const schema = new Schema({
     vragenlijst:{type:Schema.Types.ObjectId, ref:'Vragenlijst'}
 });
 
-module.exports = mongoose.model('Respons',schema);
+module.exports = mongoose.model('Reactie',schema);
