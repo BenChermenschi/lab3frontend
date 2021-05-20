@@ -10,9 +10,10 @@ exports.createGebruiker= async function(req,res,next){
      bcrypt.hash(req.body.wachtwoord,saltrounds).then(hash=>{
         let gebruiker = new Gebruiker(); 
         
+        gebruiker.voornaam =  req.body.voornaam;
         gebruiker.naam = req.body.naam; 
         gebruiker.email = req.body.email;
-        gebruiker.gebruikerstype = req.body.gebruikerstype._id;
+        gebruiker.gebruikerstype = req.body.gebruikerstype;
         gebruiker.wachtwoord=hash;
 
         gebruiker.save().then(result=>{
@@ -32,11 +33,7 @@ exports.getAllGebruikers=function(req,res,next){ //Extremely unsafe!
         if(err){
             res.send(err);
         }
-       
-
-
-
-
+        
         res.json(gebruikers);
     });
 }
@@ -56,13 +53,10 @@ exports.updateGebruiker=function(req,res,next){          // need to check if wha
         if(err){ 
             res.send(err);
         }
-       
-       
-  
-        
-            gebruiker.naam = req.body.naam; 
+            gebruiker.voornaam =  req.body.voornaam;
+            gebruiker.naam = req.body.naam;
             gebruiker.email = req.body.email;
-            gebruiker.gebruikerstype = req.body.gebruikerstype._id;
+            gebruiker.gebruikerstype = req.body.gebruikerstype;
 
             gebruiker.save().then(result=>{
                 if(!result){
