@@ -37,7 +37,7 @@ exports.getAllVragenlijsten= function(req,res,next){
             populate:{
                 path:'klasgroepen',
                 model:'Klasgroep'}
-        })
+        }) // BLIJKBAAR TOCH NOG NIET FATSOENLIJK RESOLVED ?!
         // Somehow doesnt wanna populate if reacties is empty?
         .exec(function(err,vragenlijsten){ 
         if(err){
@@ -66,7 +66,7 @@ exports.updateVragenlijst=function(req,res,next){
 
         vragenlijst.gebruiker = req.body.gebruiker;
         vragenlijst.vak = req.body.vak;
-        //vragenlijst.datum = new Date();
+       
         vragenlijst.klasgroepen = req.body.klasgroepen;
         vragenlijst.reacties = req.body.reacties;
 
