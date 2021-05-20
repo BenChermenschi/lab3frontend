@@ -17,6 +17,7 @@ const gebruikerstypeRoutes= require('./routes/gebruikerstypeRoutes');
 const gebruikerRoutes = require('./routes/gebruikerRoutes');
 const klasgroepRoutes = require('./routes/klasgroepRoutes');
 const vragenlijstRoutes = require('./routes/vragenlijstRoutes');
+const reactieRoutes = require('./routes/reactieRoutes');
 
 //defining pathprefix
 const routerprefix = '/api';
@@ -43,13 +44,13 @@ module.exports = function (app){
  /  router.post('/refresh',tokenController.refresh);
     //refresh route
 
-
     //Main routes
     vakRoutes(router);
     gebruikerstypeRoutes(router);
     gebruikerRoutes(router);
     klasgroepRoutes(router);
     vragenlijstRoutes(router);
+    reactieRoutes(router);
 
     app.use(routerprefix,router);
 }
