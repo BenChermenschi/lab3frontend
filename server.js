@@ -14,7 +14,7 @@ const{login,refresh}=require('./authenticationMiddleware');
 //mongoose promises
 mongoose.Promise = global.Promise;
 //mongo connect
-mongoose.connect(process.env.CONNECTION_STRING,{useMongoClient:true});
+mongoose.connect(process.env.CONNECTION_STRING);
 
 //successfull connection
 mongoose.connection.on("connected",function () {
