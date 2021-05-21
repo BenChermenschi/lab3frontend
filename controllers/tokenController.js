@@ -1,11 +1,11 @@
-const jwt= require('json-web-token');
+const jwt= require('jsonwebtoken');
 require('dotenv').config();
 
 exports.login=function(req,res){
     let email = req.body.email;
     let wachtwoord = req.body.wachtwoord;
 
-    let payload={username:email}
+    let payload={email:email}
 
     let accessToken= jwt.sign(payload,process.env.ACCESS_TOKEN_SECRET,{
         algorithm:"HS256",
@@ -16,7 +16,7 @@ exports.login=function(req,res){
         algorithm:"HS256",
         expiresIn: process.env.REFRESH_TOKEN_LIFE
     });
-
+    //TODO Rewrite this to store the token somewhere better!!! like a COOKIE
     //storing the refresh token in userarray
     users[email].refreshToken =refreshToken;
 
@@ -41,7 +41,7 @@ exports.refresh=function(req,res){
         return res.status(401).send();
     }
 
-    let refreshToken = users[payload.username].refreshToken;
+    let refreshToken = users[payload.email].refreshToken;
     //verify refresh token
     try{
         jwt.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET)

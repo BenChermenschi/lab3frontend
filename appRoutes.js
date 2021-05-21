@@ -5,13 +5,13 @@ const bodyParser = require ('body-parser');
 const { Router } = require('express');
 const { json } = require('body-parser');
 
-
+// Token controller for jwt!!!
 const tokenController = require('./controllers/tokenController');
 
 //defining main routers
 const router = express.Router(); //main router 
 
-//defning subrouters
+//defining subrouters
 const vakRoutes= require('./routes/vakRoutes');
 const gebruikerstypeRoutes= require('./routes/gebruikerstypeRoutes');
 const gebruikerRoutes = require('./routes/gebruikerRoutes');
