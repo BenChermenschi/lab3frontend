@@ -10,7 +10,7 @@ exports.createVragenlijst= function(req,res,next){
 
     
     vragenlijst.klasgroepen = req.body.klasgroepen;
-    vragenlijst.reacties = null;
+    vragenlijst.reacties = req.body.reacties;
 
     vragenlijst.save(function(err){
         if(err){
@@ -25,18 +25,23 @@ exports.getAllVragenlijsten= function(req,res,next){
     
         .populate({
             path:'gebruiker',
+            options: { retainNullValues: true },
             model: 'Gebruiker',
             populate:{
                 path:'gebruikerstype',
-                model:'GebruikersType'
+                model:'GebruikersType',
+                options: { retainNullValues: true },
             }
         })
         .populate('vak')
         .populate({
             path:'klasgroepen',
+            options: { retainNullValues: true },
             populate:{
                 path:'klasgroepen',
-                model:'Klasgroep'}
+                model:'Klasgroep',
+                options: { retainNullValues: true }
+            }
         }) // BLIJKBAAR TOCH NOG NIET FATSOENLIJK RESOLVED ?!
         // Somehow doesnt wanna populate if reacties is empty?
         .exec(function(err,vragenlijsten){ 
