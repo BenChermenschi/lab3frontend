@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SettingsComponent } from './settings.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 
 
 @NgModule({
   declarations: [
-    SettingsComponent
+    NotFoundPageComponent
   ],
   imports: [
     CommonModule
   ]
 })
-export class SettingsModule { }
+export class ErrorPagesModule { }
