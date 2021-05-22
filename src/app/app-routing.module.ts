@@ -13,6 +13,10 @@ import { SurveyDetailComponent } from './survey/pages/survey-detail/survey-detai
 import { SurveyEditComponent } from './survey/pages/survey-edit/survey-edit.component';
 import { SurveyListComponent } from './survey/pages/survey-list/survey-list.component';
 import { SurveyShareComponent } from './survey/pages/survey-share/survey-share.component';
+import { CourseDetailComponent } from './course/pages/course-detail/course-detail.component';
+import { CourseCreateComponent } from './course/pages/course-create/course-create.component';
+import { CourseEditComponent } from './course/pages/course-edit/course-edit.component';
+import { CourseListComponent } from './course/pages/course-list/course-list.component';
 
 
 const routes: Routes = [
@@ -84,6 +88,34 @@ const routes: Routes = [
       {
         path: '',
         component: ClassgroupListComponent
+      }
+
+    ]
+
+  },
+
+  {
+    path: 'course',
+    children: [
+      {
+        path: 'detail',
+        component: CourseDetailComponent,
+      },
+      {
+        path: 'create',
+        component: CourseCreateComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: CourseEditComponent,
+      },
+      {
+        path: 'list',
+        component: CourseListComponent,
+      },
+      {
+        path: '',
+        component: CourseListComponent
       }
 
     ]
