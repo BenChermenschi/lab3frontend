@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ClassgroupCreateComponent } from './classgroup/pages/classgroup-create/classgroup-create.component';
+import { ClassgroupEditComponent } from './classgroup/pages/classgroup-edit/classgroup-edit.component';
+import { ClassgroupDetailComponent } from './classgroup/pages/classgroup-detail/classgroup-detail.component';
+import { ClassgroupListComponent } from './classgroup/pages/classgroup-list/classgroup-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotFoundPageComponent } from './error-pages/not-found-page/not-found-page.component';
 import { LoginComponent } from './login/login.component';
@@ -54,6 +58,32 @@ const routes: Routes = [
       {
         path: '',
         component: SurveyListComponent
+      }
+
+    ]
+
+  }, {
+    path: 'classgroup',
+    children: [
+      {
+        path: 'detail',
+        component: ClassgroupDetailComponent,
+      },
+      {
+        path: 'create',
+        component: ClassgroupCreateComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: ClassgroupEditComponent,
+      },
+      {
+        path: 'list',
+        component: ClassgroupListComponent,
+      },
+      {
+        path: '',
+        component: ClassgroupListComponent
       }
 
     ]
