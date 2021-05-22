@@ -17,6 +17,10 @@ import { CourseDetailComponent } from './course/pages/course-detail/course-detai
 import { CourseCreateComponent } from './course/pages/course-create/course-create.component';
 import { CourseEditComponent } from './course/pages/course-edit/course-edit.component';
 import { CourseListComponent } from './course/pages/course-list/course-list.component';
+import { UserCreateComponent } from './user/pages/user-create/user-create.component';
+import { UserDetailComponent } from './user/pages/user-detail/user-detail.component';
+import { UserEditComponent } from './user/pages/user-edit/user-edit.component';
+import { UserListComponent } from './user/pages/user-list/user-list.component';
 
 
 const routes: Routes = [
@@ -116,6 +120,32 @@ const routes: Routes = [
       {
         path: '',
         component: CourseListComponent
+      }
+
+    ]
+
+  }, {
+    path: 'user',
+    children: [
+      {
+        path: 'detail',
+        component: UserDetailComponent,
+      },
+      {
+        path: 'create',
+        component: UserCreateComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: UserEditComponent,
+      },
+      {
+        path: 'list',
+        component: UserListComponent,
+      },
+      {
+        path: '',
+        component: UserListComponent
       }
 
     ]
