@@ -3,19 +3,26 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class VakService {
 
   constructor() { }
-
-  login() {
-
-  }
-
-  logout() {
+  create() {
 
   }
 
-  getTokenData() {
+  getAll() {
+
+  }
+
+  getById() {
+
+  }
+
+  update() {
+
+  }
+
+  delete() {
 
   }
 }

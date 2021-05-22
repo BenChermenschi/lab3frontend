@@ -3,19 +3,29 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class ReactieService {
 
   constructor() { }
 
-  login() {
+
+  create() {
 
   }
 
-  logout() {
+  getAll() {
 
   }
 
-  getTokenData() {
+  getById() {
 
   }
+
+  update() {
+
+  }
+
+  delete() {
+
+  }
+
 }
