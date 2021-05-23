@@ -21,6 +21,7 @@ import { UserCreateComponent } from './user/pages/user-create/user-create.compon
 import { UserDetailComponent } from './user/pages/user-detail/user-detail.component';
 import { UserEditComponent } from './user/pages/user-edit/user-edit.component';
 import { UserListComponent } from './user/pages/user-list/user-list.component';
+import { IdResolver } from './core/resolvers/idResolver';
 
 
 const routes: Routes = [
@@ -74,8 +75,11 @@ const routes: Routes = [
     path: 'classgroup',
     children: [
       {
-        path: 'detail',
+        path: 'detail/:id',
         component: ClassgroupDetailComponent,
+        resolve: {
+          id: IdResolver
+        }
       },
       {
         path: 'create',

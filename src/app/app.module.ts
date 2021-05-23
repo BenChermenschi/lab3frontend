@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ClassgroupModule } from './classgroup/classgroup.module';
 import { CoreModule } from './core/core.module';
 import { AuthInterceptor } from './core/interceptors/authInterceptor';
 import { AuthService } from './core/services/auth.service';
@@ -22,7 +23,8 @@ import { SharedModule } from './shared/shared.module';
     RouterModule,
     AppRoutingModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    ClassgroupModule
   ],
   providers: [
     AuthService,
