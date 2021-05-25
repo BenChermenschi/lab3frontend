@@ -94,6 +94,34 @@ exports.deleteGebruiker=function(req,res,next){ //unsafe
 exports.checkWachtwoord=function(req,res,next){
     
     let wachtwoord = req.body.wachtwoord;
+    let bodyemail = req.body.email;
+    console.log(bodyemail);
+    console.log(wachtwoord);
+    console.log("commence search"); 
+
+    Gebruiker.find({email:bodyemail}).select('+wachtwoord').exec(function(err,gebruiker){
+        console.log("inside of find");
+        if(err){
+            res.send(err);
+        }
+        console.log(gebruiker);
+        console.log("starting compare");
+        console.log(wachtwoord);
+        console.log(gebruiker.wachtwoord);
+        bcrypt.compare(wachtwoord,gebruiker.wachtwoord,(err,isValid) =>{
+            if(isValid){
+                console.log("successful")
+            }
+            if(err){
+                console.log("failed");
+                console.log(err);
+            }
+            
+        });
+ 
+
+
+    });
 
 
 
