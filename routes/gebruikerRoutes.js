@@ -13,11 +13,12 @@ module.exports=function(router){
 
    router.route(gebruikerroutepathprefix)
         .post(gebruikerController.createGebruiker)
+        .get(gebruikerController.getGebruikerAtEmail)
         .get(gebruikerController.getAllGebruikers);//Extremely unsafe
     
     router.route(gebruikerroutepathprefix+'/:gebruiker_id')
         .get(gebruikerController.getGebruikerAtId)
         .put(gebruikerController.updateGebruiker)
         .delete(gebruikerController.deleteGebruiker);
-        
+
 }

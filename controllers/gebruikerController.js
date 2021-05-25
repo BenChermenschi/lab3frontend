@@ -47,6 +47,17 @@ exports.getGebruikerAtId=function(req,res,next){
     });
 }
 
+exports.getGebruikerAtEmail=function(req,res,next){
+    Gebruiker.find({email:req.body.email}).exec(function(err,gebruiker){
+        if(err){
+            res.send(err);
+        }
+        res.json(gebruiker);
+    });
+}
+
+
+
 exports.updateGebruiker=function(req,res,next){          // need to check if what to do with the password an encryption
                                                     // also very unsafe
     Gebruiker.findById(req.params.gebruiker_id,function(err,gebruiker){
@@ -77,4 +88,14 @@ exports.deleteGebruiker=function(req,res,next){ //unsafe
         }
         res.json({message:'user sucessfully deleted'});
     });
+}
+
+
+exports.checkWachtwoord=function(req,res,next){
+    
+    let wachtwoord = req.body.wachtwoord;
+
+
+
+    
 }
