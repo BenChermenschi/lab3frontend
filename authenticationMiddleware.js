@@ -1,16 +1,22 @@
-exports.verify= function(req,res,next){
-    let accessToken= req.cookies.jwt;
+const jwt= require('jsonwebtoken');
+const dotenv = require ('dotenv');
+dotenv.config();
 
-    if (!accessToken){
-        return res.status(403).send();
-    }
+module.exports.verifyToken= async function(req,res,next){
+    const token = req.cookies.token || '';
 
-    let payload;
     try{
-        payload=jwt.verify(accessToken,process.env.ACCESS_TOKEN_SECRET);
+        if(!token){
+            res.status(401).json('Please login');
+        }
+        const decrypt = await jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
+        req.gebruiker = {
+            id:decrypt.id,
+            vollenaam:decrypt.vollenaam,
+            isAdmin:decrypt.isAdmin
+        };
         next();
-    }
-    catch(err){
-        return res.status(401).send();
+    } catch(err){
+        return res.status(500).json(err.toString());
     }
 }

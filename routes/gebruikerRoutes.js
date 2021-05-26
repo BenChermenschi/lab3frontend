@@ -18,8 +18,7 @@ module.exports=function(router){
     router.route(gebruikerroutepathprefix+ '/email')
     .get(gebruikerController.getGebruikerAtEmail);
 
-        router.route(gebruikerroutepathprefix+ '/pass')
-        .get(gebruikerController.checkWachtwoord);
+       // router.route(gebruikerroutepathprefix+ '/pass').get(gebruikerController.checkWachtwoord);
 
     
     router.route(gebruikerroutepathprefix+'/:gebruiker_id')

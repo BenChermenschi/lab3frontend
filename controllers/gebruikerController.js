@@ -4,7 +4,7 @@ const { json } = require('body-parser');
 const Gebruiker = mongoose.model('Gebruiker');
 const Gebruikerstype = mongoose.model('GebruikersType');
 const gebruikerstypeController = require('../controllers/gebruikerstypeController');
-const tokenController = require('../controllers/tokenController');
+const tokenController = require('./loginController');
 
 exports.createGebruiker= async function(req,res,next){
     const saltrounds = 10; //defines the level of encryption, the higher the number the more encrypted but also the slower the application.
@@ -49,7 +49,7 @@ exports.getGebruikerAtId=function(req,res,next){
 }
 
 exports.getGebruikerAtEmail=function(req,res,next){
-    Gebruiker.find({email:req.body.email}).exec(function(err,gebruiker){
+    Gebruiker.find({email:req.body.email}).populate('gebruikerstype').exec(function(err,gebruiker){
         if(err){
             res.send(err);
         }
@@ -61,7 +61,7 @@ exports.getGebruikerAtEmail=function(req,res,next){
 
 exports.updateGebruiker=function(req,res,next){          // need to check if what to do with the password an encryption
                                                     // also very unsafe
-    Gebruiker.findById(req.params.gebruiker_id,function(err,gebruiker){
+    Gebruiker.findById(req.params.gebruiker_id).exec(function(err,gebruiker){
         if(err){ 
             res.send(err);
         }
@@ -92,33 +92,59 @@ exports.deleteGebruiker=function(req,res,next){ //unsafe
 }
 
 
-exports.checkWachtwoord=function(req,res,next){
-    
+exports.checkWachtwoord=function(bodyemail,wachtwoord){
+   /* 
     let wachtwoord = req.body.wachtwoord;
     let bodyemail = req.body.email;
- 
+ */
 
     Gebruiker.findOne({email:bodyemail}).select('+wachtwoord').populate('gebruikerstype').exec(function(err,gebruiker){
    
         if(err){
             res.send(err);
         }
-        
+        console.log("entered password : '" +wachtwoord+"'");
         bcrypt.compare(wachtwoord,gebruiker.wachtwoord,(err,isValid) =>{
-            if(isValid){
-                tokenController.genToken(res,gebruiker);
 
-
-
-
-                res.json ({message: 'valid'});
-            }
-            if(isValid != true){
-                res.json({message:'invalid'}) ;
-            }
+            console.log('isValid = ' +isValid);
+            return isValid;
             if(err){
                 res.send(err);
             } 
+        });
+    });
+}
+
+exports.checkEmail=function(emailToCheck){
+    
+    Gebruiker.findOne({email:emailToCheck}).select('+wachtwoord').populate('gebruikerstype').exec(function(err,gebruiker){
+        if(err){
+            console.log(err);
+            res.send(err);
+        }
+        console.log("found something");
+        console.log(gebruiker);
+        return gebruiker;
+    });
+}
+
+exports.checkWachtwoordAndEmail= function(emailToCheck,wachtwoordToCheck){
+   Gebruiker.findOne({ email: emailToCheck }).select('+wachtwoord').populate('gebruikerstype').exec(function (err, gebruiker) {
+
+        if (err) {
+            res.send(err);
+        }
+        console.log("entered password : '" + wachtwoordToCheck + "'");
+        bcrypt.compare(wachtwoordToCheck, gebruiker.wachtwoord, (err, isValid) => {
+
+            console.log('isValid = ' + isValid);
+
+            if (err) {
+                res.send(err);
+            }
+
+            console.log(gebruiker);
+            
         });
     });
 }

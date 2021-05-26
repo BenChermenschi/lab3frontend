@@ -1,89 +1,20 @@
 const jwt= require('jsonwebtoken');
-require('dotenv').config();
+const dotenv = require ('dotenv');
+dotenv.config();
 
-
-
-
-exports.login=function(req,res){
-    let email = req.body.email;
-    let wachtwoord = req.body.wachtwoord;
-
-    let payload={email:email}
-
-    let accessToken= jwt.sign(payload,process.env.ACCESS_TOKEN_SECRET,{
-        algorithm:"HS256",
-        expiresIn: process.env.ACCESS_TOKEN_LIFE
-    });
-
-    let refreshToken= jwt.sign(payload,process.env.REFRESH_TOKEN_SECRET,{
-        algorithm:"HS256",
-        expiresIn: process.env.REFRESH_TOKEN_LIFE
-    });
-    //TODO Rewrite this to store the token somewhere better!!! like a COOKIE
-    //storing the refresh token in userarray
-    users[email].refreshToken =refreshToken;
-
-    //send token to client as a delicious cookie
-    res.cookie("jwt",accessToken,{secure:true,httpOnly:true});
-    res.send();
-}
-
-exports.refresh=function(req,res){
-    let accessToken = req.cookies.jwt;
-
-    if(!accessToken){
-        return res.status(403).send();
-    }
-
-    let payload;
-    //verify access token
-    try{
-        payload= jwt.verify(accessToken,process.env.ACCESS_TOKEN_SECRET);
-    }
-    catch(err){
-        return res.status(401).send();
-    }
-
-    let refreshToken = users[payload.email].refreshToken;
-    //verify refresh token
-    try{
-        jwt.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET)
-    }
-    catch(err){
-        return res.status(401).send();
-    }
-
-    let newToken = jwt.sign(payload,process.env.ACCESS_TOKEN_SECRET,{
-        algorithm: "HS256",
-        expiresIn: process.env.ACCESS_TOKEN_LIFE
-    });
-
-    res.cookie("jwt",newToken,{secure:true,httpOnly:true});
-    res.send();
-
-}
-
-exports.genToken = function(res,gebruiker){
+exports.genToken = function(res,vollenaam,id,isAdmin){
+    console.log('generating new token');
     const TTL = process.env.ACCESS_TOKEN_LIFE;
-    const vollenaam = gebruiker.vollenaam;
-    const id = gebruiker._id;
-    const gebruikerstype=gebruiker.gebruikerstype.naam;
-    let isAdmin = false;
+    const secret = process.env.ACCESS_TOKEN_SECRET;
 
-    if (gebruikerstype == 'Administrator'){
-        isAdmin = true;
-    }
-
+    const token = jwt.sign({id,vollenaam,isAdmin},secret,{
+        expiresIn:TTL
+    });
     
-    
-
-
+    res.cookie('token',token,{
+        expires: new Date(Date.now()+TTL),
+        secure:false,
+        httpOnly:true
+    });
 }
-
-
-
-
-
-
-
 

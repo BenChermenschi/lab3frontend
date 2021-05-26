@@ -5,8 +5,6 @@ const bodyParser = require ('body-parser');
 const { Router } = require('express');
 const { json } = require('body-parser');
 
-// Token controller for jwt!!!
-const tokenController = require('./controllers/tokenController');
 
 //defining main routers
 const router = express.Router(); //main router 
@@ -19,6 +17,7 @@ const klasgroepRoutes = require('./routes/klasgroepRoutes');
 const vragenlijstRoutes = require('./routes/vragenlijstRoutes');
 const reactieRoutes = require('./routes/reactieRoutes');
 
+const loginRoutes = require('./routes/loginRoutes');
 //defining pathprefix
 const routerprefix = '/api';
 
@@ -40,8 +39,8 @@ module.exports = function (app){
     });
 
     //login route
-    router.post('/login',tokenController.login)
- /  router.post('/refresh',tokenController.refresh);
+    //router.post('/login',tokenController.login);
+ /  ///router.post('/refresh',loginController.refresh);
     //refresh route
 
     //Main routes
@@ -51,6 +50,7 @@ module.exports = function (app){
     klasgroepRoutes(router);
     vragenlijstRoutes(router);
     reactieRoutes(router);
+    loginRoutes(router);
 
     app.use(routerprefix,router);
 }
