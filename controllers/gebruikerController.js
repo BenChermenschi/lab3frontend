@@ -4,7 +4,7 @@ const { json } = require('body-parser');
 const Gebruiker = mongoose.model('Gebruiker');
 const Gebruikerstype = mongoose.model('GebruikersType');
 const gebruikerstypeController = require('../controllers/gebruikerstypeController');
-
+const tokenController = require('../controllers/tokenController');
 
 exports.createGebruiker= async function(req,res,next){
     const saltrounds = 10; //defines the level of encryption, the higher the number the more encrypted but also the slower the application.
@@ -40,7 +40,7 @@ exports.getAllGebruikers=function(req,res,next){ //Extremely unsafe!
 }
 
 exports.getGebruikerAtId=function(req,res,next){
-    Gebruiker.findById(req.params.gebruiker_id,function(err,gebruiker){
+    Gebruiker.findById(req.params.gebruiker_id).populate('gebruikerstype').exec(function(err,gebruiker){
         if(err){
             res.send(err);
         }
@@ -98,7 +98,7 @@ exports.checkWachtwoord=function(req,res,next){
     let bodyemail = req.body.email;
  
 
-    Gebruiker.findOne({email:bodyemail}).select('+wachtwoord').exec(function(err,gebruiker){
+    Gebruiker.findOne({email:bodyemail}).select('+wachtwoord').populate('gebruikerstype').exec(function(err,gebruiker){
    
         if(err){
             res.send(err);
@@ -106,7 +106,7 @@ exports.checkWachtwoord=function(req,res,next){
         
         bcrypt.compare(wachtwoord,gebruiker.wachtwoord,(err,isValid) =>{
             if(isValid){
-
+                tokenController.genToken(res,gebruiker);
 
 
 
@@ -118,15 +118,8 @@ exports.checkWachtwoord=function(req,res,next){
             }
             if(err){
                 res.send(err);
-            }
-            
+            } 
         });
- 
-
-
     });
-
-
-
-    
 }
+

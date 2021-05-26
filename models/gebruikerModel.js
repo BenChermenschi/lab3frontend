@@ -8,6 +8,10 @@ const schema = new Schema({
     voornaam:{type:String,required:true},
     wachtwoord:{type:String,required:true,select: false },
     gebruikerstype:{type:Schema.Types.ObjectId, ref:'GebruikersType'}
-})
+});
+
+schema.virtual('vollenaam').get(function(){
+    return this.voornaam + ' ' + this.naam;
+});
 
 module.exports = mongoose.model('Gebruiker',schema);

@@ -1,6 +1,9 @@
 const jwt= require('jsonwebtoken');
 require('dotenv').config();
 
+
+
+
 exports.login=function(req,res){
     let email = req.body.email;
     let wachtwoord = req.body.wachtwoord;
@@ -59,6 +62,24 @@ exports.refresh=function(req,res){
     res.send();
 
 }
+
+exports.genToken = function(res,gebruiker){
+    const TTL = process.env.ACCESS_TOKEN_LIFE;
+    const vollenaam = gebruiker.vollenaam;
+    const id = gebruiker._id;
+    const gebruikerstype=gebruiker.gebruikerstype.naam;
+    let isAdmin = false;
+
+    if (gebruikerstype == 'Administrator'){
+        isAdmin = true;
+    }
+
+    
+    
+
+
+}
+
 
 
 
