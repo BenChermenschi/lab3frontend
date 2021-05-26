@@ -5,6 +5,7 @@ const Gebruiker = mongoose.model('Gebruiker');
 const Gebruikerstype = mongoose.model('GebruikersType');
 const gebruikerstypeController = require('../controllers/gebruikerstypeController');
 
+
 exports.createGebruiker= async function(req,res,next){
     const saltrounds = 10; //defines the level of encryption, the higher the number the more encrypted but also the slower the application.
      bcrypt.hash(req.body.wachtwoord,saltrounds).then(hash=>{
@@ -95,26 +96,28 @@ exports.checkWachtwoord=function(req,res,next){
     
     let wachtwoord = req.body.wachtwoord;
     let bodyemail = req.body.email;
-    console.log(bodyemail);
-    console.log(wachtwoord);
-    console.log("commence search"); 
+ 
 
-    Gebruiker.find({email:bodyemail}).select('+wachtwoord').exec(function(err,gebruiker){
-        console.log("inside of find");
+    Gebruiker.findOne({email:bodyemail}).select('+wachtwoord').exec(function(err,gebruiker){
+   
         if(err){
             res.send(err);
         }
-        console.log(gebruiker);
-        console.log("starting compare");
-        console.log(wachtwoord);
-        console.log(gebruiker.wachtwoord);
+        
         bcrypt.compare(wachtwoord,gebruiker.wachtwoord,(err,isValid) =>{
             if(isValid){
-                console.log("successful")
+
+
+
+
+
+                res.json ({message: 'valid'});
+            }
+            if(isValid != true){
+                res.json({message:'invalid'}) ;
             }
             if(err){
-                console.log("failed");
-                console.log(err);
+                res.send(err);
             }
             
         });
