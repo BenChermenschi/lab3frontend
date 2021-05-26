@@ -127,7 +127,7 @@ exports.checkEmail=function(emailToCheck){
         return gebruiker;
     });
 }
-
+ 
 exports.checkWachtwoordAndEmail= function(emailToCheck,wachtwoordToCheck){
    Gebruiker.findOne({ email: emailToCheck }).select('+wachtwoord').populate('gebruikerstype').exec(function (err, gebruiker) {
 
