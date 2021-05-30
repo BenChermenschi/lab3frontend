@@ -2,7 +2,7 @@ const jwt= require('jsonwebtoken');
 const dotenv = require ('dotenv');
 dotenv.config();
 
-exports.genToken = function(res,vollenaam,id,isAdmin){
+exports.genToken = async function(res,vollenaam,id,isAdmin){
     console.log('generating new token');
     const TTL = process.env.ACCESS_TOKEN_LIFE;
     const secret = process.env.ACCESS_TOKEN_SECRET;
@@ -16,5 +16,6 @@ exports.genToken = function(res,vollenaam,id,isAdmin){
         secure:false,
         httpOnly:true
     });
+    console.log('created cookie?');
 }
 

@@ -97,14 +97,17 @@ exports.checkWachtwoord=function(bodyemail,wachtwoord){
     let wachtwoord = req.body.wachtwoord;
     let bodyemail = req.body.email;
  */
-
+    //make this a promise
     Gebruiker.findOne({email:bodyemail}).select('+wachtwoord').populate('gebruikerstype').exec(function(err,gebruiker){
    
         if(err){
             res.send(err);
         }
         console.log("entered password : '" +wachtwoord+"'");
-        bcrypt.compare(wachtwoord,gebruiker.wachtwoord,(err,isValid) =>{
+        //Make this a promise
+
+
+        bcrypt.compare(wachtwoord,gebruiker.wachtwoord).then((err,isValid) =>{
 
             console.log('isValid = ' +isValid);
             return isValid;
@@ -116,7 +119,7 @@ exports.checkWachtwoord=function(bodyemail,wachtwoord){
 }
 
 exports.checkEmail=function(emailToCheck){
-    
+    //make this a promise
     Gebruiker.findOne({email:emailToCheck}).select('+wachtwoord').populate('gebruikerstype').exec(function(err,gebruiker){
         if(err){
             console.log(err);
@@ -128,23 +131,31 @@ exports.checkEmail=function(emailToCheck){
     });
 }
  
-exports.checkWachtwoordAndEmail= function(emailToCheck,wachtwoordToCheck){
-   Gebruiker.findOne({ email: emailToCheck }).select('+wachtwoord').populate('gebruikerstype').exec(function (err, gebruiker) {
+exports.checkWachtwoordAndEmail= async function(emailToCheck,wachtwoordToCheck){
+    //make this a promise
 
+    return new Promise(function(resolve,reject){
+
+
+    
+   Gebruiker.findOne({ email: emailToCheck }).select('+wachtwoord').populate('gebruikerstype').exec( async function (err, gebruiker) {
+        console.log(gebruiker);
         if (err) {
             res.send(err);
         }
         console.log("entered password : '" + wachtwoordToCheck + "'");
-        bcrypt.compare(wachtwoordToCheck, gebruiker.wachtwoord, (err, isValid) => {
-
+       let isValid = await bcrypt.compare(wachtwoordToCheck, gebruiker.wachtwoord)
             console.log('isValid = ' + isValid);
 
             if (err) {
-                res.send(err);
+                console.log(err);
+                //res.send(err);
             }
 
             console.log(gebruiker);
+            console.log(gebruiker.gebruikerstype);
             
+            resolve(gebruiker);
         });
     });
 }

@@ -10,7 +10,7 @@ const gebruikersController = require('./gebruikerController');
 const { genToken } = require('./tokenController');
 
 
-exports.login =  function(req,res){
+exports.login = async function(req,res){
     let email = req.body.email;
     let wachtwoord = req.body.wachtwoord;
     let isAdmin = false;
@@ -20,21 +20,25 @@ exports.login =  function(req,res){
 
 
         //let resultaat2= gebruikersController.checkWachtwoord(email,wachtwoord);
-         let resultaat1 =  gebruikersController.checkWachtwoordAndEmail(email,wachtwoord);
+         let resultaat1 = await gebruikersController.checkWachtwoordAndEmail(email,wachtwoord)
+           
             console.log("resultaat1 : ");       
-            console.log(res2);
+            console.log(resultaat1);
             console.log("behind resultaat 1");
-            if (res2.gebruikerstype.naam == 'Administrator'){
+            if (resultaat1.gebruikerstype.naam == 'Administrator'){
                 isAdmin = true;
                 console.log('granting admin priviledge');
             }
 
-            genToken(res,resultaat1.vollenaam,resultaat1._id,isAdmin);
          
+            
+           let final = await genToken(res,resultaat1.vollenaam,resultaat1._id,isAdmin);
+           
+        
          
         //// CHECK OUT PROMISES YOU DUM DUM!!! BCRYPT IS MAKING THIS STUFF ASYNC!!!!!!
         
-
+        res.send(final);
     
 
 
