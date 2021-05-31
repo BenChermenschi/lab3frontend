@@ -37,7 +37,7 @@ exports.login = async function(req,res){
         
          
         //// CHECK OUT PROMISES YOU DUM DUM!!! BCRYPT IS MAKING THIS STUFF ASYNC!!!!!!
-        
+        res.json({message:'cookie created'});
         res.send(final);
     
 
