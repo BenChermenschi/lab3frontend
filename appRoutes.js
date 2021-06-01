@@ -10,6 +10,7 @@ const authmiddleware = require('./authenticationMiddleware');
 //defining main routers
 const router = express.Router(); //main router 
 const authrouter = express.Router(); //router for authenticated routes?
+const adminrouter = express.Router();//routes for admin only
 
 //defining subrouters
 const vakRoutes= require('./routes/vakRoutes');
@@ -40,6 +41,11 @@ module.exports = function (app){
         authmiddleware.verifyToken(req,res,next);
     });
 
+    adminrouter.use(function(req,res,next){
+        console.log('adminmiddleware : incomming request detected');
+        authmiddleware.verifyTokenAdmin(req,res,next);
+    });
+
     //testroute
     router.get('/',function(req,res){
         res.json({message:'api is on'});
@@ -52,7 +58,7 @@ module.exports = function (app){
 
     //Main routes
     vakRoutes(router);
-    gebruikerstypeRoutes(router,authrouter);
+    gebruikerstypeRoutes(router,authrouter,adminrouter);
     gebruikerRoutes(router);
     klasgroepRoutes(router);
     vragenlijstRoutes(router);
@@ -61,4 +67,5 @@ module.exports = function (app){
 
     app.use(routerprefix,router);
     app.use(routerprefix,authrouter);
+    app.use(routerprefix,adminrouter);
 }

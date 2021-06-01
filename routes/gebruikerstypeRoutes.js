@@ -1,25 +1,25 @@
 const express= require('express');
 const gebruikerstypeController = require('../controllers/gebruikerstypeController');
 const Gebruikerstype = require('../models/gebruikerstypeModel');
-const gebruikerstyperouteprefix="/gebruikerstypes";
+const prefix="/gebruikerstypes";
 
-module.exports=function(router,authrouter){
+module.exports=function(router,authrouter,adminrouter){
 
     //middleware for debugging
     router.use(function(req,res,next){
         next();
     });
     //public
-    router.route(gebruikerstyperouteprefix)
+    authrouter.route(prefix)
         .get(gebruikerstypeController.getAllGebruikerstypes);
 
-    router.route(gebruikerstyperouteprefix+'/:gebruikerstype_id')
+    authrouter.route(prefix+'/:gebruikerstype_id')
         .get(gebruikerstypeController.getGebruikerstypeAtId);
     //private
-    authrouter.route(gebruikerstyperouteprefix)
+    adminrouter.route(prefix)
     .post(gebruikerstypeController.createGebruikerstype);
 
-    authrouter.route(gebruikerstyperouteprefix+'/:gebruikerstype_id')
+    adminrouter.route(prefix+'/:gebruikerstype_id')
     .put(gebruikerstypeController.updateGebruikerstype)
         .delete(gebruikerstypeController.deleteGebruikerstype);
 }  
