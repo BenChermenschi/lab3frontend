@@ -2,6 +2,7 @@ const express = require('express');
 const Vak = require('../models/vakModel');
 const vakController = require('../controllers/vakController');
 const vakrouteprefix="/vakken";
+const auth = require('../authenticationMiddleware');
 
 module.exports= function (router){
     

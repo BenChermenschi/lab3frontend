@@ -4,10 +4,12 @@ const express = require('express');
 const bodyParser = require ('body-parser');
 const { Router } = require('express');
 const { json } = require('body-parser');
+const authmiddleware = require('./authenticationMiddleware');
 
 
 //defining main routers
 const router = express.Router(); //main router 
+const authrouter = express.Router(); //router for authenticated routes?
 
 //defining subrouters
 const vakRoutes= require('./routes/vakRoutes');
@@ -33,6 +35,11 @@ module.exports = function (app){
         next();
     });
 
+    authrouter.use(function(req,res,next){
+        console.log('authrouterMiddleware : incomming request detected');
+        authmiddleware.verifyToken(req,res,next);
+    });
+
     //testroute
     router.get('/',function(req,res){
         res.json({message:'api is on'});
@@ -45,7 +52,7 @@ module.exports = function (app){
 
     //Main routes
     vakRoutes(router);
-    gebruikerstypeRoutes(router);
+    gebruikerstypeRoutes(router,authrouter);
     gebruikerRoutes(router);
     klasgroepRoutes(router);
     vragenlijstRoutes(router);
@@ -53,4 +60,5 @@ module.exports = function (app){
     loginRoutes(router);
 
     app.use(routerprefix,router);
+    app.use(routerprefix,authrouter);
 }
