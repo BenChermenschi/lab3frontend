@@ -12,11 +12,11 @@ module.exports= function(router,authrouter,adminrouter){
         next();
     });
 
-    router.route(prefix)
+    authrouter.route(prefix)
         .post(vragenlijstController.createVragenlijst)
         .get(vragenlijstController.getAllVragenlijsten);
 
-    router.route(prefix+'/:vragenlijst_id')
+    authrouter.route(prefix+'/:vragenlijst_id')
         .get(vragenlijstController.getVragenlijstAtId)
         .put(vragenlijstController.updateVragenlijst)
         .delete(vragenlijstController.deleteVragenlijst);

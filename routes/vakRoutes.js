@@ -12,12 +12,16 @@ module.exports= function (router,authrouter,adminrouter){
         next();
     });
 
-    router.route(prefix)
-        .post(vakController.createVak)
+    authrouter.route(prefix)
         .get(vakController.getAllVakken);
 
-    router.route(prefix+'/:vak_id')
-        .get(vakController.getVakAtId)
+    authrouter.route(prefix+'/:vak_id')
+        .get(vakController.getVakAtId);
+
+    adminrouter.route(prefix)
+        .post(vakController.createVak);
+
+    adminrouter.route(prefix+'/:vak_id')
         .put(vakController.updateVak)
         .delete(vakController.deleteVak);
 }

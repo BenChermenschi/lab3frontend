@@ -11,12 +11,17 @@ module.exports= function (router,authrouter,adminrouter){
         next();
     });
 
-    router.route(prefix)
-        .post(klasgroepController.createKlasgroep)
+    authrouter.route(prefix)
         .get(klasgroepController.getAllKlasgroepen);
 
-    router.route(prefix+'/:klasgroep_id')
-        .get(klasgroepController.getKlasgroepAtId)
+    authrouter.route(prefix+'/:klasgroep_id')
+        .get(klasgroepController.getKlasgroepAtId);
+
+    adminrouter.route(prefix)
+    .post(klasgroepController.createKlasgroep);
+
+    adminrouter.route(prefix+'/:klasgroep_id')
         .put(klasgroepController.updateKlasgroep)
         .delete(klasgroepController.deleteKlasgroep);
+
 }

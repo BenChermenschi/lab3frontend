@@ -17,6 +17,8 @@ module.exports= function (router,authrouter,adminrouter){
 
     router.route(prefix+'/:reactie_id')
         .get(reactieController.getReactieAtId)
-        .put(reactieController.updateReactie)
-        .delete(reactieController.deleteReactie);
+        ;
+
+        /*.put(reactieController.updateReactie)
+        .delete(reactieController.deleteReactie)*/
 }
