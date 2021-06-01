@@ -1,9 +1,9 @@
 const express = require('express');
 const Reactie = require('../models/reactieModel');
 const reactieController = require('../controllers/reactieController');
-const reactierouteprefix="/reacties";
+const prefix="/reacties";
 
-module.exports= function (router){
+module.exports= function (router,authrouter,adminrouter){
     
     //middleware for debugging purposes
     router.use(function(req,res,next){
@@ -11,11 +11,11 @@ module.exports= function (router){
         next();
     });
 
-    router.route(reactierouteprefix)
+    router.route(prefix)
         .post(reactieController.createReactie)
         .get(reactieController.getAllReacties);
 
-    router.route(reactierouteprefix+'/:reactie_id')
+    router.route(prefix+'/:reactie_id')
         .get(reactieController.getReactieAtId)
         .put(reactieController.updateReactie)
         .delete(reactieController.deleteReactie);

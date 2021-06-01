@@ -57,12 +57,12 @@ module.exports = function (app){
     //refresh route
 
     //Main routes
-    vakRoutes(router);
+    vakRoutes(router,authrouter,adminrouter);
     gebruikerstypeRoutes(router,authrouter,adminrouter);
-    gebruikerRoutes(router);
-    klasgroepRoutes(router);
-    vragenlijstRoutes(router);
-    reactieRoutes(router);
+    gebruikerRoutes(router,authrouter,adminrouter);
+    klasgroepRoutes(router,authrouter,adminrouter);
+    vragenlijstRoutes(router,authrouter,adminrouter);
+    reactieRoutes(router,authrouter,adminrouter);
     loginRoutes(router);
 
     app.use(routerprefix,router);

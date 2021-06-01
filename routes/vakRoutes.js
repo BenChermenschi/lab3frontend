@@ -1,10 +1,10 @@
 const express = require('express');
 const Vak = require('../models/vakModel');
 const vakController = require('../controllers/vakController');
-const vakrouteprefix="/vakken";
-const auth = require('../authenticationMiddleware');
+const prefix="/vakken";
 
-module.exports= function (router){
+
+module.exports= function (router,authrouter,adminrouter){
     
     //middleware for debugging purposes
     router.use(function(req,res,next){
@@ -12,11 +12,11 @@ module.exports= function (router){
         next();
     });
 
-    router.route(vakrouteprefix)
+    router.route(prefix)
         .post(vakController.createVak)
         .get(vakController.getAllVakken);
 
-    router.route(vakrouteprefix+'/:vak_id')
+    router.route(prefix+'/:vak_id')
         .get(vakController.getVakAtId)
         .put(vakController.updateVak)
         .delete(vakController.deleteVak);

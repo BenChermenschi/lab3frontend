@@ -2,9 +2,9 @@ const express = require('express');
 const vragenlijstRouter = express.Router();
 const Vragenlijst=require('../models/vragenlijstModel');
 const vragenlijstController = require('../controllers/vragenlijstController');
-const vragenlijstrouteprefix='/vragenlijsten';
+const prefix='/vragenlijsten';
 
-module.exports= function(router){
+module.exports= function(router,authrouter,adminrouter){
 
     //middleware
     router.use(function(req,res,next){
@@ -12,11 +12,11 @@ module.exports= function(router){
         next();
     });
 
-    router.route(vragenlijstrouteprefix)
+    router.route(prefix)
         .post(vragenlijstController.createVragenlijst)
         .get(vragenlijstController.getAllVragenlijsten);
 
-    router.route(vragenlijstrouteprefix+'/:vragenlijst_id')
+    router.route(prefix+'/:vragenlijst_id')
         .get(vragenlijstController.getVragenlijstAtId)
         .put(vragenlijstController.updateVragenlijst)
         .delete(vragenlijstController.deleteVragenlijst);

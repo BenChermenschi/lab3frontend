@@ -1,9 +1,9 @@
 const express = require('express');
 const Klasgroep = require('../models/klasgroepModel');
 const klasgroepController = require('../controllers/klasgroepController');
-const klasgroeprouteprefix="/klasgroepen";
+const prefix="/klasgroepen";
 
-module.exports= function (router){
+module.exports= function (router,authrouter,adminrouter){
     
     //middleware for debugging purposes
     router.use(function(req,res,next){
@@ -11,11 +11,11 @@ module.exports= function (router){
         next();
     });
 
-    router.route(klasgroeprouteprefix)
+    router.route(prefix)
         .post(klasgroepController.createKlasgroep)
         .get(klasgroepController.getAllKlasgroepen);
 
-    router.route(klasgroeprouteprefix+'/:klasgroep_id')
+    router.route(prefix+'/:klasgroep_id')
         .get(klasgroepController.getKlasgroepAtId)
         .put(klasgroepController.updateKlasgroep)
         .delete(klasgroepController.deleteKlasgroep);

@@ -1,31 +1,37 @@
 const express=require('express');
 const Gebruiker=require('../models/gebruikerModel');
 const gebruikerController = require('../controllers/gebruikerController');
-const gebruikerroutepathprefix="/gebruikers";
+const prefix="/gebruikers";
 
-module.exports=function(router){
+module.exports=function(router,authrouter,adminrouter){
 
     //middleware
     router.use(function(req,res,next){
         //do type and other validations here
         next();
     });
-
-   router.route(gebruikerroutepathprefix)
-        .post(gebruikerController.createGebruiker)
+    
+   adminrouter.route(prefix)
         .get(gebruikerController.getAllGebruikers);
     
-    router.route(gebruikerroutepathprefix+ '/email')
-    .get(gebruikerController.getGebruikerAtEmail);
+    
+    authrouter.route(prefix+ '/email')
+        .get(gebruikerController.getGebruikerAtEmail);
 
        // router.route(gebruikerroutepathprefix+ '/pass').get(gebruikerController.checkWachtwoord);
 
     
-    router.route(gebruikerroutepathprefix+'/:gebruiker_id')
-        .get(gebruikerController.getGebruikerAtId)
-        .put(gebruikerController.updateGebruiker)
-        .delete(gebruikerController.deleteGebruiker);
+    authrouter.route(prefix+'/:gebruiker_id')
+        .get(gebruikerController.getGebruikerAtId);
 
+    //private
+
+    //admin
+    adminrouter.route(prefix)
+        .post(gebruikerController.createGebruiker);
     
+    adminrouter.route(prefix+'/:gebruiker_id')
+        .put(gebruikerController.updateGebruiker)
+        .delete(gebruikerController.deleteGebruiker)
 
 }
