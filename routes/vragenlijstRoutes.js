@@ -32,7 +32,7 @@ module.exports= function(router,authrouter,adminrouter){
             authmiddleware.verifyToken,
             vragenlijstController.deleteVragenlijst]);
 
-    router.route(prefix+'/:gebruikers_id')
+    router.route(prefix+'/gebruiker')
         .get([vragenlijstController.getVragenlijstenByGebruikersId]);
 }
 
