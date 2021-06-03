@@ -101,35 +101,40 @@ exports.getVragenlijstAtId= function(req,res,next){
 }
 
 exports.getVragenlijstenByGebruikersId=function(req,res,next){
-    Vragenlijst.find({gebruiker:req.body.gebruikers_id})
-    .populate({
-        path:'gebruiker',
-        options: { retainNullValues: true },
-        model: 'Gebruiker',
-        populate:{
-            path:'gebruikerstype',
-            model:'GebruikersType',
+    try{
+        Vragenlijst.find({gebruiker:req.gebruiker.id})
+        .populate({
+            path:'gebruiker',
             options: { retainNullValues: true },
-        }
-    })
-    .populate('vak')
-    .populate({
-        path:'klasgroepen',
-        options: { retainNullValues: true },
-        populate:{
+            model: 'Gebruiker',
+            populate:{
+                path:'gebruikerstype',
+                model:'GebruikersType',
+                options: { retainNullValues: true },
+            }
+        })
+        .populate('vak')
+        .populate({
             path:'klasgroepen',
-            model:'Klasgroep',
-            options: { retainNullValues: true }
-        }
-    })
-    
-    
-    .exec(function(err,vragnelijsten){
-        if(err){
-            res.send(err);
-        }
-        res.json(vragnelijsten);
-    })
+            options: { retainNullValues: true },
+            populate:{
+                path:'klasgroepen',
+                model:'Klasgroep',
+                options: { retainNullValues: true }
+            }
+        })
+        
+        
+        .exec(function(err,vragnelijsten){
+            if(err){
+                res.send(err);
+            }
+            res.json(vragnelijsten);
+        })
+    }catch(err){
+        console.log(err);
+    }
+   
 }
 
 exports.updateVragenlijst=function(req,res,next){

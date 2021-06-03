@@ -21,6 +21,12 @@ module.exports= function(router){
             authmiddleware.verifyToken,
             vragenlijstController.getAllVragenlijsten]);
 
+
+    router.route(prefix+'/gebruiker')
+            .get([
+                authmiddleware.verifyToken,
+                vragenlijstController.getVragenlijstenByGebruikersId]);
+
     router.route(prefix+'/:vragenlijst_id')
         .get([
             authmiddleware.verifyToken,
@@ -32,8 +38,7 @@ module.exports= function(router){
             authmiddleware.verifyToken,
             vragenlijstController.deleteVragenlijst]);
 
-    router.route(prefix+'/gebruiker')
-        .get([vragenlijstController.getVragenlijstenByGebruikersId]);
+    
 }
 
 
