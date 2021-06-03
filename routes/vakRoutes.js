@@ -2,6 +2,7 @@ const express = require('express');
 const Vak = require('../models/vakModel');
 const vakController = require('../controllers/vakController');
 const prefix="/vakken";
+const authmiddleware = require('../authenticationMiddleware');
 
 
 module.exports= function (router,authrouter,adminrouter){
@@ -12,18 +13,28 @@ module.exports= function (router,authrouter,adminrouter){
         next();
     });
 
-    authrouter.route(prefix)
-        .get(vakController.getAllVakken);
+    router.route(prefix)
+        .get([
+            authmiddleware.verifyToken,
+            vakController.getAllVakken]);
 
-    authrouter.route(prefix+'/:vak_id')
-        .get(vakController.getVakAtId);
+    router.route(prefix+'/:vak_id')
+        .get([
+            authmiddleware.verifyToken,
+            vakController.getVakAtId]);
 
-    adminrouter.route(prefix)
-        .post(vakController.createVak);
+    router.route(prefix)
+        .post([
+            authmiddleware.verifyTokenAdmin,
+            vakController.createVak]);
 
-    adminrouter.route(prefix+'/:vak_id')
-        .put(vakController.updateVak)
-        .delete(vakController.deleteVak);
+    router.route(prefix+'/:vak_id')
+        .put([
+            authmiddleware.verifyTokenAdmin,
+            vakController.updateVak])
+        .delete([
+            authmiddleware.verifyTokenAdmin,
+            vakController.deleteVak]);
 }
 
 

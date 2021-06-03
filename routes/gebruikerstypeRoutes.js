@@ -2,6 +2,7 @@ const express= require('express');
 const gebruikerstypeController = require('../controllers/gebruikerstypeController');
 const Gebruikerstype = require('../models/gebruikerstypeModel');
 const prefix="/gebruikerstypes";
+const authmiddleware = require('../authenticationMiddleware');
 
 module.exports=function(router,authrouter,adminrouter){
 
@@ -10,16 +11,26 @@ module.exports=function(router,authrouter,adminrouter){
         next();
     });
     //public
-    authrouter.route(prefix)
-        .get(gebruikerstypeController.getAllGebruikerstypes);
+    router.route(prefix)
+        .get([
+            authmiddleware.verifyToken,
+            gebruikerstypeController.getAllGebruikerstypes]);
 
-    authrouter.route(prefix+'/:gebruikerstype_id')
-        .get(gebruikerstypeController.getGebruikerstypeAtId);
+    router.route(prefix+'/:gebruikerstype_id')
+        .get([
+            authmiddleware.verifyToken,
+            gebruikerstypeController.getGebruikerstypeAtId]);
     //private
-    adminrouter.route(prefix)
-    .post(gebruikerstypeController.createGebruikerstype);
+    router.route(prefix)
+    .post([
+        authmiddleware.verifyTokenAdmin,
+        gebruikerstypeController.createGebruikerstype]);
 
-    adminrouter.route(prefix+'/:gebruikerstype_id')
-    .put(gebruikerstypeController.updateGebruikerstype)
-        .delete(gebruikerstypeController.deleteGebruikerstype);
+    router.route(prefix+'/:gebruikerstype_id')
+    .put([
+        authmiddleware.verifyTokenAdmin,
+        gebruikerstypeController.updateGebruikerstype])
+        .delete([
+            authmiddleware.verifyTokenAdmin,
+            gebruikerstypeController.deleteGebruikerstype]);
 }  

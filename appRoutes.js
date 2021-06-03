@@ -65,7 +65,9 @@ module.exports = function (app){
     reactieRoutes(router,authrouter,adminrouter);
     loginRoutes(router);
 
+    app.use(routerprefix+'/a',adminrouter);
+    app.use(routerprefix+'/u',authrouter);
     app.use(routerprefix,router);
-    app.use(routerprefix,authrouter);
-    app.use(routerprefix,adminrouter);
+    
+    
 }

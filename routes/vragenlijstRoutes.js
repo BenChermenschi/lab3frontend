@@ -3,6 +3,7 @@ const vragenlijstRouter = express.Router();
 const Vragenlijst=require('../models/vragenlijstModel');
 const vragenlijstController = require('../controllers/vragenlijstController');
 const prefix='/vragenlijsten';
+const authmiddleware = require('../authenticationMiddleware');
 
 module.exports= function(router,authrouter,adminrouter){
 
@@ -12,14 +13,27 @@ module.exports= function(router,authrouter,adminrouter){
         next();
     });
 
-    authrouter.route(prefix)
-        .post(vragenlijstController.createVragenlijst)
-        .get(vragenlijstController.getAllVragenlijsten);
+    router.route(prefix)
+        .post([
+            authmiddleware.verifyToken,
+            vragenlijstController.createVragenlijst])
+        .get([
+            authmiddleware.verifyToken,
+            vragenlijstController.getAllVragenlijsten]);
 
-    authrouter.route(prefix+'/:vragenlijst_id')
-        .get(vragenlijstController.getVragenlijstAtId)
-        .put(vragenlijstController.updateVragenlijst)
-        .delete(vragenlijstController.deleteVragenlijst);
+    router.route(prefix+'/:vragenlijst_id')
+        .get([
+            authmiddleware.verifyToken,
+            vragenlijstController.getVragenlijstAtId])
+        .put([
+            authmiddleware.verifyToken,
+            vragenlijstController.updateVragenlijst])
+        .delete([
+            authmiddleware.verifyToken,
+            vragenlijstController.deleteVragenlijst]);
+
+    router.route(prefix+'/:gebruikers_id')
+        .get([vragenlijstController.getVragenlijstenByGebruikersId]);
 }
 
 

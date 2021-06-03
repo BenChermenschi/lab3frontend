@@ -2,6 +2,7 @@ const express=require('express');
 const Gebruiker=require('../models/gebruikerModel');
 const gebruikerController = require('../controllers/gebruikerController');
 const prefix="/gebruikers";
+const authmiddleware = require('../authenticationMiddleware');
 
 module.exports=function(router,authrouter,adminrouter){
 
@@ -11,27 +12,40 @@ module.exports=function(router,authrouter,adminrouter){
         next();
     });
     
-   adminrouter.route(prefix)
-        .get(gebruikerController.getAllGebruikers);
+   router.route(prefix)
+        .get([
+            authmiddleware.verifyTokenAdmin,
+            gebruikerController.getAllGebruikers
+        ]);
     
     
-    authrouter.route(prefix+ '/email')
-        .get(gebruikerController.getGebruikerAtEmail);
+    router.route(prefix+ '/email')
+        .get([
+            authmiddleware.verifyToken,
+            gebruikerController.getGebruikerAtEmail]);
 
        // router.route(gebruikerroutepathprefix+ '/pass').get(gebruikerController.checkWachtwoord);
 
     
-    authrouter.route(prefix+'/:gebruiker_id')
-        .get(gebruikerController.getGebruikerAtId);
+    router.route(prefix+'/:gebruiker_id')
+        .get([
+            authmiddleware.verifyToken,
+            gebruikerController.getGebruikerAtId]);
 
     //private
 
     //admin
-    adminrouter.route(prefix)
-        .post(gebruikerController.createGebruiker);
+    router.route(prefix)
+        .post([
+            authmiddleware.verifyTokenAdmin,
+            gebruikerController.createGebruiker]);
     
-    adminrouter.route(prefix+'/:gebruiker_id')
-        .put(gebruikerController.updateGebruiker)
-        .delete(gebruikerController.deleteGebruiker)
+    router.route(prefix+'/:gebruiker_id')
+        .put([
+            authmiddleware.verifyTokenAdmin,
+            gebruikerController.updateGebruiker])
+        .delete([
+            authmiddleware.verifyTokenAdmin,
+            gebruikerController.deleteGebruiker]);
 
 }

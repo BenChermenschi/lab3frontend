@@ -2,6 +2,7 @@ const express = require('express');
 const Klasgroep = require('../models/klasgroepModel');
 const klasgroepController = require('../controllers/klasgroepController');
 const prefix="/klasgroepen";
+const authmiddleware = require('../authenticationMiddleware');
 
 module.exports= function (router,authrouter,adminrouter){
     
@@ -11,17 +12,27 @@ module.exports= function (router,authrouter,adminrouter){
         next();
     });
 
-    authrouter.route(prefix)
-        .get(klasgroepController.getAllKlasgroepen);
+    router.route(prefix)
+        .get([
+            authmiddleware.verifyToken,
+            klasgroepController.getAllKlasgroepen]);
 
-    authrouter.route(prefix+'/:klasgroep_id')
-        .get(klasgroepController.getKlasgroepAtId);
+    router.route(prefix+'/:klasgroep_id')
+        .get([
+            authmiddleware.verifyToken,
+            klasgroepController.getKlasgroepAtId]);
 
-    adminrouter.route(prefix)
-    .post(klasgroepController.createKlasgroep);
+    router.route(prefix)
+    .post([
+        authmiddleware.verifyTokenAdmin,
+        klasgroepController.createKlasgroep]);
 
-    adminrouter.route(prefix+'/:klasgroep_id')
-        .put(klasgroepController.updateKlasgroep)
-        .delete(klasgroepController.deleteKlasgroep);
+    router.route(prefix+'/:klasgroep_id')
+        .put([
+            authmiddleware.verifyTokenAdmin,
+            klasgroepController.updateKlasgroep])
+        .delete([
+            authmiddleware.verifyTokenAdmin,
+            klasgroepController.deleteKlasgroep]);
 
 }
