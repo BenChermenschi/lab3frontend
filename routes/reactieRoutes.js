@@ -3,7 +3,7 @@ const Reactie = require('../models/reactieModel');
 const reactieController = require('../controllers/reactieController');
 const prefix="/reacties";
 
-module.exports= function (router,authrouter,adminrouter){
+module.exports= function (router){
     
     //middleware for debugging purposes
     router.use(function(req,res,next){

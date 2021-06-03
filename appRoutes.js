@@ -9,8 +9,7 @@ const authmiddleware = require('./authenticationMiddleware');
 
 //defining main routers
 const router = express.Router(); //main router 
-const authrouter = express.Router(); //router for authenticated routes?
-const adminrouter = express.Router();//routes for admin only
+
 
 //defining subrouters
 const vakRoutes= require('./routes/vakRoutes');
@@ -36,16 +35,6 @@ module.exports = function (app){
         next();
     });
 
-    authrouter.use(function(req,res,next){
-        console.log('authrouterMiddleware : incomming request detected');
-        authmiddleware.verifyToken(req,res,next);
-    });
-
-    adminrouter.use(function(req,res,next){
-        console.log('adminmiddleware : incomming request detected');
-        authmiddleware.verifyTokenAdmin(req,res,next);
-    });
-
     //testroute
     router.get('/',function(req,res){
         res.json({message:'api is on'});
@@ -57,16 +46,15 @@ module.exports = function (app){
     //refresh route
 
     //Main routes
-    vakRoutes(router,authrouter,adminrouter);
-    gebruikerstypeRoutes(router,authrouter,adminrouter);
-    gebruikerRoutes(router,authrouter,adminrouter);
-    klasgroepRoutes(router,authrouter,adminrouter);
-    vragenlijstRoutes(router,authrouter,adminrouter);
-    reactieRoutes(router,authrouter,adminrouter);
+    vakRoutes(router);
+    gebruikerstypeRoutes(router);
+    gebruikerRoutes(router);
+    klasgroepRoutes(router);
+    vragenlijstRoutes(router);
+    reactieRoutes(router);
     loginRoutes(router);
 
-    app.use(routerprefix+'/a',adminrouter);
-    app.use(routerprefix+'/u',authrouter);
+    
     app.use(routerprefix,router);
     
     

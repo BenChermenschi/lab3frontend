@@ -4,7 +4,7 @@ const Gebruikerstype = require('../models/gebruikerstypeModel');
 const prefix="/gebruikerstypes";
 const authmiddleware = require('../authenticationMiddleware');
 
-module.exports=function(router,authrouter,adminrouter){
+module.exports=function(router){
 
     //middleware for debugging
     router.use(function(req,res,next){

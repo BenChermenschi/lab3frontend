@@ -4,7 +4,7 @@ const gebruikerController = require('../controllers/gebruikerController');
 const prefix="/gebruikers";
 const authmiddleware = require('../authenticationMiddleware');
 
-module.exports=function(router,authrouter,adminrouter){
+module.exports=function(router){
 
     //middleware
     router.use(function(req,res,next){

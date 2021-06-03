@@ -5,7 +5,7 @@ const prefix="/vakken";
 const authmiddleware = require('../authenticationMiddleware');
 
 
-module.exports= function (router,authrouter,adminrouter){
+module.exports= function (router){
     
     //middleware for debugging purposes
     router.use(function(req,res,next){
