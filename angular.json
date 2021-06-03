@@ -101,6 +101,11 @@
             "styles": [
               "src/styles.sass"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "../node_modules/bootstrap/scss"
+              ]
+            },
             "scripts": []
           }
         }
