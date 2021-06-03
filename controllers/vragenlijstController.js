@@ -4,7 +4,7 @@ const Vragenlijst = mongoose.model('Vragenlijst');
 exports.createVragenlijst= function(req,res,next){
     let vragenlijst = new Vragenlijst();
 
-    vragenlijst.gebruiker = req.body.gebruiker;
+    vragenlijst.gebruiker = req.gebruiker.id;
     vragenlijst.vak = req.body.vak;
     vragenlijst.datum = new Date();
 
