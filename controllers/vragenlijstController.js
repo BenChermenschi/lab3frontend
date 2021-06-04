@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const Vragenlijst = mongoose.model('Vragenlijst');
+const reactieModel = require('../models/reactieModel');
+const Reactie = mongoose.model('Reactie');
+const reactieController = require('../controllers/reactieController');
 
 exports.createVragenlijst= function(req,res,next){
     let vragenlijst = new Vragenlijst();
@@ -91,6 +94,16 @@ exports.getVragenlijstAtId= function(req,res,next){
         if (err){
             res.send(err);
         }
+        console.log('ben mee totaal test');
+        vragenlijst.benMeeTotaal = 20;
+        console.log(vragenlijst.benMeeTotaal);
+        console.log('benmee1berekening test');
+        console.log(genereerBenMee1totaal(vragenlijst._id));
+
+
+
+
+
         res.json(vragenlijst);
     });
 
@@ -165,4 +178,50 @@ exports.deleteVragenlijst=function(req,res,next){
         }
         res.json({message: 'vragenlijst successfully deleted'});
     });
+}
+
+exports.verwerkReactiesSolo= function(vragenlijst_id){
+    const reactielijst = reactieController.getReactieByVragenlijstInternal(vragenlijst_id);
+    berekenVraag1(reactielijst);
+}
+
+async function haalReactielijst(vragenlijst_id){
+    const resultaat = await reactieController.getReactieByVragenlijstInternal(vragenlijst_id);
+    return resultaat;
+}
+
+
+function genereerBenMee1totaal(vragenlijst_id){
+   const reactielijst =  haalReactielijst(vragenlijst_id);
+   const hercast = hercastArrayBenMee(reactielijst);
+   const resultaat =  berekenVraag1(hercast,1);
+   return resultaat;
+}
+function hercastArrayBenMee(reactielijst){
+
+    console.log(reactielijst);
+    let resultaat = [];
+  
+    for(let i = 0; i<reactielijst.length;i++){
+        resultaat[i]=reactielijst.benMee;
+    }
+
+
+    return resultaat;
+}
+
+function filterEnCountArray(array,query){
+    let count = 0;
+    for(let i = 0;i<array.length;i++){
+        if(array[i]==query){
+            count++;
+        }
+    }
+
+    return count;
+}
+
+
+function berekenAantalAntwoorden(reactielijst){
+
 }

@@ -46,12 +46,18 @@ exports.getReactieByVragenlijst=function(req,res,next){
 }
 
 exports.getReactieByVragenlijstInternal=function(vragenlijst_id){
-    Reactie.find({vragenlijst:req.body.vragenlijst}).exec(function(err,reacties){
-        if (err){
-            console.log(err);
-        }
-        return reacties;
-    });
+    try{
+        Reactie.find({vragenlijst:vragenlijst_id}).exec(function(err,reacties){
+            if (err){
+                console.log(err);
+            }
+            return reacties;
+        });
+    }catch(err){
+        console.log(err);
+    }
+
+    
 }
 
 exports.updateReactie=function(req,res,next){                 // this one should be impossible to call !!!!
