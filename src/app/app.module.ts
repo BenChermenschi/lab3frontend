@@ -11,10 +11,12 @@ import { CoreModule } from './core/core.module';
 import { AuthInterceptor } from './core/interceptors/authInterceptor';
 import { AuthService } from './core/services/auth.service';
 import { SharedModule } from './shared/shared.module';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
     CoreModule,
