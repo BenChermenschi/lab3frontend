@@ -36,6 +36,24 @@ exports.getReactieAtId=function(req,res,next){
     });
 }
 
+exports.getReactieByVragenlijst=function(req,res,next){
+    Reactie.find({vragenlijst:req.body.vragenlijst}).exec(function(err,reacties){
+        if (err){
+            res.send(err);
+        }
+        res.json(reacties);
+    });
+}
+
+exports.getReactieByVragenlijstInternal=function(vragenlijst_id){
+    Reactie.find({vragenlijst:req.body.vragenlijst}).exec(function(err,reacties){
+        if (err){
+            console.log(err);
+        }
+        return reacties;
+    });
+}
+
 exports.updateReactie=function(req,res,next){                 // this one should be impossible to call !!!!
     Reactie.findById(req.params.reactie_id,function(err,reactie){
         if(err){

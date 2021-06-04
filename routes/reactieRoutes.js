@@ -2,6 +2,7 @@ const express = require('express');
 const Reactie = require('../models/reactieModel');
 const reactieController = require('../controllers/reactieController');
 const prefix="/reacties";
+const authmiddleware = require('../authenticationMiddleware');
 
 module.exports= function (router){
     
@@ -14,6 +15,8 @@ module.exports= function (router){
     router.route(prefix)
         .post(reactieController.createReactie)
         .get(reactieController.getAllReacties);
+    
+    router.route(prefix+'/vragenlijst').get([authmiddleware.verifyToken,reactieController.getReactieByVragenlijst]);
 
     router.route(prefix+'/:reactie_id')
         .get(reactieController.getReactieAtId)
