@@ -98,7 +98,7 @@ exports.getVragenlijstAtId= function(req,res,next){
         vragenlijst.benMeeTotaal = 20;
         console.log(vragenlijst.benMeeTotaal);
         console.log('benmee1berekening test');
-        console.log(genereerBenMee1totaal(vragenlijst._id));
+        //console.log(genereerBenMee1totaal(vragenlijst._id));
 
 
 
