@@ -224,7 +224,7 @@ function hercastArrayBenMee(reactielijst){
     let resultaat = [];
     console.log('recasting : ');
     for(let i = 0; i<reactielijst.length;i++){
-        resultaat[i]=reactielijst.benMee;
+        resultaat[i]=reactielijst[i].benMee;
         console.log(i+' - '+resultaat[i]);
     }
 
