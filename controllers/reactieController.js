@@ -45,17 +45,26 @@ exports.getReactieByVragenlijst=function(req,res,next){
     });
 }
 
-exports.getReactieByVragenlijstInternal=async function(vragenlijst_id,resultaat){
-    try{
-        Reactie.find({vragenlijst:vragenlijst_id}).then( function(err,reacties){
-            if (err){
-                console.log(err);
-            }
-            resultaat = reacties;
-        });
-    }catch(err){
-        console.log(err);
-    }
+exports.GenereerTotalenReactiesVoorVragenlijst= function(vragenlijst_id){
+    return new Promise((resolve,reject)=>{
+        try{
+            Reactie.find({vragenlijst:vragenlijst_id}).exec( function(err,reacties){
+                if (err){
+                    console.log(err);
+                }
+                
+                console.log(reacties);
+    
+    
+    
+    
+    
+            });
+        }catch(err){
+            console.log(err);
+        }
+    });
+   
 
     
 }

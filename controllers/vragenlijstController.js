@@ -90,7 +90,7 @@ exports.getVragenlijstAtId= async function(req,res,next){
         }
     })
     
-    .exec(async function(err,vragenlijst){
+    .exec( async function(err,vragenlijst){
         if (err){
             res.send(err);
         }
@@ -98,8 +98,28 @@ exports.getVragenlijstAtId= async function(req,res,next){
         vragenlijst.benMeeTotaal = 20;
         console.log(vragenlijst.benMeeTotaal);
         console.log('benmee1berekening test');
-        let brr = await genereerBenMee1totaal(vragenlijst._id);
-        console.log(brr);
+        //reactieController.GenereerTotalenReactiesVoorVragenlijst(vragenlijst._id,req,res,next);
+        
+        
+        Reactie.find({vragenlijst:vragenlijst._id}).exec( function(err,reacties){
+             
+                if (err){
+                    console.log(err);
+                }
+                
+                console.log(reacties);
+                console.log(vragenlijst);
+                
+                let aantalStudentenNietMee = genereerBenMee1totaal(reacties);
+                vragenlijst.benMeeTotaal1 = aantalStudentenNietMee;
+
+                console.log('vragenlijst.benMeeTotaal1 : ');
+                console.log(vragenlijst.benMeeTotaal1);
+
+
+            });
+       
+        
 
 
 
@@ -189,25 +209,23 @@ exports.verwerkReactiesSolo= function(vragenlijst_id){
 
 
 
-async function genereerBenMee1totaal(vragenlijst_id){
-    console.log("generate ben totaal mee 1");
-    let reactielijst;
-   await  reactieController.getReactieByVragenlijstInternal(vragenlijst_id,reactielijst);
+function genereerBenMee1totaal(reactielijst){
    console.log("recasting array");
    console.log("to recast : ");
    console.log(reactielijst);
    const hercast = hercastArrayBenMee(reactielijst);
    console.log("counting results");
-   const resultaat =  berekenVraag1(hercast,1);
+   const resultaat =  filterEnCountArray(hercast,1);
    return resultaat;
 }
 function hercastArrayBenMee(reactielijst){
 
     console.log(reactielijst);
     let resultaat = [];
-  
+    console.log('recasting : ');
     for(let i = 0; i<reactielijst.length;i++){
         resultaat[i]=reactielijst.benMee;
+        console.log(i+' - '+resultaat[i]);
     }
 
 
