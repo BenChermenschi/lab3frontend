@@ -127,6 +127,15 @@ exports.getVragenlijstAtId= async function(req,res,next){
                 console.log('vragenlijst.benMeeTotaal4 : ' + vragenlijst.benMeeTotaal4);
                 console.log('vragenlijst.benMeeTotaal5 : ' + vragenlijst.benMeeTotaal5);
 
+                let benMeeTotalen = {
+                    benMee1:vragenlijst.benMeeTotaal1,
+                    benMee2:vragenlijst.benMeeTotaal2,
+                    benMee3:vragenlijst.benMeeTotaal3,
+                    benMee4:vragenlijst.benMeeTotaal4,
+                    benMee5:vragenlijst.benMeeTotaal5
+                }
+
+                console.log(benMeeTotalen);
 
                 //ja/nee
                 vragenlijst.TotaalOpnieuwTrue = filterEnCountArray(hercastUitleggen,true);
