@@ -135,7 +135,11 @@ exports.getVragenlijstAtId= async function(req,res,next){
                 console.log('vragenlijst.TotaalOpnieuwTrue : ' + vragenlijst.TotaalOpnieuwTrue);
                 console.log('vragenlijst.TotaalOpnieuwFalse : ' + vragenlijst.TotaalOpnieuwFalse);
 
-                
+                //setting reacties into vragenlijst
+                vragenlijst.reacties = reacties;
+
+                console.log('dumping vragenlijst');
+                console.log(vragenlijst);
 
             });
        
