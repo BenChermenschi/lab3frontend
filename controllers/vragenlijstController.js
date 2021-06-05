@@ -134,6 +134,7 @@ exports.getVragenlijstAtId= async function(req,res,next){
                     benMee4:vragenlijst.benMeeTotaal4,
                     benMee5:vragenlijst.benMeeTotaal5
                 }
+                
 
                 console.log(benMeeTotalen);
 
@@ -144,8 +145,15 @@ exports.getVragenlijstAtId= async function(req,res,next){
                 console.log('vragenlijst.TotaalOpnieuwTrue : ' + vragenlijst.TotaalOpnieuwTrue);
                 console.log('vragenlijst.TotaalOpnieuwFalse : ' + vragenlijst.TotaalOpnieuwFalse);
 
+                let opnieuwUitleggenTotalen = {
+                    opnieuwUitleggenJa:vragenlijst.TotaalOpnieuwTrue,
+                    opnieuwUItleggenNee:vragnelijst.TotaalOpnieuwFalse
+                }
+
                 //setting reacties into vragenlijst
                 vragenlijst.reacties = reacties;
+
+                
 
                 console.log('dumping vragenlijst');
                 console.log(vragenlijst);
