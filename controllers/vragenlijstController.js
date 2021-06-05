@@ -63,7 +63,7 @@ exports.getAllVragenlijsten= function(req,res,next){
     
 }
 
-exports.getVragenlijstAtId= function(req,res,next){
+exports.getVragenlijstAtId= async function(req,res,next){
     try{
         console.log("to find id : ");
         console.log(req.params.vragenlijst_id);
@@ -90,7 +90,7 @@ exports.getVragenlijstAtId= function(req,res,next){
         }
     })
     
-    .exec(function(err,vragenlijst){
+    .exec(async function(err,vragenlijst){
         if (err){
             res.send(err);
         }
@@ -98,7 +98,8 @@ exports.getVragenlijstAtId= function(req,res,next){
         vragenlijst.benMeeTotaal = 20;
         console.log(vragenlijst.benMeeTotaal);
         console.log('benmee1berekening test');
-        //console.log(genereerBenMee1totaal(vragenlijst._id));
+        let brr = await genereerBenMee1totaal(vragenlijst._id);
+        console.log(brr);
 
 
 
@@ -185,15 +186,18 @@ exports.verwerkReactiesSolo= function(vragenlijst_id){
     berekenVraag1(reactielijst);
 }
 
-async function haalReactielijst(vragenlijst_id){
-    const resultaat = await reactieController.getReactieByVragenlijstInternal(vragenlijst_id);
-    return resultaat;
-}
 
 
-function genereerBenMee1totaal(vragenlijst_id){
-   const reactielijst =  haalReactielijst(vragenlijst_id);
+
+async function genereerBenMee1totaal(vragenlijst_id){
+    console.log("generate ben totaal mee 1");
+    let reactielijst;
+   await  reactieController.getReactieByVragenlijstInternal(vragenlijst_id,reactielijst);
+   console.log("recasting array");
+   console.log("to recast : ");
+   console.log(reactielijst);
    const hercast = hercastArrayBenMee(reactielijst);
+   console.log("counting results");
    const resultaat =  berekenVraag1(hercast,1);
    return resultaat;
 }

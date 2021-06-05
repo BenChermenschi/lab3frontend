@@ -45,13 +45,13 @@ exports.getReactieByVragenlijst=function(req,res,next){
     });
 }
 
-exports.getReactieByVragenlijstInternal=function(vragenlijst_id){
+exports.getReactieByVragenlijstInternal=async function(vragenlijst_id,resultaat){
     try{
-        Reactie.find({vragenlijst:vragenlijst_id}).exec(function(err,reacties){
+        Reactie.find({vragenlijst:vragenlijst_id}).then( function(err,reacties){
             if (err){
                 console.log(err);
             }
-            return reacties;
+            resultaat = reacties;
         });
     }catch(err){
         console.log(err);
