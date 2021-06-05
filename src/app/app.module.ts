@@ -12,11 +12,13 @@ import { AuthInterceptor } from './core/interceptors/authInterceptor';
 import { AuthService } from './core/services/auth.service';
 import { SharedModule } from './shared/shared.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     CoreModule,
