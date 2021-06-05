@@ -109,13 +109,33 @@ exports.getVragenlijstAtId= async function(req,res,next){
                 
                 console.log(reacties);
                 console.log(vragenlijst);
+
+                //cleanup results for calculations
+                const hercast5Punten = hercastArrayBenMee(reacties);
+                const hercastUitleggen=hercastArrayOpnieuwUitleggen(reacties);
                 
-                let aantalStudentenNietMee = genereerBenMee1totaal(reacties);
-                vragenlijst.benMeeTotaal1 = aantalStudentenNietMee;
+                //5punten schaal
+                vragenlijst.benMeeTotaal1 = filterEnCountArray(hercast5Punten,1);
+                vragenlijst.benMeeTotaal2 = filterEnCountArray(hercast5Punten,2);
+                vragenlijst.benMeeTotaal3 = filterEnCountArray(hercast5Punten,3);
+                vragenlijst.benMeeTotaal4 = filterEnCountArray(hercast5Punten,4);
+                vragenlijst.benMeeTotaal5 = filterEnCountArray(hercast5Punten,5);
 
-                console.log('vragenlijst.benMeeTotaal1 : ');
-                console.log(vragenlijst.benMeeTotaal1);
+                console.log('vragenlijst.benMeeTotaal1 : ' + vragenlijst.benMeeTotaal1);
+                console.log('vragenlijst.benMeeTotaal2 : ' + vragenlijst.benMeeTotaal2);
+                console.log('vragenlijst.benMeeTotaal3 : ' + vragenlijst.benMeeTotaal3);
+                console.log('vragenlijst.benMeeTotaal4 : ' + vragenlijst.benMeeTotaal4);
+                console.log('vragenlijst.benMeeTotaal5 : ' + vragenlijst.benMeeTotaal5);
 
+
+                //ja/nee
+                vragenlijst.TotaalOpnieuwTrue = filterEnCountArray(hercastUitleggen,true);
+                vragenlijst.TotaalOpnieuwFalse = filterEnCountArray(hercastUitleggen,false);
+
+                console.log('vragenlijst.TotaalOpnieuwTrue : ' + vragenlijst.TotaalOpnieuwTrue);
+                console.log('vragenlijst.TotaalOpnieuwFalse : ' + vragenlijst.TotaalOpnieuwFalse);
+
+                
 
             });
        
@@ -209,26 +229,24 @@ exports.verwerkReactiesSolo= function(vragenlijst_id){
 
 
 
-function genereerBenMee1totaal(reactielijst){
-   console.log("recasting array");
-   console.log("to recast : ");
-   console.log(reactielijst);
-   const hercast = hercastArrayBenMee(reactielijst);
-   console.log("counting results");
-   const resultaat =  filterEnCountArray(hercast,1);
-   return resultaat;
-}
-function hercastArrayBenMee(reactielijst){
 
-    console.log(reactielijst);
+function hercastArrayBenMee(reactielijst){
     let resultaat = [];
     console.log('recasting : ');
     for(let i = 0; i<reactielijst.length;i++){
         resultaat[i]=reactielijst[i].benMee;
         console.log(i+' - '+resultaat[i]);
     }
+    return resultaat;
+}
 
-
+function hercastArrayOpnieuwUitleggen(reactielijst){
+    let resultaat = [];
+    console.log('recasting : ');
+    for(let i = 0; i<reactielijst.length;i++){
+        resultaat[i]=reactielijst[i].opnieuwUitleggen;
+        console.log(i+' - '+resultaat[i]);
+    }
     return resultaat;
 }
 
