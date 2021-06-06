@@ -150,6 +150,15 @@ exports.getVragenlijstAtId= async function(req,res,next){
                     opnieuwUItleggenNee:vragnelijst.TotaalOpnieuwFalse
                 }
 
+                console.log(opnieuwUitleggenTotalen);
+
+                let totalen={
+                    benMee:benMeeTotalen,
+                    opnieuwUitleggen:opnieuwUitleggenTotalen
+                }
+
+                console.log(totalen);
+
                 //setting reacties into vragenlijst
                 vragenlijst.reacties = reacties;
 
