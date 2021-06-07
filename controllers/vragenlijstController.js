@@ -92,7 +92,7 @@ exports.getVragenlijstAtId= async function(req,res,next){
         }
     })
     
-    .exec( async function(err,vragenlijst){
+    .exec( function(err,vragenlijst){
         if (err){
             res.send(err);
         }
