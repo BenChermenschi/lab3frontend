@@ -1,13 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const mongooseUniqueValidator = require('mongoose-unique-validator');
-let TotaalbenMee1;
-let TotaalbenMee2;
-let TotaalbenMee3;
-let TotaalbenMee4;
-let TotaalbenMee5;
-let TotaalOpnieuwTrue;
-let TotaalOpniewFalse;
+
 const schema = new Schema({
     gebruiker:{type:Schema.Types.ObjectId, ref:'Gebruiker'},
     vak:{type:Schema.Types.ObjectId, ref:'Vak'},
@@ -27,30 +21,36 @@ const schema = new Schema({
             aantalNee:{type:Number}
         }
     }
-})
+});
+/*
 schema.virtual('benMeeTotaal1').get(function(){
-    return this.TotaalbenMee1;
+    return this.schema.totalen.benMee.aantal1;
 }).set(function(input){
-    this.TotaalbenMee1 = input;
+    this.aantal1 = input;
 });
 schema.virtual('benMeeTotaal2').get(function(){
-    return this.TotaalbenMee2;
+    return this.schema.totalen.benMee.aantal2;
 }).set(function(input){
-    this.TotaalbenMee2 = input;
+    this.aantal2 = input;
 });
 schema.virtual('benMeeTotaal3').get(function(){
-    return this.TotaalbenMee3;
+    return this.schema.totalen.benMee.aantal3;
 }).set(function(input){
-    this.TotaalbenMee3 = input;
+    this.aantal3 = input;
 });
 schema.virtual('benMeeTotaal4').get(function(){
-    return this.TotaalbenMee4;
+    return this.schema.totalen.benMee.aantal4;
 }).set(function(input){
-    this.TotaalbenMee4 = input;
+    this.aantal4 = input;
 });
 schema.virtual('benMeeTotaal5').get(function(){
-    return this.TotaalbenMee5;
+    return this.schema.totalen.benMee.aantal5
 }).set(function(input){
-    this.TotaalbenMee5 = input;
+    this.aantal5 = input;
 });
+*/
+
+
+
+
 module.exports = mongoose.model('VragenlijstOutput',schema);

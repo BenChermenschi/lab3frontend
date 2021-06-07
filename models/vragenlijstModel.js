@@ -40,4 +40,17 @@ schema.virtual('benMeeTotaal5').get(function(){
 }).set(function(input){
     this.TotaalbenMee5 = input;
 });
+
+schema.virtual('opnieuwUitleggenJa').get(function(){
+    return this.TotaalOpnieuwTrue;
+}).set(function(input){
+    this.TotaalOpnieuwTrue = input;
+});
+
+schema.virtual('opnieuwUitleggenNee').get(function(){
+    return this.TotaalOpniewFalse;
+}).set(function(input){
+    this.TotaalOpniewFalse = input;
+});
+
 module.exports = mongoose.model('Vragenlijst',schema);

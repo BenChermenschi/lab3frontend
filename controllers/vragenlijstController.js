@@ -3,6 +3,8 @@ const Vragenlijst = mongoose.model('Vragenlijst');
 const reactieModel = require('../models/reactieModel');
 const Reactie = mongoose.model('Reactie');
 const reactieController = require('../controllers/reactieController');
+const vragenlijstoutputModel = require('../models/vragenlijstOutputModel');
+const VragenlijstOutput = mongoose.model('VragenlijstOutput')
 
 exports.createVragenlijst= function(req,res,next){
     let vragenlijst = new Vragenlijst();
@@ -109,63 +111,55 @@ exports.getVragenlijstAtId= async function(req,res,next){
                 
                 console.log(reacties);
                 console.log(vragenlijst);
+                console.log('-----------Starting conversion----');
+
+
+                
+                //setting reacties into vragenlijst
+                vragenlijst.reacties = reacties;
+                //recast to output
+                let output = hercastVragenlijstNaarOutput(vragenlijst);
 
                 //cleanup results for calculations
                 const hercast5Punten = hercastArrayBenMee(reacties);
                 const hercastUitleggen=hercastArrayOpnieuwUitleggen(reacties);
                 
                 //5punten schaal
-                vragenlijst.benMeeTotaal1 = filterEnCountArray(hercast5Punten,1);
-                vragenlijst.benMeeTotaal2 = filterEnCountArray(hercast5Punten,2);
-                vragenlijst.benMeeTotaal3 = filterEnCountArray(hercast5Punten,3);
-                vragenlijst.benMeeTotaal4 = filterEnCountArray(hercast5Punten,4);
-                vragenlijst.benMeeTotaal5 = filterEnCountArray(hercast5Punten,5);
+                output.totalen.benMee.aantal1 = filterEnCountArray(hercast5Punten,1);
+                output.totalen.benMee.aantal2 = filterEnCountArray(hercast5Punten,2);
+                output.totalen.benMee.aantal3 = filterEnCountArray(hercast5Punten,3);
+                output.totalen.benMee.aantal4 = filterEnCountArray(hercast5Punten,4);
+                output.totalen.benMee.aantal5 = filterEnCountArray(hercast5Punten,5);
 
-                console.log('vragenlijst.benMeeTotaal1 : ' + vragenlijst.benMeeTotaal1);
-                console.log('vragenlijst.benMeeTotaal2 : ' + vragenlijst.benMeeTotaal2);
-                console.log('vragenlijst.benMeeTotaal3 : ' + vragenlijst.benMeeTotaal3);
-                console.log('vragenlijst.benMeeTotaal4 : ' + vragenlijst.benMeeTotaal4);
-                console.log('vragenlijst.benMeeTotaal5 : ' + vragenlijst.benMeeTotaal5);
+                console.log('output 1 : ' + output.totalen.benMee.aantal1);
+                console.log('output 2 : ' + output.totalen.benMee.aantal2);
+                console.log('output 3 : ' + output.totalen.benMee.aantal3);
+                console.log('output 4 : ' + output.totalen.benMee.aantal4);
+                console.log('output 5 : ' + output.totalen.benMee.aantal5);
 
-                let benMeeTotalen = {
-                    benMee1:vragenlijst.benMeeTotaal1,
-                    benMee2:vragenlijst.benMeeTotaal2,
-                    benMee3:vragenlijst.benMeeTotaal3,
-                    benMee4:vragenlijst.benMeeTotaal4,
-                    benMee5:vragenlijst.benMeeTotaal5
-                }
-                
-
-                console.log(benMeeTotalen);
+               
 
                 //ja/nee
-                vragenlijst.TotaalOpnieuwTrue = filterEnCountArray(hercastUitleggen,true);
-                vragenlijst.TotaalOpnieuwFalse = filterEnCountArray(hercastUitleggen,false);
+                output.totalen.opnieuwUitleggen.aantalJa = filterEnCountArray(hercastUitleggen,true);
+                output.totalen.opnieuwUitleggen.aantalNee = filterEnCountArray(hercastUitleggen,false);
 
-                console.log('vragenlijst.TotaalOpnieuwTrue : ' + vragenlijst.TotaalOpnieuwTrue);
-                console.log('vragenlijst.TotaalOpnieuwFalse : ' + vragenlijst.TotaalOpnieuwFalse);
-
-                let opnieuwUitleggenTotalen = {
-                    opnieuwUitleggenJa:vragenlijst.TotaalOpnieuwTrue,
-                    opnieuwUItleggenNee:vragnelijst.TotaalOpnieuwFalse
-                }
-
-                console.log(opnieuwUitleggenTotalen);
-
-                let totalen={
-                    benMee:benMeeTotalen,
-                    opnieuwUitleggen:opnieuwUitleggenTotalen
-                }
-
-                console.log(totalen);
-
-                //setting reacties into vragenlijst
-                vragenlijst.reacties = reacties;
+                console.log('output Ja : ' + output.totalen.opnieuwUitleggen.aantalJa);
+                console.log('output Nee : ' + output.totalen.opnieuwUitleggen.aantalNee);
 
                 
 
-                console.log('dumping vragenlijst');
-                console.log(vragenlijst);
+                
+
+                
+
+                
+
+                
+
+                console.log('=-=-=-=-=OUTPUT=-=-=-=-=');
+                console.log(output);
+                res.json(output);
+                
 
             });
        
@@ -175,7 +169,7 @@ exports.getVragenlijstAtId= async function(req,res,next){
 
 
 
-        res.json(vragenlijst);
+        
     });
 
     }catch(err){
@@ -209,11 +203,11 @@ exports.getVragenlijstenByGebruikersId=function(req,res,next){
         })
         
         
-        .exec(function(err,vragnelijsten){
+        .exec(function(err,vragenlijsten){
             if(err){
                 res.send(err);
             }
-            res.json(vragnelijsten);
+            res.json(vragenlijsten);
         })
     }catch(err){
         console.log(err);
@@ -292,6 +286,14 @@ function filterEnCountArray(array,query){
 }
 
 
-function berekenAantalAntwoorden(reactielijst){
-
+function hercastVragenlijstNaarOutput(vragenlijst){
+    let output = new VragenlijstOutput();
+    output._id= vragenlijst._id;
+    output.__v = vragenlijst.__v;
+    output.gebruiker=vragenlijst.gebruiker;
+    output.datum=vragenlijst.datum;
+    output.vak=vragenlijst.vak;
+    output.klasgroepen=vragenlijst.klasgroepen;
+    output.reacties=vragenlijst.reacties;
+    return output;
 }
