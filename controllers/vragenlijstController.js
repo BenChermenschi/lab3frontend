@@ -49,14 +49,14 @@ exports.getAllVragenlijsten= function(req,res,next){
                 model:'Klasgroep',
                 options: { retainNullValues: true }
             }
-        }) // BLIJKBAAR TOCH NOG NIET FATSOENLIJK RESOLVED ?!
-        // Somehow doesnt wanna populate if reacties is empty?
+        }) 
         .exec(function(err,vragenlijsten){ 
         if(err){
             res.send(err);
         }
         
         console.log(vragenlijsten);
+
         res.json(vragenlijsten);
     });
     }catch(err){
@@ -96,11 +96,6 @@ exports.getVragenlijstAtId= async function(req,res,next){
         if (err){
             res.send(err);
         }
-        console.log('ben mee totaal test');
-        vragenlijst.benMeeTotaal = 20;
-        console.log(vragenlijst.benMeeTotaal);
-        console.log('benmee1berekening test');
-        //reactieController.GenereerTotalenReactiesVoorVragenlijst(vragenlijst._id,req,res,next);
         
         
         Reactie.find({vragenlijst:vragenlijst._id}).exec( function(err,reacties){
@@ -108,10 +103,6 @@ exports.getVragenlijstAtId= async function(req,res,next){
                 if (err){
                     console.log(err);
                 }
-                
-                console.log(reacties);
-                console.log(vragenlijst);
-                console.log('-----------Starting conversion----');
 
 
                 
@@ -131,33 +122,11 @@ exports.getVragenlijstAtId= async function(req,res,next){
                 output.totalen.benMee.aantal4 = filterEnCountArray(hercast5Punten,4);
                 output.totalen.benMee.aantal5 = filterEnCountArray(hercast5Punten,5);
 
-                console.log('output 1 : ' + output.totalen.benMee.aantal1);
-                console.log('output 2 : ' + output.totalen.benMee.aantal2);
-                console.log('output 3 : ' + output.totalen.benMee.aantal3);
-                console.log('output 4 : ' + output.totalen.benMee.aantal4);
-                console.log('output 5 : ' + output.totalen.benMee.aantal5);
-
-               
-
                 //ja/nee
                 output.totalen.opnieuwUitleggen.aantalJa = filterEnCountArray(hercastUitleggen,true);
                 output.totalen.opnieuwUitleggen.aantalNee = filterEnCountArray(hercastUitleggen,false);
 
-                console.log('output Ja : ' + output.totalen.opnieuwUitleggen.aantalJa);
-                console.log('output Nee : ' + output.totalen.opnieuwUitleggen.aantalNee);
-
                 
-
-                
-
-                
-
-                
-
-                
-
-                console.log('=-=-=-=-=OUTPUT=-=-=-=-=');
-                console.log(output);
                 res.json(output);
                 
 
