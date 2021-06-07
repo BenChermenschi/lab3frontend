@@ -15,6 +15,9 @@ import { SharedModule } from './shared/shared.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { CookieService } from 'ngx-cookie-service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginModule } from './login/login.module';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { CookieService } from 'ngx-cookie-service';
     AppRoutingModule,
     HttpClientModule,
     CommonModule,
-    ClassgroupModule
+    ClassgroupModule,
+    ReactiveFormsModule,
+    FormsModule,
+    LoginModule
   ],
   providers: [
     AuthService,
