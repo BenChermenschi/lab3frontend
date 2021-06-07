@@ -4,6 +4,7 @@ import { ClassgroupCreateComponent } from './pages/classgroup-create/classgroup-
 import { ClassgroupDetailComponent } from './pages/classgroup-detail/classgroup-detail.component';
 import { ClassgroupEditComponent } from './pages/classgroup-edit/classgroup-edit.component';
 import { ClassgroupListComponent } from './pages/classgroup-list/classgroup-list.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ClassgroupListComponent } from './pages/classgroup-list/classgroup-list
     ClassgroupListComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ]
 })
 export class ClassgroupModule { }
