@@ -45,7 +45,7 @@ exports.login = async function(req,res){
     }catch(err){
         console.log("something has gone wrong, I blame this : ");
         console.log(err);
-        res.json(err);
+        res.json({message:err});
     }
 }
 
