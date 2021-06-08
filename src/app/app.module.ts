@@ -17,6 +17,7 @@ import { FooterComponent } from './footer/footer.component';
 import { CookieService } from 'ngx-cookie-service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginModule } from './login/login.module';
+import { HttpRequestInterceptor } from './core/interceptors/HttpRequestInterceptor';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { LoginModule } from './login/login.module';
   providers: [
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS,useClass: HttpRequestInterceptor,multi:true},
     CookieService
   ],
   bootstrap: [AppComponent]
