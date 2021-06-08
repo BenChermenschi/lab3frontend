@@ -30,6 +30,7 @@ mongoose.connection.on("error",function (err) {
 });
 
 let corsOptions={
+    origin: "https://lab3frontend.herokuapp.com",
     credentials:true
 }
 
