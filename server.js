@@ -29,8 +29,12 @@ mongoose.connection.on("error",function (err) {
        " error : " + err);
 });
 
+let corsOptions={
+    credentials:true
+}
+
 //app usages
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
