@@ -30,10 +30,10 @@
                 <tbody>
                     
                         
-                            <!--<app-classgroup-list-item [klasgroep]="klasgroep"></app-classgroup-list-item>-->
-                        <tr *ngFor="let klasgroep of klasgroepen">
-                            <td>{{klasgroep.naam}}</td>
-                            <td>{{klasgroep.aantalStudenten}}</td>
+                           
+                        <tr app-classgroup-list-item *ngFor="let klasgroep of klasgroepen" app-classgroup-list-item [klasgroep]="klasgroep">
+                             
+                           
                         </tr>
                     
                     
@@ -42,6 +42,6 @@
         </div>
     </div>
 </div>
-{{klasgroepen |json}}
 
-<button (click)="removeKlasgroep(klasgroepen[0]._id)">delete</button>
+
+<!--<button (click)="removeKlasgroep(klasgroepen[0]._id)">delete</button>-->
