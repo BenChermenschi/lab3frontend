@@ -18,4 +18,8 @@ export class ClassgroupListItemComponent extends BaseComponent implements OnInit
   ngOnInit(): void {
   }
 
+  selecteerKlasgroep(){
+   // this.router.navigate(['/classgroup/detail'])
+  }
+
 }
