@@ -13,7 +13,7 @@ exports.genToken = async function(res,vollenaam,id,isAdmin){
     
     res.cookie('token',token,{
         expires: new Date(Date.now()+TTL),
-        secure:false,
+        secure:true,
         httpOnly:true
     });
     console.log('created cookie?');
