@@ -10,6 +10,9 @@ module.exports=function(router){
     router.use(function(req,res,next){
         next();
     });
+
+
+/*
     //public
     router.route(prefix)
         .get([
@@ -33,4 +36,35 @@ module.exports=function(router){
         .delete([
             authmiddleware.verifyTokenAdmin,
             gebruikerstypeController.deleteGebruikerstype]);
+*/
+
+
+    //AUTHLESS
+
+
+    //public
+    router.route(prefix)
+        .get([
+         
+            gebruikerstypeController.getAllGebruikerstypes]);
+
+    router.route(prefix+'/:gebruikerstype_id')
+        .get([
+           
+            gebruikerstypeController.getGebruikerstypeAtId]);
+    //private
+    router.route(prefix)
+    .post([
+     
+        gebruikerstypeController.createGebruikerstype]);
+
+    router.route(prefix+'/:gebruikerstype_id')
+    .put([
+       
+        gebruikerstypeController.updateGebruikerstype])
+        .delete([
+        
+            gebruikerstypeController.deleteGebruikerstype]);
+
+
 }  

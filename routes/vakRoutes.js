@@ -13,6 +13,8 @@ module.exports= function (router){
         next();
     });
 
+
+    /*
     router.route(prefix)
         .get([
             authmiddleware.verifyToken,
@@ -34,6 +36,32 @@ module.exports= function (router){
             vakController.updateVak])
         .delete([
             authmiddleware.verifyTokenAdmin,
+            vakController.deleteVak]);
+            */
+
+
+    //AUTHLESS
+    router.route(prefix)
+        .get([
+           
+            vakController.getAllVakken]);
+
+    router.route(prefix+'/:vak_id')
+        .get([
+           
+            vakController.getVakAtId]);
+
+    router.route(prefix)
+        .post([
+            
+            vakController.createVak]);
+
+    router.route(prefix+'/:vak_id')
+        .put([
+            
+            vakController.updateVak])
+        .delete([
+            
             vakController.deleteVak]);
 }
 

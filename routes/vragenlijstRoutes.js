@@ -13,6 +13,8 @@ module.exports= function(router){
         next();
     });
 
+
+    /*
     router.route(prefix)
         .post([
             authmiddleware.verifyToken,
@@ -37,7 +39,35 @@ module.exports= function(router){
         .delete([
             authmiddleware.verifyToken,
             vragenlijstController.deleteVragenlijst]);
+*/
 
+    //AUTHLESS
+
+    
+    router.route(prefix)
+        .post([
+            
+            vragenlijstController.createVragenlijst])
+        .get([
+           
+            vragenlijstController.getAllVragenlijsten]);
+
+
+    router.route(prefix+'/gebruiker')
+            .get([
+              
+                vragenlijstController.getVragenlijstenByGebruikersId]);
+
+    router.route(prefix+'/:vragenlijst_id')
+        .get([
+      
+            vragenlijstController.getVragenlijstAtId])
+        .put([
+       
+            vragenlijstController.updateVragenlijst])
+        .delete([
+        
+            vragenlijstController.deleteVragenlijst]);
     
 }
 

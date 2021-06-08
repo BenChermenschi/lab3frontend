@@ -12,6 +12,8 @@ module.exports= function (router){
         next();
     });
 
+
+    /*
     router.route(prefix)
         .get([
             authmiddleware.verifyToken,
@@ -34,5 +36,32 @@ module.exports= function (router){
         .delete([
             authmiddleware.verifyTokenAdmin,
             klasgroepController.deleteKlasgroep]);
+*/
+
+
+    //AUTHLESS
+    router.route(prefix)
+    .get([
+        
+        klasgroepController.getAllKlasgroepen]);
+
+router.route(prefix+'/:klasgroep_id')
+    .get([
+        
+        klasgroepController.getKlasgroepAtId]);
+
+router.route(prefix)
+.post([
+    
+    klasgroepController.createKlasgroep]);
+
+router.route(prefix+'/:klasgroep_id')
+    .put([
+       
+        klasgroepController.updateKlasgroep])
+    .delete([
+        
+        klasgroepController.deleteKlasgroep]);
+
 
 }
