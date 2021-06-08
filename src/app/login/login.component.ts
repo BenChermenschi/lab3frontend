@@ -45,11 +45,11 @@ export class LoginComponent extends BaseComponent implements OnInit {
       this.authService.login(email,wachtwoord).pipe(takeUntil(this.destroy$)).subscribe((response:APIResponse)=>{
         console.log(response)
         if (response.message === "cookie created") {
-          this.router.navigate(['/dashboard']);
+          //this.router.navigate(['/dashboard']);
         }
-      },error=>console.log(error));
+      },error=>this.authenticationFailed(error));
     }else{
-      alert('Error : did you fill in all fields?')
+      this.showMessage("inloggen mislukt : kijk email na");
     }
     
 
@@ -72,12 +72,15 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   }
 
-  authenticationFailed(){
+  authenticationFailed(error:APIResponse){
+    console.log(error);
+    this.clearForm();
+    this.showMessage("Inloggen mislukt, check je gegevens");
 
   }
 
-  showMessage(){
-
+  showMessage(message:string){
+    alert(message);
   }
   
 
