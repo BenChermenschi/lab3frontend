@@ -5,6 +5,7 @@ import { ClassgroupDetailComponent } from './pages/classgroup-detail/classgroup-
 import { ClassgroupEditComponent } from './pages/classgroup-edit/classgroup-edit.component';
 import { ClassgroupListComponent } from './pages/classgroup-list/classgroup-list.component';
 import { RouterModule } from '@angular/router';
+import { ClassgroupListItemComponent } from './pages/classgroup-list/classgroup-list-item/classgroup-list-item.component';
 
 
 @NgModule({
@@ -13,6 +14,8 @@ import { RouterModule } from '@angular/router';
     ClassgroupDetailComponent,
     ClassgroupEditComponent,
     ClassgroupListComponent,
+    ClassgroupListItemComponent,
+    ClassgroupListItemComponent
   ],
   imports: [
     CommonModule,

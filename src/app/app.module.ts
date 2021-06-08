@@ -42,9 +42,11 @@ import { HttpRequestInterceptor } from './core/interceptors/HttpRequestIntercept
   providers: [
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS,useClass: HttpRequestInterceptor,multi:true},
+    
     CookieService
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+//{ provide: HTTP_INTERCEPTORS,useClass: HttpRequestInterceptor,multi:true},
