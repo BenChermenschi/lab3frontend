@@ -142,7 +142,7 @@ exports.checkWachtwoordAndEmail= async function(emailToCheck,wachtwoordToCheck,r
             console.log(gebruiker);
 
             if(gebruiker == null){
-                res.status(403).json({message:"Access Denied"});
+                res.status(401).json({message:"Access Denied"});
                 res.send();
                 reject("User does not exist");
             }
@@ -161,7 +161,7 @@ exports.checkWachtwoordAndEmail= async function(emailToCheck,wachtwoordToCheck,r
                 }
                 
                 if (isValid== false){
-                    res.status(403).json({message:"Access Denied"});
+                    res.status(401).json({message:"Access Denied"});
                     res.send();
                     reject("pass incorrect");
                 }
