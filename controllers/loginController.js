@@ -20,7 +20,7 @@ exports.login = async function(req,res){
 
 
         //let resultaat2= gebruikersController.checkWachtwoord(email,wachtwoord);
-         let resultaat1 = await gebruikersController.checkWachtwoordAndEmail(email,wachtwoord)
+         let resultaat1 = await gebruikersController.checkWachtwoordAndEmail(email,wachtwoord,res)
            
             console.log("resultaat1 : ");       
             console.log(resultaat1);

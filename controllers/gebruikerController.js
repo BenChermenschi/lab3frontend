@@ -131,32 +131,50 @@ exports.checkEmail=function(emailToCheck){
     });
 }
  
-exports.checkWachtwoordAndEmail= async function(emailToCheck,wachtwoordToCheck){
+exports.checkWachtwoordAndEmail= async function(emailToCheck,wachtwoordToCheck,res){
     //make this a promise
 
     return new Promise(function(resolve,reject){
 
 
-    
-   Gebruiker.findOne({ email: emailToCheck }).select('+wachtwoord').populate('gebruikerstype').exec( async function (err, gebruiker) {
-        console.log(gebruiker);
-        if (err) {
-            res.send(err);
-        }
-        console.log("entered password : '" + wachtwoordToCheck + "'");
-       let isValid = await bcrypt.compare(wachtwoordToCheck, gebruiker.wachtwoord)
-            console.log('isValid = ' + isValid);
+    try{
+        Gebruiker.findOne({ email: emailToCheck }).select('+wachtwoord').populate('gebruikerstype').exec( async function (err, gebruiker) {
+            console.log(gebruiker);
+
+            if(gebruiker == null){
+                res.status(403).json({message:"Access Denied"});
+                res.send();
+                reject("User does not exist");
+            }
 
             if (err) {
                 console.log(err);
-                //res.send(err);
+                res.status(401).json({message:"error encountered" + err});
             }
-
-            console.log(gebruiker);
-            console.log(gebruiker.gebruikerstype);
-            
-            resolve(gebruiker);
-        });
+            console.log("entered password : '" + wachtwoordToCheck + "'");
+           let isValid = await bcrypt.compare(wachtwoordToCheck, gebruiker.wachtwoord)
+                console.log('isValid = ' + isValid);
+    
+                if (err) {
+                    console.log(err);
+                    //res.send(err);
+                }
+                
+                if (isValid== false){
+                    res.status(403).json({message:"Access Denied"});
+                    res.send();
+                    reject("pass incorrect");
+                }
+                console.log(gebruiker);
+                console.log(gebruiker.gebruikerstype);
+                
+                resolve(gebruiker);
+            });
+    }catch(err){
+        res.status(401).json({message:"Access Denied"});
+        res.send();
+    }
+   
     });
 }
 
