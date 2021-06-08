@@ -21,8 +21,8 @@ export class ClassgroupCreateComponent extends BaseComponent implements OnInit {
 
   createKlasgroep() {
     const newKlasgroep: KlasgroepPost = {
-      naam: "testgroep",
-      aantalStudenten: 12
+      naam: "testgroup0806",
+      aantalStudenten: 19
     }
 
     this.klasgroepService

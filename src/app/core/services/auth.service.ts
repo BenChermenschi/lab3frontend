@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { APIResponse } from '../models/APIResponse.model';
@@ -12,12 +12,14 @@ export class AuthService {
 
   constructor(private http:HttpClient) { }
 
-  login() {
-    const credentials={
-      "email":"admin@thomasmore.be",
-      "wachtwoord":"admin"
-      }
-    return this.http.post<APIResponse>(this.baseUrl,credentials);
+  login(email:string,wachtwoord:string) {
+    const body=JSON.stringify({
+      "email":email,
+      "wachtwoord":wachtwoord
+      });
+      const headers = new HttpHeaders({"Content-Type":"application/json"});
+
+    return this.http.post<APIResponse>(this.baseUrl+"/login",body,{headers:headers});
 
   }
 
