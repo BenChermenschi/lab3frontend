@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/core/base/base.component';
 import { APIResponse } from 'src/app/core/models/APIResponse.model';
@@ -13,7 +14,7 @@ import { KlasgroepService } from 'src/app/core/services/klasgroep.service';
 export class ClassgroupListComponent extends BaseComponent implements OnInit {
 
   klasgroepen: Klasgroep[] = []
-  constructor(private klasgroepService: KlasgroepService) {
+  constructor(private klasgroepService: KlasgroepService,private router:Router) {
     super()
   }
 
@@ -30,6 +31,10 @@ export class ClassgroupListComponent extends BaseComponent implements OnInit {
       })
   }
 
+  editKlasgroep(id:string){
+    this.router.navigate(['/classgroup/edit/' + id]);
+  }
+
   
 
   hasKlasgroepen() {
@@ -43,6 +48,7 @@ export class ClassgroupListComponent extends BaseComponent implements OnInit {
       .subscribe((response: APIResponse) => {
         console.log("msg", response);
         this.getKlasgroepen();
+        alert(response);
       })
   }
 

@@ -30,12 +30,19 @@
                 </thead>
                 <tbody>
                     
+                    <tr *ngFor="let klasgroep of klasgroepen">
+                        <td >{{klasgroep.naam}}</td>
+                        <td >{{klasgroep.aantalStudenten}}</td>
+                        <td><button class="btn btn-primary" (click)="editKlasgroep(klasgroep._id)">Ed</button></td>
+                        <td><button class="btn btn-danger" (click)="removeKlasgroep(klasgroep._id)">Del</button></td>
+                    </tr>
                         
                            
-                        <tr app-classgroup-list-item *ngFor="let klasgroep of klasgroepen" app-classgroup-list-item [klasgroep]="klasgroep">
+                     <!--   <tr app-classgroup-list-item *ngFor="let klasgroep of klasgroepen" app-classgroup-list-item [klasgroep]="klasgroep">
                              
                            
                         </tr>
+                        -->
                     
                     
                 </tbody>

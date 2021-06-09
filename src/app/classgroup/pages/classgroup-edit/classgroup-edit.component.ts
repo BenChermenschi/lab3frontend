@@ -28,6 +28,10 @@ export class ClassgroupEditComponent extends BaseComponent implements OnInit {
       naam:new FormControl(),
       aantalStudenten:new FormControl()
     });
+    this.getKlasgroep();
+
+    this.myform.value.naam.setValue(this.klasgroep?.naam);
+    this.myform.value.aantalStudenten.setValue(this.klasgroep?.aantalStudenten);
   }
 
   submit(){
@@ -43,6 +47,8 @@ export class ClassgroupEditComponent extends BaseComponent implements OnInit {
       .subscribe((response: Klasgroep) => {
         this.klasgroep = response;
       })
+
+    
   }
 
   editKlasgroep(): void {
