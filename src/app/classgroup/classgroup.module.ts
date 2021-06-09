@@ -6,6 +6,7 @@ import { ClassgroupEditComponent } from './pages/classgroup-edit/classgroup-edit
 import { ClassgroupListComponent } from './pages/classgroup-list/classgroup-list.component';
 import { RouterModule } from '@angular/router';
 import { ClassgroupListItemComponent } from './pages/classgroup-list/classgroup-list-item/classgroup-list-item.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,6 +20,8 @@ import { ClassgroupListItemComponent } from './pages/classgroup-list/classgroup-
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule
   ]
 })

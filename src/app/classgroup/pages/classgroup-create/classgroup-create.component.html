@@ -8,17 +8,17 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                <form >
+                <form  [formGroup]="myform" (ngSubmit)="submit()">
                     <div class="form-group"> 
                         <label for="naam" class="control-label">Naam</label>
-                        <input class="form-control" type="text" name="naam" id="klasgroepNaam"/>
+                        <input class="form-control" type="text" name="naam" formControlName="naam" id="klasgroepNaam"/>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="aantalStudenten">Aantal studenten</label>
-                        <input class="form-control" type="number" name="aantalStudenten" id="aantalStudenten">
+                        <input class="form-control" type="number" name="aantalStudenten" formControlName="aantalStudenten" id="aantalStudenten">
                     </div>
                    <div class="form-group">
-                        <button (click)="createKlasgroep()" class="btn btn-primary" type="submit" >Aanmaken</button>
+                        <button class="btn btn-primary" type="submit" >Aanmaken</button>
                    </div>
                     
                 </form>

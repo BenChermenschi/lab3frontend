@@ -19,7 +19,7 @@ export class ClassgroupListItemComponent extends BaseComponent implements OnInit
   }
 
   selecteerKlasgroep(){
-    this.router.navigate(['/classgroup/detail/'+this.klasgroep._id]);
+    this.router.navigate(['/classgroup/detail',this.klasgroep._id]);
   }
 
 }
