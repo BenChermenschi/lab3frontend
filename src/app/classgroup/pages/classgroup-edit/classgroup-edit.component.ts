@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/core/base/base.component';
@@ -14,6 +15,7 @@ import { KlasgroepService } from 'src/app/core/services/klasgroep.service';
 export class ClassgroupEditComponent extends BaseComponent implements OnInit {
 
   klasgroep: Klasgroep | undefined
+  myform = new FormGroup({});
 
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +24,14 @@ export class ClassgroupEditComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.myform = new FormGroup({
+      naam:new FormControl(),
+      aantalStudenten:new FormControl()
+    });
+  }
+
+  submit(){
+    
   }
 
   getKlasgroep(): void {

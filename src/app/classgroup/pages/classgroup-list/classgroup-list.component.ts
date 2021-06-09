@@ -30,6 +30,8 @@ export class ClassgroupListComponent extends BaseComponent implements OnInit {
       })
   }
 
+  
+
   hasKlasgroepen() {
     return this.klasgroepen.length > 0
   }
