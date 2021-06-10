@@ -19,6 +19,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginModule } from './login/login.module';
 import { HttpRequestInterceptor } from './core/interceptors/HttpRequestInterceptor';
+import { CourseModule } from './course/course.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { ErrorPagesModule } from './error-pages/error-pages.module';
+import { ReactionModule } from './reaction/reaction.module';
+import { SettingsModule } from './settings/settings.module';
+import { SurveyModule } from './survey/survey.module';
+import { UserModule } from './user/user.module';
 
 
 @NgModule({
@@ -36,9 +43,17 @@ import { HttpRequestInterceptor } from './core/interceptors/HttpRequestIntercept
     HttpClientModule,
     CommonModule,
     ClassgroupModule,
+    CourseModule,
+    DashboardModule,
+    ErrorPagesModule,
+    LoginModule,
+    ReactionModule,
+    SettingsModule,
+    SharedModule,
+    SurveyModule,
+    UserModule,
     ReactiveFormsModule,
-    FormsModule,
-    LoginModule
+    FormsModule
   ],
   providers: [
     AuthService,
