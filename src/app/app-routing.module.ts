@@ -22,7 +22,7 @@ import { UserDetailComponent } from './user/pages/user-detail/user-detail.compon
 import { UserEditComponent } from './user/pages/user-edit/user-edit.component';
 import { UserListComponent } from './user/pages/user-list/user-list.component';
 import { IdResolver } from './core/resolvers/idResolver';
-
+import {CommonModule} from '@angular/common';
 
 const routes: Routes = [
 

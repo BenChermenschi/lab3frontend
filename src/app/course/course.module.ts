@@ -4,6 +4,8 @@ import { CourseCreateComponent } from './pages/course-create/course-create.compo
 import { CourseDetailComponent } from './pages/course-detail/course-detail.component';
 import { CourseEditComponent } from './pages/course-edit/course-edit.component';
 import { CourseListComponent } from './pages/course-list/course-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -15,7 +17,10 @@ import { CourseListComponent } from './pages/course-list/course-list.component';
     CourseListComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class CourseModule { }
