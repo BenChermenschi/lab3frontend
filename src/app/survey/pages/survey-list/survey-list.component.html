@@ -22,6 +22,8 @@
                         <th scope="col">Datum</th>
                         <th scope="col">Vak</th>
                         <th scope="col">Klasgroep</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                         
                     </tr>
                 </thead>
@@ -32,6 +34,7 @@
                         <td>{{vragenlijst.datum}}</td>
                         <td>{{vragenlijst.vak.naam}}</td>
                         <td><i *ngFor="let klasgroep of vragenlijst.klasgroepen">{{klasgroep.naam | json}}</i></td>
+                        
                     </tr>
                 </tbody>
             </table>

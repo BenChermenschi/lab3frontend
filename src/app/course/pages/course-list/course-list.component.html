@@ -22,8 +22,8 @@
                 <tbody>
                     <tr *ngFor="let vak of vakken">
                         <td>{{vak.naam}}</td>
-                        <td><button class="btn btn-primary">Ed</button></td>
-                        <td><button class="btn btn-danger">Del</button></td>
+                        <td><button class="btn btn-primary" (click)="editVak(vak._id)">Ed</button></td>
+                        <td><button class="btn btn-danger" (click)="removeVak(vak._id)">Del</button></td>
                     </tr>
                 </tbody>
             </table>
