@@ -32,7 +32,7 @@ export class ClassgroupListComponent extends BaseComponent implements OnInit {
   }
 
   editKlasgroep(id:string){
-    this.router.navigate(['/classgroup/edit/' + id]);
+    this.router.navigate(['/classgroup/edit/',id]);
   }
 
   

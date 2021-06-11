@@ -8,10 +8,10 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                <form  [formGroup]="myform" (ngSubmit)="submit()">
+                <form *ngIf="klasgroep$ | async as klasgroep" [formGroup]="myform" (ngSubmit)="submit()">
                     <div class="form-group"> 
                         <label for="naam" class="control-label">Naam</label>
-                        <input class="form-control" type="text" name="naam" formControlName="naam" id="klasgroepNaam"/>
+                        <input class="form-control" type="text" name="naam" formControlName="naam" id="klasgroepNaam" [(ngModel)]="klasgroep.naam"/>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="aantalStudenten">Aantal studenten</label>
@@ -22,6 +22,9 @@
                    </div>
                     
                 </form>
+
+
+                {{klasgroep | json}}
             </div>
             </div>
         </div>
