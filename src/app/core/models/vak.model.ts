@@ -7,10 +7,10 @@ export interface Vak extends VakBase {
 }
 
 export interface VakPost extends VakBase {
-
+    
 }
 
 export interface VakPut extends VakBase {
-
+    
 }
 

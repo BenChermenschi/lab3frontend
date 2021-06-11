@@ -1,1 +1,35 @@
-<p>course-edit works!</p>
+<div class="container">
+    <div class="card">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Vak bijwerken</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <form *ngIf="vak$ | async as vak" [formGroup]="myform" (ngSubmit)="submit()">
+                    <div class="form-group"> 
+                        <label for="naam" class="control-label">Naam</label>
+                        <input class="form-control" type="text" name="naam" formControlName="naam" id="vaknaam" [(ngModel)]="vak.naam"/>
+                    </div>
+                  
+                    <div class="form-group" hidden>
+                        <label class="control-label" for="id"></label>
+                        <input type="text" name="id" id="id" class="form-control" formControlName="id" [(ngModel)]="vak._id">
+                    </div>
+                   <div class="form-group">
+                        <button class="btn btn-primary" (click)="editVak()" >Bewerken</button>
+                   </div>
+                    
+                </form>
+
+
+                
+            </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
