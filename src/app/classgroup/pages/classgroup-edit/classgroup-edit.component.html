@@ -15,16 +15,20 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="aantalStudenten">Aantal studenten</label>
-                        <input class="form-control" type="number" name="aantalStudenten" formControlName="aantalStudenten" id="aantalStudenten">
+                        <input class="form-control" type="number" name="aantalStudenten" formControlName="aantalStudenten" id="aantalStudenten" [(ngModel)]="klasgroep.aantalStudenten">
+                    </div>
+                    <div class="form-group" >
+                        <label class="control-label" for="id"></label>
+                        <input type="text" name="id" id="id" class="form-control" formControlName="id" [(ngModel)]="klasgroep._id">
                     </div>
                    <div class="form-group">
-                        <button class="btn btn-primary" type="submit" >Aanmaken</button>
+                        <button class="btn btn-primary" (click)="editKlasgroep()" >Bewerken</button>
                    </div>
                     
                 </form>
 
 
-                {{klasgroep | json}}
+                
             </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/core/base/base.component';
@@ -23,14 +23,16 @@ export class ClassgroupEditComponent extends BaseComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private klasgroepService: KlasgroepService) {
+    private klasgroepService: KlasgroepService,
+    private router:Router) {
     super()
   }
 
   ngOnInit(): void {
     this.myform = new FormGroup({
       naam:new FormControl(),
-      aantalStudenten:new FormControl()
+      aantalStudenten:new FormControl(),
+      id:new FormControl()
     });
 
     this.klasgroep$ = this.route.paramMap.pipe(
@@ -68,17 +70,22 @@ export class ClassgroupEditComponent extends BaseComponent implements OnInit {
 */
   editKlasgroep(): void {
     const editKlasgroep: KlasgroepPut = {
-      naam: "string",
-      aantalStudenten: 12
+      naam: this.myform.value.naam,
+      aantalStudenten: this.myform.value.aantalStudenten
     };
 
-    const id = this.route.snapshot.data.id;
+   const id = this.myform.value.id;
 
     this.klasgroepService
       .update(id, editKlasgroep)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: APIResponse) => {
-
+        if (response.message === "klasgroep updated!") {
+          this.router.navigate(['/classgroup']);
+        }else{
+          alert("something went wrong try again");
+        }
+        console.log(response);
       });
   }
 
