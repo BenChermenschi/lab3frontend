@@ -44,8 +44,6 @@ export class ClassgroupEditComponent extends BaseComponent implements OnInit {
 
    // this.myform.value.naam.setValue(this.klasgroep?.naam);
     //this.myform.value.aantalStudenten.setValue(this.klasgroep?.aantalStudenten);
-    
-    console.log("naam" );
   
   }
 

@@ -18,5 +18,8 @@ export interface GebruikerPost extends GebruikerBase{
 }
 
 export interface GebruikerPut extends GebruikerBase{
+    wachtwoord:string
+}
+export interface GebruikerPutNonPass extends GebruikerBase{
 
 }
