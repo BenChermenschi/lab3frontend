@@ -5,7 +5,9 @@ import { takeUntil } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/core/base/base.component';
 import { APIResponse } from 'src/app/core/models/APIResponse.model';
 import { GebruikerPost } from 'src/app/core/models/gebruiker.model';
+import { Gebruikerstype } from 'src/app/core/models/gebruikerstype.model';
 import { GebruikerService } from 'src/app/core/services/gebruiker.service';
+import { GebruikerstypeService } from 'src/app/core/services/gebruikerstype.service';
 
 @Component({
   selector: 'app-user-create',
@@ -16,23 +18,37 @@ export class UserCreateComponent extends BaseComponent implements OnInit {
 
   myform = new FormGroup({});
 
-  constructor(private gebruikerService:GebruikerService,private router:Router) {
+  gebruikerstypes:Gebruikerstype[]=[];
+
+  constructor(private gebruikerService:GebruikerService,private router:Router, private gebruikerstypeService:GebruikerstypeService) {
     super();
    }
 
   ngOnInit(): void {
+    this.getGebruikerstypes();
+
     this.myform = new FormGroup({
       email:new FormControl(),
       naam:new FormControl(),
       voornaam:new FormControl(),
       gebruikerstype:new FormControl(),
-      wachtwoord:new FormControl()
+      wachtwoord:new FormControl(),
+      herwachtwoord:new FormControl()
     });
   }
 
   clearForm(){
     this.myform.reset();
   }
+
+  getGebruikerstypes():void{
+    this.gebruikerstypeService
+      .getAll().pipe(takeUntil(this.destroy$))
+      .subscribe((response:Gebruikerstype[])=>{
+        this.gebruikerstypes = response;
+      })
+  }
+
 
   submit(){
     this.createGebruiker();
@@ -44,6 +60,7 @@ export class UserCreateComponent extends BaseComponent implements OnInit {
     let voornaam = this.myform.value.voornaam;
     let gebruikerstype = this.myform.value.gebruikerstype;
     let wachtwoord = this.myform.value.wachtwoord;
+    let herwachtwoord = this.myform.value.herwachtwoord;
 
     const valid = this.validateFields();
     if (valid ===true) {
@@ -59,12 +76,17 @@ export class UserCreateComponent extends BaseComponent implements OnInit {
         .create(newGebruiker)
         .pipe(takeUntil(this.destroy$))
         .subscribe((response:APIResponse)=>{
-          console.log(response);
-          if (response.message==="") {
-            
+          
+          if (response.message==="gebruiker created") {
+            this.router.navigate(['/user']);
+          }
+          else{
+            this.showMessage("Something went wrong")
           }
         })
 
+    }else{
+      this.showMessage("Kijk velden na");
     }
   }
 
@@ -79,13 +101,9 @@ export class UserCreateComponent extends BaseComponent implements OnInit {
     if (this.myform.value.voornaam === null || this.myform.value.voornaam==="") {
       valid = false;
     }
-    if (this.myform.value.gebruikerstype === null || this.myform.value.gebruikerstype === "") {
+    if (this.validatePass() === false) {
       valid = false;
     }
-    if (this.myform.value.wachtwoord === null || this.myform.value.wachtwoord === "") {
-      valid = false;
-    }
-
     return valid
   }
 
@@ -97,6 +115,21 @@ export class UserCreateComponent extends BaseComponent implements OnInit {
     return false;
   }
 
+  validatePass(){
+    
+    if (this.myform.value.wachtwoord != this.myform.value.herwachtwoord) {
+      return false;
+    }
+    if (this.myform.value.wachtwoord === null || this.myform.value.wachtwoord === "") {
+      return false;
+    }
+    return true;
+  }
+
+
+  showMessage(message:String){
+    alert(message);
+  }
 
 
 

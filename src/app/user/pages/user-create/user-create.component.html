@@ -21,7 +21,24 @@
                         <label for="email" class="control-label">email</label>
                         <input class="form-control" type="email" name="email" formControlName="email" id="email"/>
                     </div>
-                    
+                    <div class="form-group"> 
+                        <label for="gebruikerstype" class="control-label">gebruikerstype</label>
+                       <select formControlName="gebruikerstype" name="gebruikerstype" id="gebruikerstype" class="form-control">
+                           <option *ngFor="let gebruikerstype of gebruikerstypes" value="{{gebruikerstype._id}}">
+                               {{gebruikerstype.naam}}
+                           </option>
+                       </select>
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="wachtwoord" class="control-label">Wachtwoord</label>
+                        <input class="form-control" type="password" name="wachtwoord" formControlName="wachtwoord" id="wachtwoord"/>
+                    </div>
+                    <div class="form-group"> 
+                        <label for="herwachtwoord" class="control-label">Wachtwoord Herhalen</label>
+                        <input class="form-control" type="password" name="herwachtwoord" formControlName="herwachtwoord" id="herwachtwoord"/>
+                    </div>
+
                    <div class="form-group">
                         <button class="btn btn-primary" type="submit" >Aanmaken</button>
                    </div>
