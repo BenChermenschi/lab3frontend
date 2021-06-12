@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="card">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Vragenlijst aanmaken</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <form  [formGroup]="myform" (ngSubmit)="submit()">
+                    <div class="form-group"> 
+                        <label for="gebruiker" class="control-label">Gebruiker</label>
+                       <select formControlName="gebruiker" name="gebruikerstype" id="gebruikerstype" class="form-control">
+                           <option *ngFor="let gebruiker of gebruikers" value="{{gebruiker._id}}">
+                               {{gebruiker.naam}}
+                           </option>
+                       </select>
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="vak" class="control-label">Vak</label>
+                       <select formControlName="vak" name="vak" id="vak" class="form-control">
+                           <option *ngFor="let vak of vakken" value="{{vak._id}}">
+                               {{vak.naam}}
+                           </option>
+                       </select>
+                    </div>
+                    
+                    <div class="form-group"> 
+                        <label for="klasgroep" class="control-label">Klasgroep</label>
+                       <select formControlName="klasgroep" name="klasgroep" id="klasgroep" class="form-control">
+                           <option *ngFor="let klasgroep of klasgroepen" value="{{klasgroep._id}}">
+                               {{klasgroep.naam}}
+                           </option>
+                       </select>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit" >Aanmaken</button>
+                   </div>
+
+
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>

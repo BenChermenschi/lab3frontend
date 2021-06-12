@@ -6,13 +6,14 @@ import { Vak } from "./vak.model";
 export interface VragenLijstBase {
     gebruiker: Gebruiker;
     vak: Vak;
-    datum: Date;
     klasgroepen: Klasgroep[];
-    reacties: Reactie[];
+    
 }
 
 export interface VragenLijst extends VragenLijstBase {
-    _id: string
+    _id: string;
+    datum: Date;
+    reacties: Reactie[];
 }
 
 export interface VragenLijstPost extends VragenLijstBase {
@@ -21,4 +22,8 @@ export interface VragenLijstPost extends VragenLijstBase {
 
 export interface VragenLijstPut extends VragenLijstBase {
 
+}
+
+export interface VragenlijstDetailed extends VragenLijst{
+    
 }
