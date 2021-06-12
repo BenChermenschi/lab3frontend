@@ -39,7 +39,7 @@
                 <tbody>
                     <tr *ngFor="let vragenlijst of vragenlijsten">
                    
-                        <td>{{vragenlijst.gebruiker.naam}}</td>
+                        <td>{{vragenlijst.gebruiker.voornaam}} {{vragenlijst.gebruiker.naam}}</td>
                         <td>{{vragenlijst.datum | date:'EEEE, d/MMM/y'}}</td>
                         <td>{{vragenlijst.datum | date:'HH:mm'}}</td>
                         <td>{{vragenlijst.vak.naam}}</td>
@@ -60,7 +60,7 @@
                 
             </table>
 
-            
+  
         </div>
     </div>
 </div>

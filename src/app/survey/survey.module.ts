@@ -6,6 +6,7 @@ import { SurveyEditComponent } from './pages/survey-edit/survey-edit.component';
 import { SurveyListComponent } from './pages/survey-list/survey-list.component';
 import { SurveyShareComponent } from './pages/survey-share/survey-share.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -22,7 +23,9 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
    
   ]
 })

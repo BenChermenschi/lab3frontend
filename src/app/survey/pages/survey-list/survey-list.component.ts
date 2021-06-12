@@ -13,7 +13,7 @@ import { VragenlijstService } from 'src/app/core/services/vragenlijst.service';
 })
 export class SurveyListComponent extends BaseComponent implements OnInit {
 
-  vragenlijsten:VragenLijst[] = []
+  vragenlijsten:VragenLijst[] = [];
   constructor(private vragenlijstService: VragenlijstService,private router:Router) {
     super()
   }
