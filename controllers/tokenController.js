@@ -10,12 +10,7 @@ exports.genToken = async function(res,vollenaam,id,isAdmin){
     const token = jwt.sign({id,vollenaam,isAdmin},secret,{
         expiresIn:TTL
     });
-    
-    res.cookie('token',token,{
-        expires: new Date(Date.now()+TTL),
-        secure:true,
-        httpOnly:true
-    });
-    console.log('created cookie?');
+
+    return token 
 }
 
