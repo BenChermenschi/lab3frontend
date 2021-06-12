@@ -4,7 +4,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/core/base/base.component';
-import { Gebruiker } from 'src/app/core/models/gebruiker.model';
+import { APIResponse } from 'src/app/core/models/APIResponse.model';
+import { Gebruiker, GebruikerPut } from 'src/app/core/models/gebruiker.model';
 import { Gebruikerstype } from 'src/app/core/models/gebruikerstype.model';
 import { GebruikerService } from 'src/app/core/services/gebruiker.service';
 import { GebruikerstypeService } from 'src/app/core/services/gebruikerstype.service';
@@ -19,7 +20,7 @@ export class UserEditComponent extends BaseComponent implements OnInit {
   myform = new FormGroup({});
   gebruiker$!:Observable<Gebruiker>;
   private routeSub:Subscription | undefined;
-  Id:string = "";
+  Id:String="";
   
   gebruikerstypes:Gebruikerstype[]=[];
 
@@ -91,7 +92,36 @@ export class UserEditComponent extends BaseComponent implements OnInit {
   }
 
   editGebruiker(): void{
-    
+    let email = this.myform.value.email;
+    let naam = this.myform.value.naam;
+    let voornaam = this.myform.value.voornaam;
+    let gebruikerstype = this.myform.value.gebruikerstype;
+    let wachtwoord = this.myform.value.wachtwoord;
+    let herwachtwoord = this.myform.value.herwachtwoord;
+
+
+    const editGebruiker:GebruikerPut={
+      email:email,
+      naam:naam,
+      voornaam:voornaam,
+      gebruikerstype:gebruikerstype,
+      wachtwoord:wachtwoord
+    }
+
+    this.routeSub=this.route.params.subscribe(params=>{
+      this.gebruikerService
+      .update(params['id'],editGebruiker)
+      .subscribe((response:APIResponse)=>{
+        console.log(response);
+        if (response.message==="gebruiker updated") {
+          this.router.navigate(['/user']);
+        }else{
+          alert("something has gone wrong");
+        }
+      })
+
+
+    });
   }
   ngOnDestroy() {
     if (this.routeSub !=undefined) {
