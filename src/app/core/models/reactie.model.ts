@@ -5,7 +5,7 @@ export interface ReactieBase {
     opnieuwUitleggen: boolean;
     welkOnderdeel: string;
     andereVragen: string;
-    vragenlijst: VragenLijst;
+    vragenlijst: string;
 }
 
 export interface Reactie extends ReactieBase {
