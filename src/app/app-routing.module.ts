@@ -23,6 +23,7 @@ import { UserEditComponent } from './user/pages/user-edit/user-edit.component';
 import { UserListComponent } from './user/pages/user-list/user-list.component';
 import { IdResolver } from './core/resolvers/idResolver';
 import {CommonModule} from '@angular/common';
+import { ReactionCreateComponent } from './reaction/pages/reaction-create/reaction-create.component';
 
 const routes: Routes = [
 
@@ -71,7 +72,17 @@ const routes: Routes = [
 
     ]
 
-  }, {
+  },
+  {
+    path:'reaction',
+    children:[
+      {
+        path:'create/:id',
+        component:ReactionCreateComponent
+      }
+    ]
+  }, 
+  {
     path: 'classgroup',
     children: [
       {

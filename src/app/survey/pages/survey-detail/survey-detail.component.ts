@@ -32,7 +32,7 @@ export class SurveyDetailComponent extends BaseComponent implements OnInit {
   
 
 
-  vragenlijst:VragenlijstDetailed | undefined
+  vragenlijst:VragenlijstDetailed | undefined;
   private routeSub:Subscription | undefined;
   Id:string="";
 

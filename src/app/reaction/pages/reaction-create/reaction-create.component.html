@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="card">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1></h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                <form  [formGroup]="myform" (ngSubmit)="submit()">
+                    <div class="form-group"> 
+                        <label class="form-label" for="benMee" class="control-label">Heb ik de leerstof uit huidige les begrepen ?</label>
+                       
+                        <fieldset id="benMee" formGroupName="benMee" name="benMee">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="benMee" id="1">
+                                <label class="form-check-label" for="1">Helemaal Niet</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="benMee" id="2">
+                                <label class="form-check-label" for="2">Ik Snap een klein stukje</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="benMee" id="3">
+                                <label class="form-check-label" for="3">middelmatig, sommige stukken wel sommige niet</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="benMee" id="4">
+                                <label class="form-check-label" for="4">Ik ben grotendeels mee</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="benMee" id="5">
+                                <label class="form-check-label" for="5">Absoluut</label>
+                            </div>
+                     
+                        </fieldset>
+                    </div>
+                    <div class="form-group"> 
+                        <label class="form-label" for="opnieuwUitleggen" class="control-label">Is het nodig dat een deel van de les herhaald wordt ?</label>
+                       
+                        <fieldset id="opnieuwUitleggen" formGroupName="opnieuwUitleggen" name="opnieuwUitleggen">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="opnieuwUitleggen" id="Ja">
+                                <label class="form-check-label" for="Ja">Ja</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="opnieuwUitleggen" id="Nee">
+                                <label class="form-check-label" for="Nee">Nee</label>
+                            </div>
+                            
+                        </fieldset>
+                    </div>
+                    <div class="form-group"> 
+                        <label class="form-label" for="welkOnderdeel" class="control-label">Welk onderdeel van de les zou je opnieuw behandeld willen zien ?</label>
+                       
+                        <textarea class="form-control" id="welkOnderdeel" formGroupName="welkOnderdeel" name="welkOnderdeel">
+                            
+                        </textarea>
+                    </div>
+                    <div class="form-group"> 
+                        <label class="form-label" for="andereVragen" class="control-label">Welk onderdeel van de les zou je opnieuw behandeld willen zien ?</label>
+                       
+                        <textarea class="form-control" id="andereVragen" formGroupName="andereVragen" name="andereVragen">
+                            
+                        </textarea>
+                    </div>
+
+                   
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit" >Aanmaken</button>
+                   </div>
+
+
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
