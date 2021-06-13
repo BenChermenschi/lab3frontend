@@ -7,6 +7,8 @@ import { SurveyListComponent } from './pages/survey-list/survey-list.component';
 import { SurveyShareComponent } from './pages/survey-share/survey-share.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -26,6 +28,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
+    ChartsModule
     
    
   ]

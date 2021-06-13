@@ -33,7 +33,7 @@
             "styles": [
               "src/styles.sass"
             ],
-            "scripts": []
+            "scripts": ["node_modules/chart.js/dist/chart.min.js"]
           },
           "configurations": {
             "production": {
@@ -106,7 +106,7 @@
                 "../node_modules/bootstrap/scss"
               ]
             },
-            "scripts": []
+            "scripts": ["node_modules/chart.js/dist/chart.min.js"]
           }
         }
       }
@@ -114,3 +114,4 @@
   },
   "defaultProject": "lab3frontend"
 }
+ 
