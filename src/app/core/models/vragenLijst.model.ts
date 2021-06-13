@@ -16,16 +16,16 @@ export interface VragenLijstBase {
 }
 
 interface BenMee{
-    aantal1:Number;
-    aantal2:Number;
-    aantal3:Number;
-    aantal4:Number;
-    aantal5:Number;
+    aantal1:number;
+    aantal2:number;
+    aantal3:number;
+    aantal4:number;
+    aantal5:number;
 } 
 
 interface OpnieuwUitleggen{
-    aantalJa:Number;
-    aantalNee:Number;
+    aantalJa:number;
+    aantalNee:number;
 }
 
 
