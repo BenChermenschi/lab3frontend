@@ -10,6 +10,9 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
   ],
   imports: [
     CommonModule
+  ],
+  exports:[
+    NotFoundPageComponent
   ]
 })
 export class ErrorPagesModule { }

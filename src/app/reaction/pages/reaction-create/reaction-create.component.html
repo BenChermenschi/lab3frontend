@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="idValid==true" class="container">
     <div class="card">
         <div class="container">
             <div class="row">
@@ -84,3 +84,5 @@
     
     
 </div>
+
+<app-not-found-page *ngIf="idValid==false"></app-not-found-page>

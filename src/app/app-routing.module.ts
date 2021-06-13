@@ -24,6 +24,7 @@ import { UserListComponent } from './user/pages/user-list/user-list.component';
 import { IdResolver } from './core/resolvers/idResolver';
 import {CommonModule} from '@angular/common';
 import { ReactionCreateComponent } from './reaction/pages/reaction-create/reaction-create.component';
+import { ReactionDoneComponent } from './reaction/pages/reaction-done/reaction-done.component';
 
 const routes: Routes = [
 
@@ -79,6 +80,10 @@ const routes: Routes = [
       {
         path:'create/:id',
         component:ReactionCreateComponent
+      },
+      {
+        path:'done',
+        component:ReactionDoneComponent
       }
     ]
   }, 

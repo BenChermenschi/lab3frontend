@@ -20,6 +20,8 @@ export class ReactionCreateComponent extends BaseComponent implements OnInit {
 
   myform = new FormGroup({});
 
+  idValid:boolean |undefined;
+
   vragenlijst:VragenLijst | undefined;
   private routeSub:Subscription | undefined;
   Id:string="";
@@ -38,8 +40,24 @@ export class ReactionCreateComponent extends BaseComponent implements OnInit {
       console.log(params['id']);
       this.Id = params['id'];
       //test if it exists here
+      this.vragenlijstService
+      .getById(this.Id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((response:VragenlijstDetailed)=>{
+      console.log(response._id);
+        this.idValid=true;
 
+      },(err:any)=>{
+        console.log(err);
+        if (err.status == 404) {
+          this.idValid=false;
+        }
       
+      });
+      
+
+
+
     });
 
   }
@@ -56,21 +74,11 @@ export class ReactionCreateComponent extends BaseComponent implements OnInit {
 
 
 
-  testVragenlijstExists():void{
-    let valid;
+  testVragenlijstExists(){
+    
 
-    this.vragenlijstService
-    .getById(this.Id)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((response:VragenlijstDetailed)=>{
-      console.log("test")
-      console.log(response);
-      if (response._id == null || response._id== undefined) {
-        valid = false;
-      }
-
-    })
-    return valid;
+    
+    
 
   }
 
@@ -146,7 +154,10 @@ export class ReactionCreateComponent extends BaseComponent implements OnInit {
     .pipe(takeUntil(this.destroy$))
     .subscribe((response:APIResponse)=>{
       console.log(response);
-      
+      this.router.navigate(['reaction/done']);
+    },(err)=>{
+      this.showMessage("something has gone wrong");
+      console.log(err)
     })
 
 
