@@ -38,7 +38,8 @@ export class UserEditComponent extends BaseComponent implements OnInit {
   
     
 
-    this.routeSub=this.route.params.subscribe(params=>{
+    this.routeSub=this.route.params
+    .subscribe(params=>{
       console.log(params['id']);
       this.Id = params['id'];
       

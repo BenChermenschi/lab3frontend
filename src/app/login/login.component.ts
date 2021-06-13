@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../core/base/base.component';
-import {FormBuilder,ReactiveFormsModule,FormGroup,FormControl,FormsModule} from '@angular/forms';
-import {AuthService} from '../core/services/auth.service';
+import { FormBuilder, ReactiveFormsModule, FormGroup, FormControl, FormsModule } from '@angular/forms';
+import { AuthService } from '../core/services/auth.service';
 import { takeUntil } from 'rxjs/operators';
-import { APIResponse } from '../core/models/APIResponse.model';
+import { APIAuthResponse, APIResponse } from '../core/models/APIResponse.model';
 import { Router } from '@angular/router';
 
 
@@ -17,72 +17,72 @@ export class LoginComponent extends BaseComponent implements OnInit {
   myform = new FormGroup({});
 
 
-  constructor(private authService:AuthService, private router:Router) {
+  constructor(private authService: AuthService, private router: Router) {
     super()
-    
+
   }
   ngOnInit(): void {
     this.myform = new FormGroup({
-      email:new FormControl(),
-      wachtwoord:new FormControl()
+      email: new FormControl(),
+      wachtwoord: new FormControl()
     });
   }
 
-  clearForm(){
+  clearForm() {
     this.myform.reset();
   }
 
-  submit(){
+  submit() {
     let email = this.myform.value.email;
     let wachtwoord = this.myform.value.wachtwoord;
     const emailPlausable = this.validateEmail();
     let valid = true;
-    if(emailPlausable===false){
+    if (emailPlausable === false) {
       valid = false;
     }
-    
-    if (valid ===true) {
-      this.authService.login(email,wachtwoord).pipe(takeUntil(this.destroy$)).subscribe((response:APIResponse)=>{
-        console.log(response)
-        if (response.message === "cookie created") {
-          //this.router.navigate(['/dashboard']);
-        }
-      },error=>this.authenticationFailed(error));
-    }else{
+
+    if (valid === true) {
+      this.authService.login(email, wachtwoord)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((response: APIAuthResponse) => {
+          console.log(response)
+
+        }, error => this.authenticationFailed(error));
+    } else {
       this.showMessage("inloggen mislukt : kijk email na");
     }
-    
+
 
 
   }
 
-  
-  
-  
 
-  validateEmail(){
+
+
+
+  validateEmail() {
     //validate email
-    if(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.myform.value.email)){
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.myform.value.email)) {
       return true;
     }
     return false;
   }
 
-  validationFailed(){
+  validationFailed() {
 
   }
 
-  authenticationFailed(error:APIResponse){
+  authenticationFailed(error: APIResponse) {
     console.log(error);
     this.clearForm();
     this.showMessage("Inloggen mislukt, check je gegevens");
 
   }
 
-  showMessage(message:string){
+  showMessage(message: string) {
     alert(message);
   }
-  
+
 
 
 }
