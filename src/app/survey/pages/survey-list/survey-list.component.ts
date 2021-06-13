@@ -46,8 +46,17 @@ export class SurveyListComponent extends BaseComponent implements OnInit {
     .subscribe((response:APIResponse)=>{
       console.log('msg',response);
       this.getVragenlijsten();
-      alert(response);
+  
     })
+  }
+
+  detailsVragenlijst(id:string){
+    this.router.navigate(['/survey/detail/',id]);
+  }
+
+
+  showMessage(message:string){
+    alert(message);
   }
 
 }

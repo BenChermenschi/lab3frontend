@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { APIResponse } from '../models/APIResponse.model';
-import { VragenLijst, VragenLijstPost, VragenLijstPut } from '../models/vragenLijst.model';
+import { VragenLijst, VragenlijstDetailed, VragenLijstPost, VragenLijstPut } from '../models/vragenLijst.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class VragenlijstService {
   }
 
   getById(id: string) {
-    return this.http.get<VragenLijst>(this.baseUrl + '/' + id);
+    return this.http.get<VragenlijstDetailed>(this.baseUrl + '/' + id);
   }
 
   update(id: string, obj: VragenLijstPut) {
