@@ -83,7 +83,16 @@ export class SurveyCreateComponent extends BaseComponent implements OnInit {
   }
 
   submit(){
-    this.createVragenlijst();
+    let valid = this.validateFields();
+
+    if (valid === true) {
+      this.createVragenlijst();
+    }else{
+      this.showMessage("Please fill in all fields");
+    }
+
+
+    
   }
 
 
@@ -115,6 +124,26 @@ export class SurveyCreateComponent extends BaseComponent implements OnInit {
 
     
   }
+
+
+  validateFields(){
+    let valid = true;
+
+    if (this.myform.value.klasgroep === null) {
+      valid = false;
+    }
+    if (this.myform.value.vak === null){
+      valid = false;
+    }
+
+    if (this.myform.value.gebruiker ===null){
+      valid = false;
+    }
+
+
+    return valid;
+  }
+
 
   showMessage(message:string){
     alert(message);
