@@ -22,7 +22,7 @@ import { UserDetailComponent } from './user/pages/user-detail/user-detail.compon
 import { UserEditComponent } from './user/pages/user-edit/user-edit.component';
 import { UserListComponent } from './user/pages/user-list/user-list.component';
 import { IdResolver } from './core/resolvers/idResolver';
-import {CommonModule} from '@angular/common';
+import { IsLoggedInGuard, IsNotLoggedInGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
 
@@ -30,15 +30,18 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [IsNotLoggedInGuard]
+
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [IsLoggedInGuard],
   },
   {
     path: 'settings',
-    component: SettingsComponent
+    component: SettingsComponent,
   },
 
   {
@@ -73,6 +76,7 @@ const routes: Routes = [
 
   }, {
     path: 'classgroup',
+
     children: [
       {
         path: 'detail/:id',

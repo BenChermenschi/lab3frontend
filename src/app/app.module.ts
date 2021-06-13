@@ -27,6 +27,7 @@ import { SettingsModule } from './settings/settings.module';
 import { SurveyModule } from './survey/survey.module';
 import { UserModule } from './user/user.module';
 import { ChartsModule } from 'ng2-charts';
+import { IsLoggedInGuard, IsNotLoggedInGuard } from './core/guards/auth.guard';
 
 
 
@@ -59,15 +60,16 @@ import { ChartsModule } from 'ng2-charts';
     ReactiveFormsModule,
     FormsModule,
     ChartsModule
-    
-    
+
+
   ],
   providers: [
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    
+    IsLoggedInGuard,
+    IsNotLoggedInGuard,
     CookieService,
-   
+
   ],
   bootstrap: [AppComponent]
 })
