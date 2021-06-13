@@ -26,7 +26,7 @@ import { ReactionModule } from './reaction/reaction.module';
 import { SettingsModule } from './settings/settings.module';
 import { SurveyModule } from './survey/survey.module';
 import { UserModule } from './user/user.module';
-import { ChartModule } from 'angular2-chartjs';
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -58,7 +58,7 @@ import { ChartModule } from 'angular2-chartjs';
     UserModule,
     ReactiveFormsModule,
     FormsModule,
-    ChartModule
+    ChartsModule
     
     
   ],
