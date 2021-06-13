@@ -9,12 +9,18 @@
         </div>
 
         <div class="row">
-            <h1>Vragenlijst details</h1>
-            <p>Datum : </p>
-            <p>Vak :</p>
+            <h1>{{vragenlijst?.vak?.naam}}</h1>
+            <p>{{vragenlijst?.datum | date:'EEEE, d/MMM/y'}} {{vragenlijst?.datum | date:'HH:mm'}}</p>
+            
 
-            <div class="">
+            <div class="chart">
+                <h2>In welke mate denk ik van mezelf dat ik mee ben met de leerstof?</h2>
+               
+            </div>
 
+            <div class="chart">
+                <h2>Moet er een deel uit de les herhaald worden?</h2>
+                
             </div>
 
 
