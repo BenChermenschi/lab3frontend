@@ -26,6 +26,10 @@ import { ReactionModule } from './reaction/reaction.module';
 import { SettingsModule } from './settings/settings.module';
 import { SurveyModule } from './survey/survey.module';
 import { UserModule } from './user/user.module';
+import { ChartModule } from 'angular2-chartjs';
+
+
+
 
 
 @NgModule({
@@ -53,13 +57,17 @@ import { UserModule } from './user/user.module';
     SurveyModule,
     UserModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ChartModule
+    
+    
   ],
   providers: [
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     
-    CookieService
+    CookieService,
+   
   ],
   bootstrap: [AppComponent]
 })
