@@ -46,7 +46,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
         .pipe(takeUntil(this.destroy$))
         .subscribe((response: APIAuthResponse) => {
           console.log(response)
-
+          this.router.navigate(['dashboard'])
         }, error => this.authenticationFailed(error));
     } else {
       this.showMessage("inloggen mislukt : kijk email na");
