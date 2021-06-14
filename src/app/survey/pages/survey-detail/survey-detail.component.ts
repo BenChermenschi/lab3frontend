@@ -24,30 +24,7 @@ export class SurveyDetailComponent extends BaseComponent implements OnInit {
 
 
   @ViewChildren('benMeeChart') chart: any | undefined;
-  benMeeType: any;
-  benMeeData: any;
-  benMeeOptions: any;
-  benMeeLabels: any;
-  benMeeLegend: any;
-  benMeePlugins: any;
 
-
-
-  //old
-  /*
-    public barChartLabels =['2006', '2007', '2008', '2009', '2010'];
-    public barChartOptions: ChartOptions = {
-      responsive: true,
-    };
-    
-    public barChartType: ChartType = 'bar';
-    public barChartLegend = true;
-    public barChartPlugins = [];
-  
-  
-    public barChartData: any[] =[{
-      data:[5,3,4,7,1],label:"aantal antwoorden"
-    }];*/
 
 
 
@@ -96,7 +73,7 @@ export class SurveyDetailComponent extends BaseComponent implements OnInit {
         data: {
           labels: ['Absoluut Niet ', 'Ik snap er zo goed als niets van', 'Half en Half, moet het nog eens bekijken', 'Ik snap de meerderheid', 'Ik ben volledig mee'],
           datasets: [{
-            label: '# of Votes',
+            label: "",
             data: [this.vragenlijst.totalen.benMee.aantal1, this.vragenlijst.totalen.benMee.aantal2, this.vragenlijst.totalen.benMee.aantal3, this.vragenlijst.totalen.benMee.aantal4, this.vragenlijst.totalen.benMee.aantal5],
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
