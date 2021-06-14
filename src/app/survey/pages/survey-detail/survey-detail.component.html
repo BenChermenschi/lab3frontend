@@ -2,34 +2,93 @@
 <div class="container">
 <div class="card">
 <div class="container">
-        <div class="row">
-            <div class="col-8"></div>
-            <button class="btn btn-outline-secondary col-2 align-self-end">Aanpassen</button>
-            <button class="btn btn-outline-danger col-2 align-self-end">Verwijderen</button>
-        </div>
 
         <div class="row">
-            <h1>{{vragenlijst?.vak?.naam}}</h1>
-            <p>{{vragenlijst?.datum | date:'EEEE, d/MMM/y'}} {{vragenlijst?.datum | date:'HH:mm'}}</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1>{{vragenlijst?.vak?.naam}}</h1>
+                        <p>{{vragenlijst?.datum | date:'EEEE, d/MMM/y'}} {{vragenlijst?.datum | date:'HH:mm'}}</p>
+                        <div *ngFor="let klasgroep of vragenlijst?.klasgroepen">
+                            <p>{{klasgroep.naam}}</p>
+                        </div>
+                        
+                        <p> {{respondenten}} van de {{respondentenLimit}} studenten hebben al ingevuld</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="chart" >
+                            <h2>In welke mate denk ik van mezelf dat ik mee ben met de leerstof?</h2>
+                            <div style="display: block;">
+                                <canvas baseChart id="benMeeChart" #benMeeChart
+                                  [datasets]="benMeeData"
+                                  [labels]="benMeeLabels"
+                                  [options]="benMeeOptions"
+                                  [plugins]="benMeePlugins"
+                                  [legend]="benMeeLegend">
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="chart">
+                            <h2>Moet er een deel uit de les herhaald worden?</h2>
+                            <div style="display: block;">
+                                <canvas #nogVragenChart
+                                
+                                
+                                
+                                
+                                >
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="welkOnderdeel">
+                            <h2>Welk onderdeel moet mogelijk herhaald worden?</h2>
+                            <div class="card" *ngFor="let antwoord of welkOnderdeel; index as i">
+                                <div class="card-body" >
+                                    <h3 class="card-title">Antwoord {{i+1}}</h3>
+                                    <blockquote class="blockquote">
+                                        <p class="card-text "><cite>{{antwoord}}</cite></p>
+                                    </blockquote>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="andereVragen">
+                            <h2>Andere vragen van de studenten</h2>
+                            <div class="card" *ngFor="let vraag of andereVragen; index as i">
+                                <div class="card-body">
+                                    <h3 class=" card-title">Vraag {{i+1}}</h3>
+                                    <blockquote class="blockquote">
+                                        <p class="card-text "><cite>{{vraag}}</cite></p>
+                                    </blockquote>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+
             
 
-            <div class="chart">
-                <h2>In welke mate denk ik van mezelf dat ik mee ben met de leerstof?</h2>
-                <div style="display: block;">
-                    <canvas baseChart
-                      [datasets]="barChartData"
-                      [labels]="barChartLabels"
-                      [options]="barChartOptions"
-                      [plugins]="barChartPlugins"
-                      [legend]="barChartLegend">
-                    </canvas>
-                  </div>
-            </div>
+          
 
-            <div class="chart">
-                <h2>Moet er een deel uit de les herhaald worden?</h2>
                 
-            </div>
+        </div>
+            
 
 
         </div>
