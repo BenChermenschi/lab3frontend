@@ -23,7 +23,8 @@ export class SurveyDetailComponent extends BaseComponent implements OnInit {
   //chart stuff
 
 
-  @ViewChildren('benMeeChart') chart: any | undefined;
+  @ViewChildren('benMeeChart') benMeeChart: any | undefined;
+  @ViewChildren('nogVragenChart') nogVragenChart: any | undefined;
 
 
 
@@ -55,6 +56,7 @@ export class SurveyDetailComponent extends BaseComponent implements OnInit {
 
   updateGraphs(): void {
     this.updatebenMee();
+    this.updateNogVragenChart();
   }
 
   updatebenMee(): void {
@@ -67,7 +69,7 @@ export class SurveyDetailComponent extends BaseComponent implements OnInit {
       }
 
 
-      let myChart = new Chart(ctx, {
+      let chart = new Chart(ctx, {
 
         type: 'bar',
         data: {
@@ -107,6 +109,55 @@ export class SurveyDetailComponent extends BaseComponent implements OnInit {
 
 
 
+  }
+
+  updateNogVragenChart():void{
+    if (this.vragenlijst != undefined) {
+      console.log("updatingNogVragen");
+      const canvas = <HTMLCanvasElement>document.getElementById('nogVragenChart');
+      let ctx: any;
+      if (canvas.getContext('2d') != null) {
+        ctx = canvas.getContext('2d');
+      }
+
+
+      let chart = new Chart(ctx, {
+
+        type: 'pie',
+        data: {
+          labels: ['Ja','Nee'],
+          datasets: [{
+            label: "",
+            data: [this.vragenlijst.totalen.opnieuwUitleggen.aantalJa,this.vragenlijst.totalen.opnieuwUitleggen.aantalNee],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      })
+
+    }
   }
 
 
@@ -176,31 +227,5 @@ export class SurveyDetailComponent extends BaseComponent implements OnInit {
     }
     */
 
-
-  prepareGraphs() {
-    this.prepareGraphBenMee();
-    this.prepareAndereVragen();
-  }
-
-  prepareComments() {
-    this.prepareTeHerhalen();
-    this.prepareAndereVragen();
-  }
-
-  prepareGraphBenMee() {
-
-  }
-
-  prepareGraphHerhaalLes() {
-
-  }
-
-  prepareTeHerhalen() {
-
-  }
-
-  prepareAndereVragen() {
-
-  }
 
 }
