@@ -27,6 +27,10 @@ export class VragenlijstService {
     return this.http.get<VragenlijstDetailed>(this.baseUrl + '/' + id);
   }
 
+  getByUser(userId:string){
+    return this.http.get<VragenLijst[]>(this.baseUrl + '/gebruiker/'+userId);
+  }
+
   update(id: string, obj: VragenLijstPut) {
     const body = { ...obj }
     return this.http.put<APIResponse>(this.baseUrl + '/' + id, body)

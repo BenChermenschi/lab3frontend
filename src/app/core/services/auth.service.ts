@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -27,10 +28,45 @@ export class AuthService {
     localStorage.setItem('authToken', token);
   }
 
+  getTokenString(): string |"" {
+    return localStorage.getItem('authToken') || "";
+  }
+
+
+  private setIsAdmin(input:boolean){
+    const isAdmin:string = String(input);
+    localStorage.setItem('isAdmin',isAdmin);
+  }
+
+  private getIsAdmin(): string | ""{
+    return localStorage.getItem('isAdmin') || "";
+  }
+  
+  isAdmin():boolean{
+    const isAdminString = this.getIsAdmin();
+    if (isAdminString == "") {
+      return false;
+    }
+    const isAdmin = JSON.parse(isAdminString);
+    console.log("admin is " +isAdmin);
+    return isAdmin;
+  }
+
+  private setGebruikersId(gebruikersId:string){
+    localStorage.setItem('gebruikersId',gebruikersId);
+  }
+  getGebruikersId():string|""{
+    return localStorage.getItem('gebruikersId') || "";
+  }
+
+  
+
   login(email: string, wachtwoord: string): Observable<APIAuthResponse> {
     return this.loginRequest(email, wachtwoord)
       .pipe(tap((response: APIAuthResponse) => {
         this.setToken(response.token)
+        this.setIsAdmin(response.isAdmin);
+        this.setGebruikersId(response._id)
       }))
   }
 
@@ -44,11 +80,17 @@ export class AuthService {
     return this.http.post<APIAuthResponse>(this.baseUrl + "/login", body, { headers: headers });
   }
 
+
+
   logout() {
 
   }
 
   getTokenData() {
 
+
+
   }
+
+  
 }

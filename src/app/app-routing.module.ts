@@ -53,26 +53,32 @@ const routes: Routes = [
       {
         path: 'detail/:id',
         component: SurveyDetailComponent,
+        canActivate: [IsLoggedInGuard],
       },
       {
         path: 'create',
         component: SurveyCreateComponent,
+        canActivate: [IsLoggedInGuard],
       },
       {
         path: 'edit/:id',
         component: SurveyEditComponent,
+        canActivate: [IsLoggedInGuard],
       },
       {
         path: 'list',
         component: SurveyListComponent,
+        canActivate: [IsLoggedInGuard],
       },
       {
         path: 'share',
         component: SurveyShareComponent,
+        canActivate: [IsLoggedInGuard],
       },
       {
         path: '',
-        component: SurveyListComponent
+        component: SurveyListComponent,
+        canActivate: [IsLoggedInGuard],
       }
 
     ]

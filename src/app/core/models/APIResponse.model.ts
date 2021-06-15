@@ -3,5 +3,8 @@ export interface APIResponse {
 }
 
 export interface APIAuthResponse{
-    token: string
+    token: string,
+    isAdmin:boolean,
+    vollenaam:string,
+    _id:string
 }

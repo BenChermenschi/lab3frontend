@@ -49,6 +49,4 @@ export interface VragenlijstDetailed extends VragenLijst{
     datum:Date;
     reacties:Reactie[];
     totalen:Totalen;
-
-
 }

@@ -25,6 +25,25 @@ export class IsLoggedInGuard implements CanActivate {
 }
 
 @Injectable()
+export class IsAdminGuard implements CanActivate{
+    constructor(private authService:AuthService, private router:Router){}
+
+    canActivate(
+        next:ActivatedRouteSnapshot,
+        state: RouterStateSnapshot):boolean{
+            const isAdmin = this.authService.isAdmin();
+
+            console.log(isAdmin);
+            if (!isAdmin) {
+                this.router.navigate(['/dashboard']);
+            }
+            return true;
+        }
+    
+}
+
+
+@Injectable()
 export class IsNotLoggedInGuard implements CanActivate {
 
     constructor(private authService: AuthService,
@@ -43,3 +62,5 @@ export class IsNotLoggedInGuard implements CanActivate {
         return true
     }
 }
+
+
