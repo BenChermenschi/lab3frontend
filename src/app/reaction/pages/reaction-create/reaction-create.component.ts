@@ -21,6 +21,7 @@ export class ReactionCreateComponent extends BaseComponent implements OnInit {
   myform = new FormGroup({});
 
   idValid:boolean |undefined;
+  opnieuwUitleggen:boolean |undefined;
 
   vragenlijst:VragenLijst | undefined;
   private routeSub:Subscription | undefined;

@@ -58,8 +58,9 @@ export class DashboardComponent extends BaseComponent implements OnInit {
       this.vragenlijstService.getRecentByUser(user_Id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response:VragenlijstDetailed)=>{
-        this.recentEntry=response;
         console.log(response);
+        this.recentEntry=response;
+        
         this.updateCharts();
       })
     }
@@ -68,8 +69,9 @@ export class DashboardComponent extends BaseComponent implements OnInit {
       this.vragenlijstService.getRecent()
       .pipe(takeUntil(this.destroy$))
       .subscribe((response:VragenlijstDetailed)=>{
-        this.recentEntry = response;
         console.log(response);
+        this.recentEntry = response;
+       
         this.updateCharts();
 
       })
