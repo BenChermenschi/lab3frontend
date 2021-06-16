@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
         const customReq = request.clone({
             headers:request.headers.set('auth',token)
         });
-        console.log("token = "+token);
+        
 
         
         

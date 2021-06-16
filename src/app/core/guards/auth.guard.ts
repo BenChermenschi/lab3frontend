@@ -33,7 +33,7 @@ export class IsAdminGuard implements CanActivate{
         state: RouterStateSnapshot):boolean{
             const isAdmin = this.authService.isAdmin();
 
-            console.log(isAdmin);
+            
             if (!isAdmin) {
                 this.router.navigate(['/dashboard']);
             }
@@ -55,7 +55,6 @@ export class IsNotLoggedInGuard implements CanActivate {
 
         const isLoggedIn = this.authService.isLoggedIn()
 
-        console.log(isLoggedIn)
         if (isLoggedIn) {
             this.router.navigate(['/dashboard'])
         }
