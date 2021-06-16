@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { APIResponse } from '../models/APIResponse.model';
-import { VragenLijst, VragenlijstDetailed, VragenLijstPost, VragenLijstPut } from '../models/vragenLijst.model';
+import { VragenLijst, VragenlijstDetailed, VragenLijstPost, VragenLijstPut, VragenlijstRecentRequest } from '../models/vragenLijst.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +38,14 @@ export class VragenlijstService {
 
   delete(id: string) {
     return this.http.delete<APIResponse>(this.baseUrl + "/" + id);
+  }
+
+  getRecent(){
+    return this.http.get<VragenlijstDetailed>(this.baseUrl+"/recent")
+  }
+
+  getRecentByUser(obj:VragenlijstRecentRequest){
+    const body = {...obj}
+    return this.http.post<VragenlijstDetailed>(this.baseUrl+"/recentbyuser",body);
   }
 }

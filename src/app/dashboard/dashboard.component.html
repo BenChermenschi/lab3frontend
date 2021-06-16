@@ -13,14 +13,38 @@
 
     <div class="row">
         <div class="col-12">
-            <div *ngIf="isAdmin == true"   class="container" id="adminContainer">
+            <div   class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <h2 class="card-title">Recente activiteit</h2>
-                                <div>
-
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3>vak : {{recentEntry?.vak?.naam}}</h3>
+                                            <p>{{recentEntry?.datum | date:'EEEE, d/MMM/y'}} {{recentEntry?.datum | date:'HH:mm'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <canvas id="recentBenMeeGraph" #recentBenMeeGraph></canvas>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <canvas id="recentHerhalenGraph" #recentHerhalenGraph></canvas>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    {{recentEntry | json}}
                                 </div>
                             </div>
                         </div>
@@ -28,21 +52,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="isAdmin == false" class="container" id="docentContainer">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h2 class="card-title">Recente activiteit</h2>
-                                <div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>
+           
         </div>
     </div>
 

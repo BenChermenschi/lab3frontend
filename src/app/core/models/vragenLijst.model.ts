@@ -53,3 +53,7 @@ export interface VragenlijstDetailed extends VragenLijst{
     reacties:Reactie[];
     totalen:Totalen;
 }
+
+export interface VragenlijstRecentRequest{
+    user_id:string;
+}
