@@ -36,18 +36,15 @@ export interface VragenLijst extends VragenLijstBase {
     reacties: Reactie[];
 }
 
-export interface VragenLijstPost  {
-   
-        vak: Vak;
-        klasgroepen: Klasgroep[];
-        gebruiker:string;
-}
-
-export interface VragenLijstPut {
-    gebruiker: string;
+export interface VragenLijstPost {
     vak: Vak;
     klasgroepen: Klasgroep[];
-    reacties: Reactie[];
+    gebruiker:string;
+
+}
+
+export interface VragenLijstPut extends VragenLijstBase {
+
 }
 
 export interface VragenlijstDetailed extends VragenLijst{
