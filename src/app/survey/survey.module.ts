@@ -32,6 +32,9 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule
     
    
+  ],
+  exports:[
+    SurveyListComponent,
   ]
 })
 export class SurveyModule { }

@@ -1,18 +1,56 @@
 
-<div class="container">
+<div  class="container">
     <div class="row ">
         <div class="col-12">
             <div class="jumbotron">
                 <div class="d-flex justify-content-center">
-                    <h1 class="display-1" >Dashboard</h1>
+                    <h1 class="display-1" >welkom </h1>
                 </div>
             </div>
         </div>
     </div>
+
+
     <div class="row">
         <div class="col-12">
-            <h2>Recente vragenlijst</h2>
-            
+            <div *ngIf="isAdmin == true"   class="container" id="adminContainer">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Recente activiteit</h2>
+                                <div>
+
+                                </div>
+                            </div>
+                        </div>
+                  
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isAdmin == false" class="container" id="docentContainer">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Recente activiteit</h2>
+                                <div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <app-survey-list>
+
+            </app-survey-list>
         </div>
     </div>
     
