@@ -11,6 +11,7 @@ import { AuthService } from '../core/services/auth.service';
 })
 export class NavbarComponent extends BaseComponent implements OnInit {
 
+  isLoggedIn:boolean | undefined;
   isAdministrator:boolean | undefined;
 
   constructor(private authService:AuthService, private router:Router) {
@@ -18,8 +19,15 @@ export class NavbarComponent extends BaseComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.isAdministrator = false;
+    this.isLoggedIn = false;
     this.routerEventListener();
 
+  }
+
+  checkIfLoggedIn(){
+    this.isLoggedIn = this.authService.isLoggedIn();
+    console.log("logged in = " + this.isLoggedIn)
   }
 
   checkIfAdmin(){
@@ -33,6 +41,7 @@ export class NavbarComponent extends BaseComponent implements OnInit {
       takeUntil(this.destroy$)
       )
     .subscribe(event =>{
+      this.checkIfLoggedIn();
       this.checkIfAdmin();
     });
   }
