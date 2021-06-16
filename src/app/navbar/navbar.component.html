@@ -10,6 +10,7 @@
             <li *ngIf="isAdministrator == true" class="nav-item"><a [routerLink]="['/course']" class="nav-link">Vakken</a></li>
             <li *ngIf="isAdministrator == true" class="nav-item"><a [routerLink]="['/classgroup']" class="nav-link">Klasgroepen</a></li>
             <li *ngIf="isAdministrator == true" class="nav-item"><a [routerLink]="['/user']" class="nav-link">Gebruikers</a></li>
+            <li class="nav-item"><a  (click)="logout()" class="btn btn-secondary">Uitloggen</a></li>
         </ul>
     </div>
 </nav> 

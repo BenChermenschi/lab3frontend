@@ -46,4 +46,9 @@ export class NavbarComponent extends BaseComponent implements OnInit {
     });
   }
 
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
 }

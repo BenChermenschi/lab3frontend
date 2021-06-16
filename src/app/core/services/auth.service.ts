@@ -20,6 +20,11 @@ export class AuthService {
     const token = this.getToken()
     return !!token
   }
+
+  isLoggedInObservable(){
+    
+  }
+
   private getToken(): string | null {
     return localStorage.getItem('authToken');
   }
