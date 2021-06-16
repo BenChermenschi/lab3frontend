@@ -76,6 +76,7 @@ export class SurveyListComponent extends BaseComponent implements OnInit {
     .pipe(takeUntil(this.destroy$))
     .subscribe((response:APIResponse)=>{
       console.log('msg',response);
+      this.showMessage("Succesvol verwijderd");
       this.getVragenlijsten();
   
     })
