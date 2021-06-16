@@ -103,6 +103,10 @@ export class SurveyEditComponent extends BaseComponent implements OnInit {
     this.myform.controls['vak'].setValue(this.vragenlijst?.vak._id);
   }
 
+  getGebruiker(){
+    return this.authService.getGebruikersId();
+  }
+
   submit(){
     this.editVragenlijst();
   }
@@ -111,7 +115,7 @@ export class SurveyEditComponent extends BaseComponent implements OnInit {
     const editVragenlijst:VragenLijstPut={
       klasgroepen:[this.myform.value.klasgroep],
       vak:this.myform.value.vak,
-      gebruiker:this.Id,
+      gebruiker:this.getGebruiker(),
       reacties:[]
     }
 
