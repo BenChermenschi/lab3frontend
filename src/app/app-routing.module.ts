@@ -22,7 +22,7 @@ import { UserDetailComponent } from './user/pages/user-detail/user-detail.compon
 import { UserEditComponent } from './user/pages/user-edit/user-edit.component';
 import { UserListComponent } from './user/pages/user-list/user-list.component';
 import { IdResolver } from './core/resolvers/idResolver';
-import { IsLoggedInGuard, IsNotLoggedInGuard } from './core/guards/auth.guard';
+import { IsAdminGuard, IsLoggedInGuard, IsNotLoggedInGuard } from './core/guards/auth.guard';
 import {CommonModule} from '@angular/common';
 import { ReactionCreateComponent } from './reaction/pages/reaction-create/reaction-create.component';
 import { ReactionDoneComponent } from './reaction/pages/reaction-done/reaction-done.component';
@@ -104,6 +104,7 @@ const routes: Routes = [
       {
         path: 'detail/:id',
         component: ClassgroupDetailComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
         resolve: {
           id: IdResolver
         }
@@ -111,18 +112,22 @@ const routes: Routes = [
       {
         path: 'create',
         component: ClassgroupCreateComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
       },
       {
         path: 'edit/:id',
         component: ClassgroupEditComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
       },
       {
         path: 'list',
         component: ClassgroupListComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
       },
       {
         path: '',
-        component: ClassgroupListComponent
+        component: ClassgroupListComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
       }
 
     ]
@@ -135,22 +140,27 @@ const routes: Routes = [
       {
         path: 'detail',
         component: CourseDetailComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
       },
       {
         path: 'create',
         component: CourseCreateComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
       },
       {
         path: 'edit/:id',
         component: CourseEditComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
       },
       {
         path: 'list',
         component: CourseListComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
       },
       {
         path: '',
-        component: CourseListComponent
+        component: CourseListComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
       }
 
     ]
@@ -161,22 +171,27 @@ const routes: Routes = [
       {
         path: 'detail',
         component: UserDetailComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
       },
       {
         path: 'create',
         component: UserCreateComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
       },
       {
         path: 'edit/:id',
         component: UserEditComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
       },
       {
         path: 'list',
         component: UserListComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
       },
       {
         path: '',
-        component: UserListComponent
+        component: UserListComponent,
+        canActivate:[IsLoggedInGuard,IsAdminGuard],
       }
 
     ]

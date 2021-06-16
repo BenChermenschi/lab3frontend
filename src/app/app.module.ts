@@ -27,7 +27,7 @@ import { SettingsModule } from './settings/settings.module';
 import { SurveyModule } from './survey/survey.module';
 import { UserModule } from './user/user.module';
 import { ChartsModule } from 'ng2-charts';
-import { IsLoggedInGuard, IsNotLoggedInGuard } from './core/guards/auth.guard';
+import { IsAdminGuard, IsLoggedInGuard, IsNotLoggedInGuard } from './core/guards/auth.guard';
 
 
 
@@ -69,6 +69,7 @@ import { IsLoggedInGuard, IsNotLoggedInGuard } from './core/guards/auth.guard';
     IsLoggedInGuard,
     IsNotLoggedInGuard,
     CookieService,
+    IsAdminGuard
 
   ],
   bootstrap: [AppComponent]
