@@ -4,7 +4,7 @@ import { Klasgroep } from 'src/app/core/models/klasgroep.model';
 import { KlasgroepService } from 'src/app/core/services/klasgroep.service';
 import { takeUntil } from 'rxjs/operators';
 import { Vak } from 'src/app/core/models/vak.model';
-import { Gebruiker } from 'src/app/core/models/gebruiker.model';
+import { Gebruiker, GebruikerForVragenlijst } from 'src/app/core/models/gebruiker.model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { VakService } from 'src/app/core/services/vak.service';
 import { GebruikerService } from 'src/app/core/services/gebruiker.service';
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { VragenLijst, VragenLijstPost } from 'src/app/core/models/vragenLijst.model';
 import { VragenlijstService } from 'src/app/core/services/vragenlijst.service';
 import { APIResponse } from 'src/app/core/models/APIResponse.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-survey-create',
@@ -25,12 +26,11 @@ export class SurveyCreateComponent extends BaseComponent implements OnInit {
 
   klasgroepen: Klasgroep[] = [];
   vakken:Vak[]=[];
-  gebruikers:Gebruiker[]=[]; // remove this one once login works again
 
   
 
 
-  constructor(private vragenlijstService:VragenlijstService ,private klasgroepService: KlasgroepService,private vakService:VakService,private gebruikerService:GebruikerService,private router:Router) {
+  constructor(private authService:AuthService,private vragenlijstService:VragenlijstService ,private klasgroepService: KlasgroepService,private vakService:VakService,private gebruikerService:GebruikerService,private router:Router) {
     super();
   }
 
@@ -38,7 +38,7 @@ export class SurveyCreateComponent extends BaseComponent implements OnInit {
     this.initiateMyForm();
     this.initiateKlasGroepen();
     this.initiateVakken();
-    this.initiateGebruikers();
+    
 
 
   }
@@ -69,6 +69,7 @@ export class SurveyCreateComponent extends BaseComponent implements OnInit {
     })
   }
 
+  /*
   initiateGebruikers(){
     this.gebruikerService.getAll()
     .pipe(takeUntil(this.destroy$))
@@ -77,6 +78,7 @@ export class SurveyCreateComponent extends BaseComponent implements OnInit {
      
     })
   }
+  */
 
   clearForm(){
     this.myform.reset();
@@ -101,7 +103,7 @@ export class SurveyCreateComponent extends BaseComponent implements OnInit {
 
     const klasgroep =[this.myform.value.klasgroep];
     const vak = this.myform.value.vak;
-    const gebruiker=this.myform.value.gebruiker;
+    const gebruiker= this.authService.getGebruikersId();
     
     const newVragenlijst:VragenLijstPost={
       klasgroepen:klasgroep,
@@ -133,10 +135,6 @@ export class SurveyCreateComponent extends BaseComponent implements OnInit {
       valid = false;
     }
     if (this.myform.value.vak === null){
-      valid = false;
-    }
-
-    if (this.myform.value.gebruiker ===null){
       valid = false;
     }
 

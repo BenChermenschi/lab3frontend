@@ -23,3 +23,7 @@ export interface GebruikerPut extends GebruikerBase{
 export interface GebruikerPutNonPass extends GebruikerBase{
 
 }
+
+export interface GebruikerForVragenlijst{
+    _id:string
+}

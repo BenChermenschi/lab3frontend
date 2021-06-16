@@ -83,7 +83,9 @@ export class AuthService {
 
 
   logout() {
-
+    this.setIsAdmin(false);
+    this.setGebruikersId("");
+    this.setToken("");
   }
 
   getTokenData() {
