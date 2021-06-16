@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { APIResponse } from '../models/APIResponse.model';
-import { Gebruiker, GebruikerPost, GebruikerPut } from '../models/gebruiker.model';
+import { Gebruiker, GebruikerPatchPass, GebruikerPost, GebruikerPut } from '../models/gebruiker.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +31,15 @@ export class GebruikerService {
     return this.http.put<APIResponse>(this.baseUrl+'/'+id,gebruiker);
   }
 
+  patchPass(id:string,toUpdateGebruiker:GebruikerPatchPass){
+    const gebruiker = {...toUpdateGebruiker};
+    return this.http.patch<APIResponse>(this.baseUrl+'/'+id,gebruiker);
+  }
+
   delete(id:string){
     return this.http.delete<APIResponse>(this.baseUrl+"/"+id);
   }
+
+
 
 }

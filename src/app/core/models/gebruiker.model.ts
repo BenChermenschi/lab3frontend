@@ -27,3 +27,7 @@ export interface GebruikerPutNonPass extends GebruikerBase{
 export interface GebruikerForVragenlijst{
     _id:string
 }
+
+export interface GebruikerPatchPass {
+    wachtwoord:string
+}

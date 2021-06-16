@@ -70,7 +70,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((response:VragenlijstDetailed)=>{
         console.log(response);
-        this.recentEntry = response;
+        this.reCastvragenlijst(response);
        
         this.updateCharts();
 
@@ -78,10 +78,19 @@ export class DashboardComponent extends BaseComponent implements OnInit {
     }
   }
 
-  getMostRecentByUser(){
-    
-    
-    
+  reCastvragenlijst(response:any){
+    const recast:VragenlijstDetailed={
+      _id:response?._id,
+      datum:response?.datum,
+      gebruiker:response?.gebruiker,
+      klasgroepen:response?.klasgroepen,
+      reacties:response?.reacties,
+      totalen:response?.totalen,
+      vak:response?.vak
+    }
+
+    console.log(recast);
+    this.recentEntry = recast;
   }
 
 

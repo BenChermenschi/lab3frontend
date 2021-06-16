@@ -1,1 +1,32 @@
-<p>settings works!</p>
+<div class="container">
+    <div class="card">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Instellingen</h1>
+                </div>
+            </div>
+            
+            <div class="row" ng-show="state">
+                <div class="col-12">
+                <form  [formGroup]="myform" (ngSubmit)="submit()">
+                    <div class="form-group"> 
+                        <label for="wachtwoord" class="control-label">Nieuw Wachtwoord</label>
+                        <input class="form-control" type="password" name="wachtwoord" formControlName="wachtwoord" id="wachtwoord"/>
+                    </div>
+                    <div class="form-group"> 
+                        <label for="herwachtwoord" class="control-label">Nieuw Wachtwoord Herhalen</label>
+                        <input class="form-control" type="password" name="herwachtwoord" formControlName="herwachtwoord" id="herwachtwoord"/>
+                    </div>
+                   <div class="form-group">
+                        <button class="btn btn-primary" type="submit" >Bewerken</button>
+                   </div>
+                    
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
