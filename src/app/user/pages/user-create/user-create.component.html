@@ -18,11 +18,11 @@
                         <input class="form-control" type="text" name="naam" formControlName="naam" id="gebruikerNaam"/>
                     </div>
                     <div class="form-group"> 
-                        <label for="email" class="control-label">email</label>
+                        <label for="email" class="control-label">Email</label>
                         <input class="form-control" type="email" name="email" formControlName="email" id="email"/>
                     </div>
                     <div class="form-group"> 
-                        <label for="gebruikerstype" class="control-label">gebruikerstype</label>
+                        <label for="gebruikerstype" class="control-label">Gebruikerstype</label>
                        <select formControlName="gebruikerstype" name="gebruikerstype" id="gebruikerstype" class="form-control">
                            <option *ngFor="let gebruikerstype of gebruikerstypes" value="{{gebruikerstype._id}}">
                                {{gebruikerstype.naam}}
@@ -40,7 +40,7 @@
                     </div>
 
                    <div class="form-group">
-                        <button class="btn btn-primary" type="submit" >Aanmaken</button>
+                        <button class="btn btn-primary" type="submit" >Maken</button>
                    </div>
                     
                 </form>

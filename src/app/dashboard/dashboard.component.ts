@@ -14,6 +14,8 @@ import { VragenlijstService } from '../core/services/vragenlijst.service';
 })
 export class DashboardComponent extends BaseComponent implements OnInit {
 
+  gebruikersnaam:string="";
+
   isAdmin: boolean | undefined
   recentEntry: VragenlijstDetailed | undefined;
 
@@ -26,7 +28,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.checkAdmin();
     this.getMostRecent();
-
+    this.gebruikersnaam = this.grabNaam();
   }
 
   checkAdmin() {
@@ -46,8 +48,11 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   grabUserId() {
     let output = this.authService.getGebruikersId();
     return output;
+  }
 
-
+  grabNaam(){
+    let output = this.authService.getGebruikersNaam();
+    return output;
   }
 
   getMostRecent() {

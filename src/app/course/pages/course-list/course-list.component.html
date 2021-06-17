@@ -12,7 +12,7 @@
 
     <div class="row">
         <div class="col-8">
-            <a class="btn btn-outline-secondary col-2 align-self-end" [routerLink]="['/course/create']" >Nieuw</a>
+            <a class="btn btn-outline-secondary col-2 align-self-end" [routerLink]="['/course/create']" ><i class="fa fa-plus" aria-hidden="true"></i> Nieuw</a>
         </div>
         
     </div>
@@ -24,14 +24,14 @@
                     <tr>
                         <th scope="col">Naam</th>
                         <th scope="col">Bewerken</th>
-                        <th scope="col"></th>
+                        <th scope="col">Verwijderen</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let vak of vakken">
                         <td>{{vak.naam}}</td>
-                        <td><button class="btn btn-primary" (click)="editVak(vak._id)">Ed</button></td>
-                        <td><button class="btn btn-danger" (click)="removeVak(vak._id)">Del</button></td>
+                        <td><button class="btn btn-secondary" (click)="editVak(vak._id)"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+                        <td><button class="btn btn-danger" (click)="removeVak(vak._id)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
                     </tr>
                 </tbody>
             </table>

@@ -12,7 +12,7 @@
 
     <div class="row">
         <div class="col-8">
-            <a class="btn btn-outline-secondary col-2 align-self-end" [routerLink]="['/user/create']" >Nieuw</a>
+            <a class="btn btn-outline-secondary col-2 align-self-end" [routerLink]="['/user/create']" ><i class="fa fa-plus" aria-hidden="true"></i> Nieuw</a>
         </div>
         
     </div>
@@ -22,10 +22,10 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">email</th>
-                        <th scope="col">voornaam</th>
-                        <th scope="col">naam</th>
-                        <th scope="col">type</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Voornaam</th>
+                        <th scope="col">Naam</th>
+                        <th scope="col">Type</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
@@ -36,8 +36,8 @@
                         <td>{{gebruiker.voornaam}}</td>
                         <td>{{gebruiker.naam}}</td>
                         <td>{{gebruiker.gebruikerstype.naam}}</td>
-                        <td><button class="btn btn-primary" (click)="editGebruiker(gebruiker._id)">Ed</button></td>
-                        <td><button class="btn btn-danger" (click)="removeGebruiker(gebruiker._id)">Del</button></td>
+                        <td><button class="btn btn-secondary" (click)="editGebruiker(gebruiker._id)"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+                        <td><button class="btn btn-danger" (click)="removeGebruiker(gebruiker._id)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
                     </tr>
                 </tbody>
             </table>

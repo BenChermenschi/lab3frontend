@@ -12,7 +12,7 @@
     
         <div class="row">
             <div class="col-8">
-                <a class="btn btn-outline-secondary col-2 align-self-end" [routerLink]="['/classgroup/create']" >Nieuw</a>
+                <a class="btn btn-outline-secondary col-2 align-self-end" [routerLink]="['/classgroup/create']" ><i class="fa fa-plus" aria-hidden="true"></i> Nieuw</a>
             </div>
             
         </div>
@@ -33,8 +33,8 @@
                     <tr *ngFor="let klasgroep of klasgroepen">
                         <td >{{klasgroep.naam}}</td>
                         <td >{{klasgroep.aantalStudenten}}</td>
-                        <td><button class="btn btn-primary" (click)="editKlasgroep(klasgroep._id)">Ed</button></td>
-                        <td><button class="btn btn-danger" (click)="removeKlasgroep(klasgroep._id)">Del</button></td>
+                        <td><button class="btn btn-secondary" (click)="editKlasgroep(klasgroep._id)"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+                        <td><button class="btn btn-danger" (click)="removeKlasgroep(klasgroep._id)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
                     </tr>
                         
                            

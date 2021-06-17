@@ -13,17 +13,23 @@
                             <p>{{klasgroep.naam}}</p>
                         </div>
                         
-                        <p> {{respondenten}} van de {{respondentenLimit}} studenten hebben al ingevuld</p>
+                        <p> {{respondenten}} van de {{respondentenLimit}} studenten hebben al ingevuld.</p>
 
-                        <blockquote>
-                            <p>Deelbare link : </p>
-                            <input class="form-control" type="text" value="https://lab3frontend.herokuapp.com/reaction/create/{{Id}}">
-                            
-                        </blockquote>
+                        <div class="card">
+                            <div class="card-body">
+                               
+                                    <h2 class="card-title">Deelbare link : </h2>
+                                    <input class="form-control" type="text" value="https://lab3frontend.herokuapp.com/reaction/create/{{Id}}">
+                                    
+                               
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
+                <br/>
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-8">
                         <div class="chart" >
                             <h2>In welke mate denk ik van mezelf dat ik mee ben met de leerstof?</h2>
                             <div style="display: block;">
@@ -41,9 +47,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
+                    <div class="col-4">
                         <div class="chart">
                             <h2>Moet er een deel uit de les herhaald worden?</h2>
                             <div style="display: block;">
@@ -56,6 +60,11 @@
                                 </canvas>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        
                     </div>
                 </div>
                 <div class="row">

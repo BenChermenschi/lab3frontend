@@ -3,8 +3,9 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+    <div class="collapse navbar-collapse row" id="navbarNav">
+        
+        <ul class="navbar-nav col-10">
             <li class="nav-item"><a [routerLink]="['/dashboard']" class="nav-link">Dashboard</a></li>
             <li class="nav-item"><a [routerLink]="['/survey']" class="nav-link">Vragenlijsten</a></li>
             <li *ngIf="isAdministrator == true" class="nav-item"><a [routerLink]="['/course']" class="nav-link">Vakken</a></li>
@@ -13,8 +14,8 @@
             <li class="nav-item"><a [routerLink]="['/settings']" class="nav-link">Instellingen</a></li>
             
         </ul>
-        <form action="" class="form-inline">
-            <a  (click)="logout()" class="btn btn-secondary">Uitloggen</a>
+        <form action="" class="form-inline col-2">
+            <a  (click)="logout()" class="btn btn-secondary"><i class="fa fa-sign-out" aria-hidden="true"></i> Uitloggen</a>
         </form>
     </div>
 </nav> 

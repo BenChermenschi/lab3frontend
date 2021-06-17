@@ -64,6 +64,13 @@ export class AuthService {
     return localStorage.getItem('gebruikersId') || "";
   }
 
+  private setGebruikersNaam(gebruikersNaam:string){
+    localStorage.setItem('gebruikersNaam',gebruikersNaam);
+  }
+  getGebruikersNaam():string|""{
+    return localStorage.getItem('gebruikersNaam')||"";
+  }
+
   
 
   login(email: string, wachtwoord: string): Observable<APIAuthResponse> {
@@ -71,7 +78,9 @@ export class AuthService {
       .pipe(tap((response: APIAuthResponse) => {
         this.setToken(response.token)
         this.setIsAdmin(response.isAdmin);
-        this.setGebruikersId(response._id)
+        this.setGebruikersId(response._id);
+        this.setGebruikersNaam(response.vollenaam);
+        
       }))
   }
 
@@ -91,6 +100,7 @@ export class AuthService {
     this.setIsAdmin(false);
     this.setGebruikersId("");
     this.setToken("");
+    this.setGebruikersNaam("");
   }
 
   getTokenData() {

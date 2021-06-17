@@ -1,20 +1,67 @@
-
 <div class="container">
-    <div>
-        <div><img src="" alt=""/></div>
-        <form [formGroup]="myform" (ngSubmit)="submit()" >
-            <div class="form-group"> 
-                <label for="email" class="control-label">Email</label>
-                <input class="form-control" type="text" formControlName="email" name="email" id="email"/>
-            </div>
-            <div class="form-group">
-                <label class="control-label" for="password">Wachtwoord</label>
-                <input class="form-control" type="password" formControlName="wachtwoord" name="password" id="password">
-            </div>
-           <div class="form-group">
-                <button class="btn btn-primary" type="submit" >Inloggen</button>
-           </div>
-            
-        </form>
+  <div class="row">
+    <div class="col-12">
+      <img src="" alt="" />
     </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-center">
+            <h1 class="display-1">We Are Motivated</h1>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+       
+      <form [formGroup]="myform" (ngSubmit)="submit()">
+          <div class="card">
+              <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="email" class="control-label">Email</label>
+                                <input
+                                  class="form-control"
+                                  type="text"
+                                  formControlName="email"
+                                  name="email"
+                                  id="email"
+                                />
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label" for="password">Wachtwoord</label>
+                                <input
+                                  class="form-control"
+                                  type="password"
+                                  formControlName="wachtwoord"
+                                  name="password"
+                                  id="password"
+                                />
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <br/>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-sign-in" aria-hidden="true"></i> Inloggen</button>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+        
+        
+        
+        
+      </form>
+    </div>
+  </div>
 </div>

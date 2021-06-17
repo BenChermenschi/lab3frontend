@@ -15,9 +15,9 @@
 
     <div class="row">
         <div class="col-8">
-            <a class="btn btn-outline-secondary col-2 align-self-end" [routerLink]="['/survey/create']" >Nieuw</a>
-        </div>
         
+            <a class="btn btn-outline-secondary col-2 align-self-end" [routerLink]="['/survey/create']" ><i class="fa fa-plus" aria-hidden="true"></i> Nieuw</a>
+        </div>
     </div>
 
     <div class="row">
@@ -26,7 +26,7 @@
                 <thead>
                     <tr>
                       
-                        <th scope="col">gebruiker</th>
+                        <th scope="col">Gebruiker</th>
                         <th scope="col">Datum</th>
                         <th scope="col">Uur</th>
                         <th scope="col">Vak</th>
@@ -52,9 +52,9 @@
                                 </tr>
                             </table>
                         </td>
-                        <td><button class="btn btn-primary" (click)="detailsVragenlijst(vragenlijst._id)">details</button></td>
-                        <td><button class="btn btn-primary" (click)="editVragenlijst(vragenlijst._id)">Ed</button></td>
-                        <td><button class="btn btn-danger" (click)="removeVragenlijst(vragenlijst._id)">Del</button></td>
+                        <td><button class="btn btn-primary" (click)="detailsVragenlijst(vragenlijst._id)">Details</button></td>
+                        <td><button class="btn btn-secondary" (click)="editVragenlijst(vragenlijst._id)"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+                        <td><button class="btn btn-danger" (click)="removeVragenlijst(vragenlijst._id)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
                         
                     </tr>
                 </tbody>
