@@ -48,7 +48,7 @@ export class CourseCreateComponent extends BaseComponent implements OnInit {
       .create(newVak)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response:APIResponse)=>{
-        console.log(response);
+        //console.log(response);
         if (response.message === "vak created") {
           alert("creatie successvol");
           this.router.navigate(['/course']);

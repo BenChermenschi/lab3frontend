@@ -52,7 +52,7 @@ export class CourseEditComponent extends BaseComponent implements OnInit {
       .update(id,editVak)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response:APIResponse)=>{
-        console.log(response);
+        //console.log(response);
         if (response.message === "Vak updated!") {
           this.router.navigate(['/course']);
         }else{

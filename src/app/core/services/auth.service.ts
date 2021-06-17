@@ -53,7 +53,7 @@ export class AuthService {
       return false;
     }
     const isAdmin = JSON.parse(isAdminString);
-    console.log("admin is " +isAdmin);
+    //console.log("admin is " +isAdmin);
     return isAdmin;
   }
 

@@ -58,7 +58,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
       this.vragenlijstService.getRecentByUser(user_Id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response:VragenlijstDetailed)=>{
-        console.log(response);
+        //console.log(response);
         this.recentEntry=response;
         
         this.updateCharts();
@@ -69,7 +69,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
       this.vragenlijstService.getRecent()
       .pipe(takeUntil(this.destroy$))
       .subscribe((response:VragenlijstDetailed)=>{
-        console.log(response);
+        //console.log(response);
         this.reCastvragenlijst(response);
        
         this.updateCharts();
@@ -89,7 +89,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
       vak:response?.vak
     }
 
-    console.log(recast);
+    //console.log(recast);
     this.recentEntry = recast;
   }
 
@@ -100,7 +100,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
 
   updatebenMee(): void {
     if (this.recentEntry != undefined) {
-      console.log("updatingBenMee");
+      //console.log("updatingBenMee");
       const canvas = <HTMLCanvasElement>document.getElementById('recentBenMeeGraph');
       let ctx: any;
       if (canvas.getContext('2d') != null) {

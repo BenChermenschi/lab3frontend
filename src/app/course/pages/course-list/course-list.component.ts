@@ -40,7 +40,7 @@ export class CourseListComponent extends BaseComponent implements OnInit {
 
   removeVak(id:string){
     this.vakService.delete(id).pipe(takeUntil(this.destroy$)).subscribe((response:APIResponse)=> {
-      console.log("msg",response);
+      //console.log("msg",response);
       this.getVakken();
       alert(response);
     })

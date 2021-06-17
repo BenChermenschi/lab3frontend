@@ -45,7 +45,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
       this.authService.login(email, wachtwoord)
         .pipe(takeUntil(this.destroy$))
         .subscribe((response: APIAuthResponse) => {
-          console.log(response)
+          //console.log(response)
           this.router.navigate(['dashboard'])
         }, error => this.authenticationFailed(error));
     } else {
@@ -73,7 +73,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   authenticationFailed(error: APIResponse) {
-    console.log(error);
+    //console.log(error);
     this.clearForm();
     this.showMessage("Inloggen mislukt, check je gegevens");
 

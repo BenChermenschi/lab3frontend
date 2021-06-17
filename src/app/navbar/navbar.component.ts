@@ -27,7 +27,7 @@ export class NavbarComponent extends BaseComponent implements OnInit {
 
   checkIfLoggedIn(){
     this.isLoggedIn = this.authService.isLoggedIn();
-    console.log("logged in = " + this.isLoggedIn)
+    //console.log("logged in = " + this.isLoggedIn)
   }
 
   checkIfAdmin(){

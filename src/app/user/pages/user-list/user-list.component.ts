@@ -43,10 +43,21 @@ export class UserListComponent extends BaseComponent implements OnInit {
       .delete(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response:APIResponse)=>{
-        console.log("msg",response);
+        //console.log("msg",response);
+        if  (response.message ==="user sucessfully deleted"){
+          this.showMessage("Succesvol verwijderd");
+          
+        }else{
+          this.showMessage("Er is iets misgelopen");
+        }
         this.getGebruikers();
-        alert(response);
+      
       })
   }
+
+  showMessage(message:string){
+    alert(message);
+  }
+
 
 }

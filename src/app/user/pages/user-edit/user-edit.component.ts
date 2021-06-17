@@ -40,7 +40,7 @@ export class UserEditComponent extends BaseComponent implements OnInit {
 
     this.routeSub=this.route.params
     .subscribe(params=>{
-      console.log(params['id']);
+      //console.log(params['id']);
       this.Id = params['id'];
       
       this.gebruikerService
@@ -113,11 +113,12 @@ export class UserEditComponent extends BaseComponent implements OnInit {
       this.gebruikerService
       .update(params['id'],editGebruiker)
       .subscribe((response:APIResponse)=>{
-        console.log(response);
+        //console.log(response);
         if (response.message==="gebruiker updated") {
+          this.showMessage("successvol aangemaakt");
           this.router.navigate(['/user']);
         }else{
-          alert("something has gone wrong");
+          this.showMessage("something has gone wrong");
         }
       })
 
@@ -129,6 +130,10 @@ export class UserEditComponent extends BaseComponent implements OnInit {
       this.routeSub.unsubscribe();
     }
     
+  }
+
+  showMessage(message:string){
+    alert(message);
   }
 
 }

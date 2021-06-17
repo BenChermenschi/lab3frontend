@@ -45,11 +45,11 @@ export class ReactionCreateComponent extends BaseComponent implements OnInit {
       .getById(this.Id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response:VragenlijstDetailed)=>{
-      console.log(response._id);
+      //console.log(response._id);
         this.idValid=true;
 
       },(err:any)=>{
-        console.log(err);
+        //console.log(err);
         if (err.status == 404) {
           this.idValid=false;
         }
@@ -128,12 +128,12 @@ export class ReactionCreateComponent extends BaseComponent implements OnInit {
   
 
   submit(){
-    console.log(this.myform.value)
+    //console.log(this.myform.value)
 
 
 
     if (this.validateFields() ===true) {
-      console.log(this.myform.value);
+      //console.log(this.myform.value);
       this.createReactie();
     }else{
       this.showMessage("Not all fields are valid, please check and try again");
@@ -154,11 +154,11 @@ export class ReactionCreateComponent extends BaseComponent implements OnInit {
     .create(newReactie)
     .pipe(takeUntil(this.destroy$))
     .subscribe((response:APIResponse)=>{
-      console.log(response);
+      //console.log(response);
       this.router.navigate(['reaction/done']);
     },(err)=>{
       this.showMessage("something has gone wrong");
-      console.log(err)
+      //console.log(err)
     })
 
 
