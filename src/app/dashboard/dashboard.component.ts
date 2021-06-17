@@ -14,12 +14,12 @@ import { VragenlijstService } from '../core/services/vragenlijst.service';
 })
 export class DashboardComponent extends BaseComponent implements OnInit {
 
-  isAdmin:boolean | undefined
-  recentEntry:VragenlijstDetailed | undefined;
+  isAdmin: boolean | undefined
+  recentEntry: VragenlijstDetailed | undefined;
 
-  @ViewChildren('recentBenMeeChart') benMeeChart:any | undefined;
+  @ViewChildren('recentBenMeeChart') benMeeChart: any | undefined;
 
-  constructor(private authService:AuthService,private router:Router,private vragenlijstService:VragenlijstService) {
+  constructor(private authService: AuthService, private router: Router, private vragenlijstService: VragenlijstService) {
     super()
   }
 
@@ -29,64 +29,64 @@ export class DashboardComponent extends BaseComponent implements OnInit {
 
   }
 
-  checkAdmin(){
-    if (this.authService.isLoggedIn()== true) {
+  checkAdmin() {
+    if (this.authService.isLoggedIn() == true) {
       //is user
-      if  (this.authService.isAdmin() == true){
-        console.log("hello admin");
-        this.isAdmin= true;
-        
-      }else{
-        console.log("hello docent");
+      if (this.authService.isAdmin() == true) {
+        //console.log("hello admin");
+        this.isAdmin = true;
+
+      } else {
+        //console.log("hello docent");
         this.isAdmin = false;
       }
     }
   }
 
-  grabUserId(){
+  grabUserId() {
     let output = this.authService.getGebruikersId();
     return output;
-    
+
 
   }
 
-  getMostRecent(){
+  getMostRecent() {
     this.checkAdmin();
-    if (this.isAdmin ==false) {
-      let user_Id:VragenlijstRecentRequest={user_id:this.authService.getGebruikersId()}
-    if(this.isAdmin ==false){
-      this.vragenlijstService.getRecentByUser(user_Id)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((response:VragenlijstDetailed)=>{
-        //console.log(response);
-        this.recentEntry=response;
-        
-        this.updateCharts();
-      })
-    }
-    }
-    if (this.isAdmin ==true) {
-      this.vragenlijstService.getRecent()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((response:VragenlijstDetailed)=>{
-        //console.log(response);
-        this.reCastvragenlijst(response);
-       
-        this.updateCharts();
+    if (this.isAdmin == false) {
+      let user_Id: VragenlijstRecentRequest = { user_id: this.authService.getGebruikersId() }
+      if (this.isAdmin == false) {
+        this.vragenlijstService.getRecentByUser(user_Id)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((response: VragenlijstDetailed) => {
+            //console.log(response);
+            this.recentEntry = response;
 
-      })
+            this.updateCharts();
+          })
+      }
+    }
+    if (this.isAdmin == true) {
+      this.vragenlijstService.getRecent()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((response: VragenlijstDetailed) => {
+          //console.log(response);
+          this.reCastvragenlijst(response);
+
+          this.updateCharts();
+
+        })
     }
   }
 
-  reCastvragenlijst(response:any){
-    const recast:VragenlijstDetailed={
-      _id:response?._id,
-      datum:response?.datum,
-      gebruiker:response?.gebruiker,
-      klasgroepen:response?.klasgroepen,
-      reacties:response?.reacties,
-      totalen:response?.totalen,
-      vak:response?.vak
+  reCastvragenlijst(response: any) {
+    const recast: VragenlijstDetailed = {
+      _id: response?._id,
+      datum: response?.datum,
+      gebruiker: response?.gebruiker,
+      klasgroepen: response?.klasgroepen,
+      reacties: response?.reacties,
+      totalen: response?.totalen,
+      vak: response?.vak
     }
 
     //console.log(recast);
@@ -94,7 +94,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   }
 
 
-  updateCharts(){
+  updateCharts() {
     this.updatebenMee();
   }
 

@@ -81,10 +81,12 @@ export class ClassgroupEditComponent extends BaseComponent implements OnInit {
         if (response.message === "klasgroep updated!") {
           this.router.navigate(['/classgroup']);
         }else{
-          alert("something went wrong try again");
+          this.showMessage("Er is iets misgelopen");
         }
         console.log(response);
       });
   }
+
+ 
 
 }

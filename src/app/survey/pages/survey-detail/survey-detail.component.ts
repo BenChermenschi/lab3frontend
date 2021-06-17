@@ -44,7 +44,7 @@ export class SurveyDetailComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.routeSub = this.route.params.pipe(takeUntil(this.destroy$)).subscribe(params => {
-      console.log(params['id']);
+      //console.log(params['id']);
       this.Id = params['id'];
       this.getVragenlijstDetailed();
 

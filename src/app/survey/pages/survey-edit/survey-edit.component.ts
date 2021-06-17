@@ -126,18 +126,16 @@ export class SurveyEditComponent extends BaseComponent implements OnInit {
       .subscribe((response:APIResponse)=>{
         console.log(response);
         if (response.message ==="Vragenlijst updated!"){
-          this.showMessage("Success");
+          this.showMessage("Vragenlijst succesvol aangepast");
           this.router.navigate(['/survey']);
         }else{
-          this.showMessage("something has gone wrong");
+          this.showMessage("Er is iets misgelopen");
         }
       })
     })
   }
 
-  showMessage(message:string){
-    alert(message);
-  }
+ 
 
 
 

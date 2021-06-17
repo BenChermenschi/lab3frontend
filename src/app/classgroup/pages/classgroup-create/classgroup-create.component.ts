@@ -53,12 +53,14 @@ export class ClassgroupCreateComponent extends BaseComponent implements OnInit {
       .subscribe((response: APIResponse) => {
         console.log(response)
         if (response.message==="klasgroep created") {
-          this.showMessage("creatie success");
+          this.showMessage("Klasgroep succesvol aangemaakt");
           this.router.navigate(['/classgroup']);
         }else{
-          this.showMessage("creatie mislukt");
+          this.showMessage("Er is iets misgelopen");
         }
       })
+    }else{
+      this.showMessage("Incorrect ingevuld");
     }
   }
 
@@ -74,9 +76,7 @@ export class ClassgroupCreateComponent extends BaseComponent implements OnInit {
   }
 
 
-  showMessage(message:String){
-    alert(message);
-  }
+  
 
 
 }

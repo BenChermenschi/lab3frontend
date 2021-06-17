@@ -81,12 +81,12 @@ export class UserCreateComponent extends BaseComponent implements OnInit {
             this.router.navigate(['/user']);
           }
           else{
-            this.showMessage("Something went wrong")
+            this.showMessage("Er is iets misgelopen");
           }
         })
 
     }else{
-      this.showMessage("Kijk velden na");
+      this.showMessage("Er zijn invalide velden, kijk je gegevens na");
     }
   }
 
@@ -127,9 +127,7 @@ export class UserCreateComponent extends BaseComponent implements OnInit {
   }
 
 
-  showMessage(message:String){
-    alert(message);
-  }
+  
 
 
 

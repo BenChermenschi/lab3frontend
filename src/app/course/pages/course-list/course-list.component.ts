@@ -40,9 +40,14 @@ export class CourseListComponent extends BaseComponent implements OnInit {
 
   removeVak(id:string){
     this.vakService.delete(id).pipe(takeUntil(this.destroy$)).subscribe((response:APIResponse)=> {
-      //console.log("msg",response);
+      if (response.message ==="vak successfully deleted") {
+        this.showMessage("Vak verwijderen succesvol");
+      }else{
+        this.showMessage("Er is iets misgelopen");
+      }
+     
       this.getVakken();
-      alert(response);
+      
     })
   }
 

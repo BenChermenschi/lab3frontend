@@ -11,4 +11,8 @@ export abstract class BaseComponent implements OnDestroy {
     this.destroy$.next(true);
     this.destroy$.complete()
   }
+
+  showMessage(message:string){
+    alert(message);
+  }
 }

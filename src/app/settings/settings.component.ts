@@ -65,7 +65,7 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     if  (this.validateFields()===true){
       this.updatePass();
     }else{
-      this.showMessage("Please fill in all fields correctly");
+      this.showMessage("Er zijn invalide velden, kijk je gegevens na");
     }
   
   }
@@ -82,18 +82,16 @@ export class SettingsComponent extends BaseComponent implements OnInit {
     .subscribe((response:APIResponse)=>{
       console.log(response);
       if (response.message === "pass updated") {
-        this.showMessage("Success");
+        this.showMessage("Wachtwoord wijziging succesvol");
         this.router.navigate(['/dashboard']);
       }else{
-        this.showMessage("something has gone wrong");
+        this.showMessage("Er is iets misgelopen");
       }
 
     })  
   }
 
 
-  showMessage(message:string){
-    alert(message);
-  }
+  
 
 }

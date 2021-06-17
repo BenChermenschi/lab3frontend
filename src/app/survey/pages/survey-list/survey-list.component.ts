@@ -31,11 +31,11 @@ export class SurveyListComponent extends BaseComponent implements OnInit {
     if (this.authService.isLoggedIn()== true) {
       //is user
       if  (this.authService.isAdmin() == true){
-        console.log("hello admin");
+        //console.log("hello admin");
         this.getAllVragenlijsten();
         
       }else{
-        console.log("hello docent");
+        //console.log("hello docent");
         this.getVragenlijstenByUser();
       }
     }
@@ -75,8 +75,13 @@ export class SurveyListComponent extends BaseComponent implements OnInit {
     .delete(id)
     .pipe(takeUntil(this.destroy$))
     .subscribe((response:APIResponse)=>{
-      console.log('msg',response);
-      this.showMessage("Succesvol verwijderd");
+      if (response.message==="vragenlijst successfully deleted"){
+        this.showMessage("Succesvol verwijderd");
+      }else{
+        this.showMessage("Er is iets misgelopen");
+      }
+      
+      
       this.getVragenlijsten();
   
     })
@@ -87,8 +92,6 @@ export class SurveyListComponent extends BaseComponent implements OnInit {
   }
 
 
-  showMessage(message:string){
-    alert(message);
-  }
+  
 
 }

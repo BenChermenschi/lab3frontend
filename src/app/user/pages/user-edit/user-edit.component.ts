@@ -115,10 +115,10 @@ export class UserEditComponent extends BaseComponent implements OnInit {
       .subscribe((response:APIResponse)=>{
         //console.log(response);
         if (response.message==="gebruiker updated") {
-          this.showMessage("successvol aangemaakt");
+          this.showMessage("Gebruiker succesvol aangepast");
           this.router.navigate(['/user']);
         }else{
-          this.showMessage("something has gone wrong");
+          this.showMessage("Er is iets misgelopen");
         }
       })
 
@@ -132,8 +132,6 @@ export class UserEditComponent extends BaseComponent implements OnInit {
     
   }
 
-  showMessage(message:string){
-    alert(message);
-  }
+  
 
 }

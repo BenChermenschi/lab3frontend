@@ -46,10 +46,17 @@ export class ClassgroupListComponent extends BaseComponent implements OnInit {
       .delete(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: APIResponse) => {
-        console.log("msg", response);
+        if (response.message==="klasgroep successfully deleted") {
+          this.showMessage("Succesvol verwijderd");
+        }else{
+          this.showMessage("Er is iets misgelopen");
+        }
+        //console.log("msg", response);
         this.getKlasgroepen();
-        alert(response);
+        
       })
   }
+
+  
 
 }

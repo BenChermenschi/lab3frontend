@@ -55,9 +55,7 @@ export class UserListComponent extends BaseComponent implements OnInit {
       })
   }
 
-  showMessage(message:string){
-    alert(message);
-  }
+  
 
 
 }

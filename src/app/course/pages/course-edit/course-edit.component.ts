@@ -56,10 +56,12 @@ export class CourseEditComponent extends BaseComponent implements OnInit {
         if (response.message === "Vak updated!") {
           this.router.navigate(['/course']);
         }else{
-          alert("something went wrong try again");
+          this.showMessage("Er is iets misgelopen");
         }
       });
 
   }
+
+  
 
 }

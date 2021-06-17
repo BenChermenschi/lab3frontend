@@ -90,7 +90,7 @@ export class SurveyCreateComponent extends BaseComponent implements OnInit {
     if (valid === true) {
       this.createVragenlijst();
     }else{
-      this.showMessage("Please fill in all fields");
+      this.showMessage("Er zijn invalide velden, kijk je gegevens na");
     }
 
 
@@ -118,7 +118,7 @@ export class SurveyCreateComponent extends BaseComponent implements OnInit {
       if (response.message === "vragenlijst created") {
         this.router.navigate(['/survey']);
       }else{
-        this.showMessage("Something went wrong");
+        this.showMessage("Er is iets misgelopen");
       }
     })
 
@@ -143,9 +143,7 @@ export class SurveyCreateComponent extends BaseComponent implements OnInit {
   }
 
 
-  showMessage(message:string){
-    alert(message);
-  }
+
 
   
 }

@@ -49,7 +49,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
           this.router.navigate(['dashboard'])
         }, error => this.authenticationFailed(error));
     } else {
-      this.showMessage("inloggen mislukt : kijk email na");
+      this.showMessage("Inloggen mislukt : kijk email na");
     }
 
 
@@ -75,13 +75,11 @@ export class LoginComponent extends BaseComponent implements OnInit {
   authenticationFailed(error: APIResponse) {
     //console.log(error);
     this.clearForm();
-    this.showMessage("Inloggen mislukt, check je gegevens");
+    this.showMessage("Inloggen mislukt: check je gegevens");
 
   }
 
-  showMessage(message: string) {
-    alert(message);
-  }
+  
 
 
 

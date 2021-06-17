@@ -38,7 +38,7 @@ export class ReactionCreateComponent extends BaseComponent implements OnInit {
 
 
     this.routeSub=this.route.params.pipe(takeUntil(this.destroy$)).subscribe(params=>{
-      console.log(params['id']);
+      //console.log(params['id']);
       this.Id = params['id'];
       //test if it exists here
       this.vragenlijstService
@@ -136,7 +136,7 @@ export class ReactionCreateComponent extends BaseComponent implements OnInit {
       //console.log(this.myform.value);
       this.createReactie();
     }else{
-      this.showMessage("Not all fields are valid, please check and try again");
+      this.showMessage("Er zijn invalide velden, kijk je gegevens na");
     }
 
   }
@@ -155,9 +155,10 @@ export class ReactionCreateComponent extends BaseComponent implements OnInit {
     .pipe(takeUntil(this.destroy$))
     .subscribe((response:APIResponse)=>{
       //console.log(response);
+      
       this.router.navigate(['reaction/done']);
     },(err)=>{
-      this.showMessage("something has gone wrong");
+      this.showMessage("Er is iets misgelopen");
       //console.log(err)
     })
 
@@ -169,8 +170,6 @@ export class ReactionCreateComponent extends BaseComponent implements OnInit {
   }
 
 
-  showMessage(message:string){
-    alert(message);
-  }
+ 
 
 }

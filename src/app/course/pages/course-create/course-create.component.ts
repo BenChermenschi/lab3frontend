@@ -50,10 +50,10 @@ export class CourseCreateComponent extends BaseComponent implements OnInit {
       .subscribe((response:APIResponse)=>{
         //console.log(response);
         if (response.message === "vak created") {
-          alert("creatie successvol");
+          this.showMessage("creatie successvol");
           this.router.navigate(['/course']);
         }else{
-          alert("creatie mislukt")
+          this.showMessage("Er is iets misgelopen");
         }
       })
     }
@@ -67,5 +67,7 @@ export class CourseCreateComponent extends BaseComponent implements OnInit {
     }
     return valid;
   }
+
+  
 
 }
