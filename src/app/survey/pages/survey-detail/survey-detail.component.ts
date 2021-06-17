@@ -68,30 +68,27 @@ export class SurveyDetailComponent extends BaseComponent implements OnInit {
         ctx = canvas.getContext('2d');
       }
 
-
+ 
       let chart = new Chart(ctx, {
-
         type: 'bar',
         data: {
-          labels: ['Absoluut Niet ', 'Ik snap er zo goed als niets van', 'Half en Half, moet het nog eens bekijken', 'Ik snap de meerderheid', 'Ik ben volledig mee'],
+          labels: ['Helemaal niet', 'Ik snap een klein stukje', 'Middelmatig, sommige stukken, wel sommige niet', 'Ik ben grotendeels mee', 'Absoluut'],
           datasets: [{
             label: "",
             data: [this.vragenlijst.totalen.benMee.aantal1, this.vragenlijst.totalen.benMee.aantal2, this.vragenlijst.totalen.benMee.aantal3, this.vragenlijst.totalen.benMee.aantal4, this.vragenlijst.totalen.benMee.aantal5],
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
+              'rgba(255, 13, 13, 0.2)',
+              'rgba(255, 78, 17, 0.2)',
+              'rgba(255, 142, 21, 0.2)',
+              'rgba(172, 179, 52, 0.2)',
+              'rgba(105, 179, 76, 0.2)'
             ],
             borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
+              'rgba(255, 13, 13, 1)',
+              'rgba(255, 78, 17, 1)',
+              'rgba(255, 142, 21, 1)',
+              'rgba(172, 179, 52, 1)',
+              'rgba(105, 179, 76, 1)'
             ],
             borderWidth: 1
           }]
@@ -103,13 +100,15 @@ export class SurveyDetailComponent extends BaseComponent implements OnInit {
             }
           }
         }
-      })
+      });
+
+
+
+
+
 
     }
-
-
-
-  }
+}
 
   updateNogVragenChart():void{
     if (this.vragenlijst != undefined) {
@@ -130,30 +129,15 @@ export class SurveyDetailComponent extends BaseComponent implements OnInit {
             label: "",
             data: [this.vragenlijst.totalen.opnieuwUitleggen.aantalJa,this.vragenlijst.totalen.opnieuwUitleggen.aantalNee],
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
+              'rgba(255, 13, 13, 0.2)',
+              'rgba(105, 179, 76, 0.2)'
             ],
             borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
+              'rgba(255, 13, 13, 1)',
+              'rgba(105, 179, 76, 1)'
             ],
             borderWidth: 1
           }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
         }
       })
 
